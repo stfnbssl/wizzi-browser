@@ -1,0 +1,39 @@
+{
+    "name": "wizzi-js",
+    "sideEffects": false,
+    "description": "A wizzi default plugin for javascript and typescript code-generation..",
+    "author": {
+        "name": "Stefano Bassoli",
+        "email": "stfn.bssl@gmail.com"
+    },
+    "private": false,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-js"
+    },
+    "engines": {
+        "node": ">=0.10.28",
+        "npm": ">=1.4.28"
+    },
+    "scripts": {
+        "test": "mocha tests/**/*.js --full-trace"
+    },
+    "dependencies": {
+        "async": "^3.2.0",
+        "chalk": "^4.1.0",
+        "i": "^0.3.5",
+        "iconv-lite": "^0.6.2",
+        "json-stringify-safe": "^5.0.1",
+        "lodash": "^4.17.20"
+    },
+    "devDependencies": {
+        "del": "^6.0.0",
+        "expect.js": "^0.3.1"
+    }
+}

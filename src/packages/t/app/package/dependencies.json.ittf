@@ -1,0 +1,230 @@
+﻿$group
+	$params &app
+
+	$if app.useBabelNode
+		@babel/polyfill "^7.2.5"
+
+	$if app.useBabelRegister
+		@babel/core "latest"
+		@babel/register "latest"
+		@babel/preset-env "latest"
+
+	$if app.useFirestoreServer
+		@google-cloud/firestore "^0.14.1"	
+
+	$if app.useMaterialUi || app.useMaterialUiIcons
+		@material-ui/core "^1.1.0"
+		@material-ui/icons "^1.1.0"
+
+	$if app.useAphrodite
+		aphrodite "^2.2.3"
+	
+	$if app.hasDemo
+		async "latest"
+
+	$if app.useAxios
+		axios "^0.16.2"
+
+	$if app.useExpress
+		body-parser "^1.18.3"
+
+	$if app.useApiMiddleware
+		axios "latest"
+		normalizr "latest"
+
+	$if app.useMaterialUi || app.useAphrodite
+		classnames "^2.2.6"
+
+	$if app.useCodemirror
+		codemirror "^5.38.0"
+
+	$if app.useReact
+		classnames "^2.2.6"
+
+	$if app.useExpress
+		cors "^2.8.5"
+
+	$if app.useDatalayer
+		cuid "^2.1.4"
+	
+	$if app.useDotenv
+		dotenv "^6.2.0"
+	
+	$if app.useExpress
+		express "^4.16.4"
+
+	$if app.useFirestoreBrowser
+		firebase-admin "^4.0.3"
+
+	$if app.useFirebase
+		firebase "5.5.7"
+
+	$if app.useFirebaseServer
+		firebase-server "^0.11.0"
+	
+	$if app.useGraphql
+		
+		graphql 'latest'
+
+		$if app.graphql.apolloClient
+			apollo-boost 'latest'
+			react-apollo 'latest'
+		
+		$else
+			
+			graphql-yoga 'latest'
+		
+		$if app.graphql.apolloServer
+			apollo-server "latest"
+		
+		$if app.graphql.github
+			graphql-binding-github "0.3.25"
+		
+		$if app.graphql.prisma
+			prisma "1.8.3"
+			prisma-binding "2.0.0"
+	
+	$if app.useLruCache
+		lru-cache "latest"
+
+	$if app.useMarkdown
+		highlight.js "^9.12.0"
+		markdown-it "^8.4.1"
+
+	$if app.useVue
+		$if app.useMonaco2
+			monaco-editor "^0.15.6"
+	
+	$if app.useMongose
+		mongoose "^5.4.2"
+
+	$if app.useMySql
+		mysql "2.16.0"
+
+	$if app.useJsBeautify
+		js-beautify 'latest'
+	
+	$if app.hasDemo
+		json-stringify-safe "latest"
+
+	$if app.useNeo4j
+		neo4j-driver "latest"
+	
+	$if app.useExpress
+		morgan "^1.8.1"
+
+	$if app.useNextjs
+		$$ next "^4.1.0"
+		$$ next "latest"
+		next-server "^7.0.2-canary.18"
+		$if app.useNextjsServerExpress
+			express "latest"
+
+	$if app.hasDemo
+		object-inspect "latest"
+
+	$if app.polyfill.objectAssign
+		object-assign "^4.1.1"
+	
+	$if app.usePrettier
+		prettier "^1.14.0"
+	
+	$if app.usePrismjs
+		prismjs "^1.14.0"
+
+	$if app.polyfill.promise
+		promise "^8.0.1"
+
+	$if app.polyfill.raf
+		raf "^3.4.0"
+	
+	$if app.useReact
+		react "^16.0.0"
+		
+		$if app.useAce
+			react-ace "latest"
+		
+		react-dom "^16.0.0"
+		
+		$if app.useRedux
+			react-redux "^6.0.0"
+			$if app.useReduxFirestore
+				react-redux-firebase "latest"
+		
+		$if app.useReduxAuth
+			redux-auth-wrapper "^1.0.0"
+		
+		$if app.useReduxForm
+			redux-form "^7.3.0"
+			$if app.useMaterialUi
+				redux-form-material-ui "next"
+		
+		$if app.useCodemirror
+			react-codemirror2 "latest"
+		
+		$if app.useJsonView
+			react-json-view "latest"
+		
+		$if app.useReactLowLight
+			react-lowlight "latest"
+			highlight.js "latest"
+
+		$if app.useReactMarkdown
+			react-markdown "latest"
+		
+		$if app.useMonaco
+			monaco-editor "^0.13.1"
+			react-monaco-editor "latest"
+		
+
+		$if app.useReactRouter
+			react-router-dom "^4.3.1"
+		
+		$if app.useServer
+			react-render-html "^0.5.2"
+		
+		$if app.useSplitter
+			react-split-pane "^0.1.77"
+
+		$if app.useCreateReactApp
+			react-scripts "1.1.4"
+	
+	$if app.useRedux
+		redux "^4.0.1"
+		redux-devtools-extension "^2.13.2"
+		$if app.useReduxFirestore
+			redux-firestore "latest"
+		redux-logger "^3.0.6"
+		redux-observable "^1.0.0"
+		redux-thunk "^2.1.0"
+
+	$if app.useRedux
+		reselect "^4.0.0"
+
+	$if app.useRedux
+		rxjs "^6.4.0"
+	
+	$if app.useTypescript
+		$if app.TSImportHelpers
+			tslib "1.9.3"
+		$if app.TSTypesafeActions
+			typesafe-actions "3.0.0"
+	
+	$if app.useVue
+		$if app.useMonaco2
+			vue-monaco "^0.3.1"
+
+	$if app.polyfill.fetch
+		whatwg-fetch "^2.0.4"
+
+	$if app.useWizzi
+		wizzi 'latest'
+		$if app.wizziPlugins
+			$foreach item in app.wizziPlugins
+				${item} 'latest'
+
+	$if app.useWizziUtils
+		wizzi-utils 'latest'
+
+	$if app.useWizziTools
+		wizzi-tools 'latest'

@@ -1,0 +1,10 @@
+{
+	plugins
+		[
+            $include v08/app/.babelrc/plugins
+	presets
+		[
+			$include v08/app/.babelrc/presets
+	env
+		{
+			$include v08/app/.babelrc/env

@@ -1,0 +1,54 @@
+﻿$group
+	$params name
+
+	$
+		var namelower = name.toLowerCase()
+		var nameupper = name.toUpperCase()
+
+	c( ADD_${nameupper}_REQUEST )
+		{
+			@ ...state
+			@ isUpdating${name}s true
+
+	c( ADD_${nameupper}_FAILURE )
+		{
+			@ ...state
+			@ isUpdating${name}s false
+
+	c( ADD_${nameupper}_SUCCESS
+		{
+			@ ...state
+			@ schemas action.schemas
+			@ isUpdating${name}s false
+
+	c( RENAME_${nameupper}_REQUEST )
+		{
+			@ ...state
+			@ isUpdating${name}s true
+
+	c( RENAME_${nameupper}_FAILURE )
+		{
+			@ ...state
+			@ isUpdating${name}s false
+
+	c( RENAME_${nameupper}_SUCCESS
+		{
+			@ ...state
+			@ schemas action.schemas
+			@ isUpdating${name}s false
+
+	c( REMOVE_${nameupper}_REQUEST )
+		{
+			@ ...state
+			@ isUpdating${name}s true
+
+	c( REMOVE_${nameupper}_FAILURE )
+		{
+			@ ...state
+			@ isUpdating${name}s false
+
+	c( REMOVE_${nameupper}_SUCCESS
+		{
+			@ ...state
+			@ schemas action.schemas
+			@ isUpdating${name}s false

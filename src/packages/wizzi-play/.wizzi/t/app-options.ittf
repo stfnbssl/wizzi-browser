@@ -1,0 +1,49 @@
+﻿$group
+
+	$include app/options/init
+
+	$
+		app.name = 'wizzi-play';
+		app.version = '0.0.1';
+		app.title = 'Wizzi play';
+		app.description = 'Wizzi factory playground';
+		app.keywords = 'wizzi ui react';
+		app.copy = 'Stefano Bassoli - 2018 (stfn.bssl@gmail.com)'
+		
+		app.rootContainer = 'MuiThemeContainer';
+		app.rootElementId = 'app'
+		app.initialLoad = true;
+		
+		app.useBabel = true;
+        app.useMaterialUi = true;
+		app.primaryColor = 'orange';
+		app.secondaryColor = 'green';
+		app.accentColor = 'red';
+		app.useCssBaseline = false;
+		app.useCssBase = true;
+		app.useMonaco = true;
+		app.useJsonView = true;
+		app.sheetOrder = [];
+		app.useRedux = true;
+		app.useReduxForm = false;
+		// https://redux.js.org/advanced/async-actions
+		app.useReduxThunk = true;
+		app.useReduxLogger = true;
+		app.useApiMiddleware = false;
+		app.useThunkWithExtraArgument = true;
+		app.useFirestoreMiddleware = true;
+		app.useDevTools = false;
+		app.hotReload = false;
+		app.useReactPerf = false;
+		app.useNormalizr = false;
+		app.githubLink = false;
+		app.useSearch  = false;
+		app.useDrawer = true;
+		app.useMarkdownApi = false;
+		app.useMarkdownDemo = false;
+		app.useRouter = false;
+		app.routeBasepath = '';
+		app.testNoArtifactGeneration = false;
+		app.testNoWizzify = false;
+
+	$include app/options/analize

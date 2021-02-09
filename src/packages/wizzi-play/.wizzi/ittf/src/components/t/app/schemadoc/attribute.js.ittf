@@ -1,0 +1,46 @@
+﻿var Attribute
+	=>
+		param { attribute: a }
+
+		var xrestricts = null
+		if a.restricts.length > 0
+			var facets = []
+			foreach r in a.restricts
+				foreach f in r.facets
+					_ facets.push(f)
+			set xrestricts
+				div
+					span Restrict facets
+						@ className hb-sch-doc-e-subtitle-2
+					div
+						@ className hb-sch-doc-restricts-box
+						table
+							@ className hb-sch-doc-table
+							tbody
+								{
+									_ facets.map
+										=>
+											param facet
+											const type = facet.type.substr(0, facet.type.length - 5)
+											return
+												tr
+													td {type}
+													td {facet.value}
+													td 
+														< Comments
+															@ comments {facet.comments}
+	
+		return
+			tr
+				@ key {a.name}
+				td {a.name}
+				td {showTags(a.name, a.tags).join(' | ')}
+				td {a.type}
+				td {a.default}
+				td
+					< Flags
+						@ flags {a.flags}
+				td 
+					< Comments
+						@ comments {a.comments}
+					+ {xrestricts}	

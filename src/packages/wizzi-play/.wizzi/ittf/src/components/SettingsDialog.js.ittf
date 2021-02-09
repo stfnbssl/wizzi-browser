@@ -1,0 +1,92 @@
+﻿r-component( SettingsDialog )
+
+	$append imports
+	
+		import Button from '@material-ui/core/Button'
+		import TextField from '@material-ui/core/TextField'
+		import Dialog from '@material-ui/core/Dialog'
+		import DialogActions from '@material-ui/core/DialogActions'
+		import DialogContent from '@material-ui/core/DialogContent'
+		import DialogContentText from '@material-ui/core/DialogContentText'
+		import DialogTitle from '@material-ui/core/DialogTitle'
+		import ExampleList from './ExampleList'
+		import FragmentList from './FragmentList'
+		import TemplateList from './TemplateList'
+		import SnippetList from './SnippetList'
+
+	style
+
+	=> handleClose
+
+	render
+		prop selectedIttfKind
+		prop open
+		prop schema
+		prop documents
+		prop templates
+		prop onAddExample
+		prop onRenameExample
+		prop onRemoveExample
+		prop onAddFragment
+		prop onRenameFragment
+		prop onRemoveFragment
+		prop onAddTemplate
+		prop onRenameTemplate
+		prop onRemoveTemplate
+		prop onAddSnippet
+		prop onRenameSnippet
+		prop onRemoveSnippet
+		prop onCancel
+
+		return
+			div
+				< Dialog
+					@ open {open}
+					@ aria-labelledby form-dialog-title
+					< DialogTitle
+						@ id form-dialog-title
+						+ Schema {schema} settings
+						hr
+					< DialogContent
+						{
+							&&
+								+ selectedIttfKind === 'examples'
+								< ExampleList
+									@ examples {documents}
+									@ templates {templates}
+									@ schema {schema}
+									@ onAddExample { onAddExample }
+									@ onRenameExample { onRenameExample }
+									@ onRemoveExample { onRemoveExample }
+						{
+							&&
+								+ selectedIttfKind === 'fragments'
+								< FragmentList
+									@ fragments {documents}
+									@ schema {schema}
+									@ onAddFragment { onAddFragment }
+									@ onRenameFragment { onRenameFragment }
+									@ onRemoveFragment { onRemoveFragment }
+						{
+							&&
+								+ selectedIttfKind === 'templates'
+								< TemplateList
+									@ templates {documents}
+									@ schema {schema}
+									@ onAddTemplate { onAddTemplate }
+									@ onRenameTemplate { onRenameTemplate }
+									@ onRemoveTemplate { onRemoveTemplate }
+						{
+							&&
+								+ selectedIttfKind === 'snippets'
+								< SnippetList
+									@ snippets {documents}
+									@ schema {schema}
+									@ onAddSnippet { onAddSnippet }
+									@ onRenameSnippet { onRenameSnippet }
+									@ onRemoveSnippet { onRemoveSnippet }
+						< DialogActions
+							< Button
+								@ onClick { onCancel }
+								@ color primary
+								+ Cancel

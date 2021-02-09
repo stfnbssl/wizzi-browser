@@ -1,0 +1,7 @@
+﻿	
+	$$ top level
+	unpkg "dist/react-redux-firebase.min.js"
+	main "lib/index.js"
+	module "es/index.js"
+	jsnext:main "es/index.js"
+	typings "./index.d.ts"

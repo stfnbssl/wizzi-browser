@@ -1,0 +1,12 @@
+﻿module
+	kind react
+
+	import FbFsClient from '../store/db/fbFsClient'
+	import WizziStore from '../store/db/wizziStore'
+	
+	const extraArguments
+		{
+			@ FbFsClient FbFsClient
+			@ WizziStore WizziStore
+
+	export default extraArguments

@@ -1,0 +1,19 @@
+﻿$group
+	$params &app
+
+	$if app.useServer
+		
+		$if app.useNextjs
+			nextjs( &app )
+		
+		$else
+			# No known server app detected
+			# example
+			# app.useNextjs = true;
+
+	$else
+		# The app do not require a server
+		# see 
+			# app.useServer = true;
+			# app.useNextjs = true;
+			# etc...

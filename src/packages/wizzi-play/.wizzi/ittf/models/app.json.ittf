@@ -1,0 +1,62 @@
+{
+	name "wizzi-play"
+	version "0.0.1"
+    title "Wizzi play"
+	description "Wizzi factory playground"
+    keywords "wizzi ui react"
+	author "Stefano Bassoli"
+	license "MIT"
+    copy "Stefano Bassoli - 2018 (stfn.bssl@gmail.com)"
+
+    { Build
+        useWebpack true
+        { webpack
+            useCss false
+            useSass false
+            useHtml true
+            useDevServer true
+        useBabel true
+        { babel
+        useReact true
+        { react
+            useRouter false
+            useRedux false
+
+		
+		app.rootContainer = 'MuiThemeContainer';
+		app.rootElementId = 'app'
+		app.initialLoad = true;
+		
+		app.useBabel = true;
+        app.useMaterialUi = true;
+		app.primaryColor = 'orange';
+		app.secondaryColor = 'green';
+		app.accentColor = 'red';
+		app.useCssBaseline = false;
+		app.useCssBase = true;
+		app.useMonaco = true;
+		app.useJsonView = true;
+		app.sheetOrder = [];
+		app.useRedux = true;
+		app.useReduxForm = false;
+		// https://redux.js.org/advanced/async-actions
+		app.useReduxThunk = true;
+		app.useReduxLogger = true;
+		app.useApiMiddleware = false;
+		app.useThunkWithExtraArgument = true;
+		app.useFirestoreMiddleware = true;
+		app.useDevTools = false;
+		app.hotReload = false;
+		app.useReactPerf = false;
+		app.useNormalizr = false;
+		app.githubLink = false;
+		app.useSearch  = false;
+		app.useDrawer = true;
+		app.useMarkdownApi = false;
+		app.useMarkdownDemo = false;
+		app.useRouter = false;
+		app.routeBasepath = '';
+		app.testNoArtifactGeneration = false;
+		app.testNoWizzify = false;
+
+	$include app/options/analize

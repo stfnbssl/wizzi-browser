@@ -1,0 +1,45 @@
+﻿r-component( DiffDialog )
+
+	$append imports
+	
+		import Button from '@material-ui/core/Button'
+		import TextField from '@material-ui/core/TextField'
+		import Dialog from '@material-ui/core/Dialog'
+		import DialogActions from '@material-ui/core/DialogActions'
+		import DialogContent from '@material-ui/core/DialogContent'
+		import DialogContentText from '@material-ui/core/DialogContentText'
+		import DialogTitle from '@material-ui/core/DialogTitle'
+		import MonacoDiff from './MonacoDiff'
+
+	style
+
+	=> handleClose
+
+	render
+		prop open
+		prop originalModel
+		prop modifiedModel
+		prop onCancel
+
+		return
+			div
+				< Dialog
+					@ open {open}
+					@ aria-labelledby form-dialog-title
+					@ maxWidth {false}
+					$$ @ fullScreen {true}
+					< DialogTitle
+						@ id form-dialog-title
+						+ Diff
+						hr
+					< DialogContent
+						< MonacoDiff
+							@ originalModel {originalModel}
+							@ modifiedModel {modifiedModel}
+							@ width { 1100 }
+							@ height { 700 }
+						< DialogActions
+							< Button
+								@ onClick { onCancel }
+								@ color primary
+								+ Cancel

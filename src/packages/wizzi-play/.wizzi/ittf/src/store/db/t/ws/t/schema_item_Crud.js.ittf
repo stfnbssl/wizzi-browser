@@ -1,0 +1,40 @@
+﻿$group
+	$params item_Name, item_names
+
+	m setSchema${item_Name}
+		param schemaName
+		param name
+		_ this.getSchemas
+			f_cb( schemas )
+				const schema = schemas[schemaName]
+				const copy = []
+				foreach item in schema.${item_names}
+					if item.name !== name
+						_ copy.push(item)
+				_ copy.push
+					{
+						@ name name
+				set schema.${item_names} = copy
+		
+	m renameSchema${item_Name}
+		param schemaName
+		param oldName
+		param newName
+		_ this.removeSchema${item_Name}
+			@ schemaName
+			@ oldName
+		_ this.setSchema${item_Name}
+			@ schemaName
+			@ newName
+	
+	m removeSchema${item_Name}
+		param schemaName
+		param name
+		_ this.getSchemas
+			f_cb( schemas )
+				const schema = schemas[schemaName]
+				const copy = []
+				foreach item in schema.${item_names}
+					if item.name !== name
+						_ copy.push(item)
+				set schema.${item_names} = copy	

@@ -1,0 +1,95 @@
+﻿$group
+	$params &app
+
+	$if app.useBabelNode
+		build "babel src -d dist"
+		start "npm run build && nodemon dist/index.js"
+		serve "npm run build && node dist/index.js"
+		test "npm run build && mocha --require babel-register"
+
+	$elif app.useBabel
+		build "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
+		start "npm run build && node dist/src/index.js"
+		$if app.useTypescript
+			build:js "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
+
+	$elif app.useCreateReactApp
+		start "react-scripts start"
+		build "react-scripts build"
+		test "react-scripts test --env=jsdom"
+		eject "react-scripts eject"
+	
+	$elif app.useNextjs
+		build "next build"
+		$if app.useNextjsServer
+			dev "node server.js"
+			start "set NODE_ENV=development&&node server.js"
+		$else
+			dev "next"
+			start "next start"
+	
+	$elif app.useWebpack
+		build "webpack"
+	
+
+	$elif app.pkgSmart
+		clean "rimraf es lib dist coverage"
+		
+		$if app.pkgSmart.eslint
+			lint "eslint ./src/** ./bin/** ./test/**/*.js"
+			lint:fix "npm run lint -- --fix"
+		
+		format "prettier --write \"src/**/*.js\" \"test/**/*.js\""
+		
+		$if app.pkgSmart.test
+			test "mocha -R spec ./test/unit/**"
+			test:cov "istanbul cover $(npm bin)/_mocha ./test/unit/**"
+			codecov "cat coverage/lcov.info | codecov"
+		
+		build:commonjs "cross-env BABEL_ENV=commonjs babel src --out-dir lib"
+		build:es "cross-env BABEL_ENV=es babel src --out-dir es"
+		build:umd "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/react-redux-firebase.js"
+		build:umd:min "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-redux-firebase.min.js"
+		build:size "cross-env SIZE=true BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-redux-firebase.min.js"
+		build "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min"
+		
+		watch "npm run build:commonjs -- --watch"
+		
+		prepare "npm run clean && npm run build"
+		prepush "npm run lint"
+		
+		$if app.pkgSmart.docs
+			docs:clean "rimraf _book"
+			docs:prepare "gitbook install"
+			docs:api "babel-node bin/api-docs-generate"
+			docs:build "npm run docs:prepare && gitbook build -g prescottprue/react-redux-firebase && npm run docs:api"
+			docs:watch "npm run docs:prepare && gitbook serve"
+			docs:publish "npm run docs:clean && npm run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:prescottprue/react-redux-firebase gh-pages --force"
+			docs:upload "babel-node bin/api-docs-upload
+
+	
+	$if app.useLintStaged
+		precommit "lint-staged"
+	
+	$if app.useTypescript
+		
+		$if app.useWebpack
+			build "webpack"
+		$else
+			type-check "tsc --noEmit"
+			type-check:watch "npm run type-check -- --watch"
+			build "npm run build:types && npm run build:js"
+			build:types "tsc --emitDeclarationOnly"
+		
+		
+		$if app.usePrettier
+			$if app.useTSLint
+				tslint-check "tslint-config-prettier-check ./tslint.json"
+			prettier:base "prettier --parser typescript --single-quote"
+			prettier:check "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\""
+			prettier:write "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+
+	$if app.useVue
+		clean "rimraf dist"
+		build "npm run clean && webpack --mode production"
+		serve "webpack-dev-server --mode development"

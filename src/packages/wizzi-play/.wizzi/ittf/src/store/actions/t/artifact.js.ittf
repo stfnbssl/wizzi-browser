@@ -1,0 +1,116 @@
+﻿$group
+	+
+	decl_rsf( artifact, generate )
+	+
+	# thunk.withExtraArgument
+	wz-const scheduleGenerateArtifact
+		=>
+			param schemaName
+			param ittfKind
+			param documentName
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					if timers['generateArtifact']
+						_ clearTimeout
+							@ timers['generateArtifact']
+						log 'store.actions.scheduleGenerateArtifact. Cleared previous schedule.', new Date()
+			
+					set timers['generateArtifact']
+						_ setTimeout
+							function
+								_ dispatch
+									_ generateArtifact
+										@ schemaName
+										@ ittfKind
+										@ documentName
+								log 'store.actions.scheduleGenerateArtifact. dispatched.', new Date()
+							@ 2 * 1000
+
+	# thunk.withExtraArgument
+	wz-const generateArtifact
+		=>
+			param schemaName
+			param ittfKind
+			param documentName
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+					
+					log '*** store.actions.artifact.generateArtifact'
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+							
+					_ dispatch
+						_ requestArtifactGeneration
+							@ schemaName
+							@ ittfKind
+							@ documentName
+					
+					_ wizziStore.generateArtifactAction
+						@ schemaName
+						@ ittfKind
+						@ documentName
+						f_cb_no_err( generatedArtifact )
+							if err
+								return
+									_ dispatch
+										_ failArtifactGeneration
+											@ schemaName
+											@ ittfKind
+											@ documentName
+											@ err
+							_ dispatch
+								_ completeArtifactGeneration
+									@ schemaName
+									@ ittfKind
+									@ documentName
+									@ generatedArtifact
+
+	wz-const requestArtifactGeneration
+		=>
+			param schemaName
+			param ittfKind
+			param documentName
+			return
+				{
+					@ type GENERATE_ARTIFACT_REQUEST
+					@ schemaName schemaName
+					@ ittfKind ittfKind
+					@ documentName documentName
+	
+	wz-const failArtifactGeneration
+		=>
+			param schemaName
+			param ittfKind
+			param documentName
+			param error
+			return
+				{
+					@ type GENERATE_ARTIFACT_FAILURE
+					@ schemaName schemaName
+					@ ittfKind ittfKind
+					@ documentName documentName
+					@ error error
+	
+	wz-const completeArtifactGeneration
+		=>
+			param schemaName
+			param ittfKind
+			param documentName
+			param text
+			return
+				{
+					@ type GENERATE_ARTIFACT_SUCCESS
+					@ schemaName schemaName
+					@ ittfKind ittfKind
+					@ documentName documentName
+					@ text text
+					
+
+	

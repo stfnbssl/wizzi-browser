@@ -1,0 +1,89 @@
+﻿$group
+
+	m getSchemas
+		param callback
+		
+		if this.schemas != null
+			r_cb( this.schemas )
+
+		_ this.fb.getCollection
+			_ this.pathNames.schemasCollPath
+			{
+			a_cb( schemas )
+				log 'WizziStore.getSchemas.schemas: ', schemas
+				set this.schemas = {}
+				foreach item in schemas
+					var schema
+						{
+							@ name item.data.name
+							@ retrieved false
+							[ examples
+							[ fragments
+							[ snippets
+							[ templates
+					set this.schemas[item.data.name] = schema
+				log 'WizziStore.getSchemas.this.schemas: ', this.schemas
+				r_cb( this.schemas )
+
+	m retrieveSchema
+		param schemaName
+		param callback
+
+		log 'WizziStore.retrieveSchema', schemaName
+		var schema = this.schemas[schemaName]
+		log 'WizziStore.retrieveSchema', schemaName, schema
+
+		_ this.fb.getCollection
+			_ this.pathNames.examplesCollPath
+				@ schemaName
+			{
+			a_cb( examples )
+				log 'WizziStore.retrieveSchema. examples: ', examples
+				foreach item in examples
+					_ schema.examples.push
+						{
+							@ id item.id
+							@ name item.data.name
+					log 'WizziStore.retrieveSchema. schema.examples: ', schema.examples
+				_ this.fb.getCollection
+					_ this.pathNames.snippetsCollPath
+						@ schemaName
+					{
+					a_cb( snippets )
+						log 'WizziStore.retrieveSchema. snippets: ', snippets
+						foreach item in snippets
+							_ schema.snippets.push
+								{
+									@ id item.id
+									@ name item.data.name
+						log 'WizziStore.retrieveSchema. schema.snippets: ', schema.snippets
+						_ this.fb.getCollection
+							_ this.pathNames.fragmentsCollPath
+								@ schemaName
+							{
+							a_cb( fragments )
+								foreach item in fragments
+									_ schema.fragments.push
+										{
+											@ id item.id
+											@ name item.data.name
+								log 'WizziStore.retrieveSchema. schema.fragments: ', schema.fragments
+								_ this.fb.getCollection
+									_ this.pathNames.templatesCollPath
+										@ schemaName
+									{
+									a_cb( templates )
+										foreach item in templates
+											_ schema.templates.push
+												{
+													@ id item.id
+													@ name item.data.name
+										log 'WizziStore.retrieveSchema. schema.templates: ', schema.templates
+										set schema.retrieved = true
+										r_cb( schema )
+
+
+	schema_item_Crud( Example, examples )
+	schema_item_Crud( Fragment, fragments )
+	schema_item_Crud( Snippet, snippets )
+	schema_item_Crud( Template, templates )

@@ -1,0 +1,90 @@
+﻿$group
+
+	$if appEnvironment !== 'browser'
+
+		m initBatchLoadExamples
+			param schemaName
+			set this.examplesBatchSchema = schemaName
+			set this.examplesBatch = {}
+		
+		m addBatchLoadExamplesItem
+			param ittfFileRelPath
+			param origBaseName
+			param content
+			if this.examplesBatch[ittfFileRelPath]
+				throw
+					new Error
+						@ 'WizziStore.addBatchLoadExamplesItem. Duplicated example path: ' + ittfFileRelPath
+			set this.examplesBatch[ittfFileRelPath]
+				{
+					@ name origBaseName
+					@ schema this.examplesBatchSchema
+					@ content content
+			log 'addBatchLoadExamplesItem', ittfFileRelPath
+		
+		m addBatchLoadExamplesFile
+			param filePath
+			param basePath
+			
+			set filePath = normalizeFile(filePath)
+			set basePath = normalizeFolder(basePath)
+			
+			if basePath.substr(-1) !== '/'
+				set basePath += '/'
+			const origBaseName = filePath.substr(basePath.length)
+			
+			const ittfFileRelPath
+				_ this.pathNames.ittfFileRelPath
+					@ origBaseName
+					@ this.examplesBatchSchema
+
+			var content
+				_ this.vfile.read
+					@ filePath
+			_ this.addBatchLoadExamplesItem(ittfFileRelPath, origBaseName, content)
+		
+		m addBatchLoadExamplesFolder
+			param folderPath
+			param basePath
+			const files
+				_ this.vfile.getFiles
+					@ folderPath
+			log 'WizziStore.addBatchLoadExamplesFolder files', files
+			foreach f in files
+				if normalizeFile(f.fullPath).indexOf('/t/') < 0
+					_ this.addBatchLoadExamplesFile(f.fullPath, basePath || folderPath)
+
+		m commitBatchLoadExamples
+			param callback
+			log 'WizziStore.commitBatchLoadExamples.examplesBatch', Object.keys(this.examplesBatch)
+			_ this.fb.setBatch
+				_ this.pathNames.examplesCollPath
+				@ this.examplesBatch
+				@ callback
+
+		m downloadExamples
+			param schemaName
+			param destFolder
+			param callback
+			const that = this
+			_ this.getExamples
+				{
+					@ schema schemaName
+				f_cb( examples )
+					var filePath
+					foreach doc in examples
+						log '***', destFolder, doc
+						set filePath
+							_ path.join
+								@ destFolder
+								@ doc.data.name
+						_ that.vfile.write
+							@ filePath
+							@ doc.data.content
+					const message = 'Download successful. Dest path: ' + destFolder
+					log message
+					r_cb( message )
+
+
+
+

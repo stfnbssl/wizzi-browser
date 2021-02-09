@@ -1,0 +1,13 @@
+md
+	h1 wizzi-standalone
+	br
+	p Wizzi webpack(ed) for the browser
+	br
+
+	h2 Build
+	ul
+		li execute wizzi generation of ../stfnbssl/wizzi/packages/wizzi-util with param "webpack"
+        li execute wizzi generation of ../stfnbssl/wizzi/packages/wizzi-mtree with param "webpack"
+        li execute wizzi generation of ../stfnbssl/wizzi/packages/wizzi-repo with param "webpack"
+        li execute wizzi generation of ../stfnbssl/wizzi/packages/wizzi-tools with param "webpack"
+        li execute wizzi generation of ../stfnbssl/wizzi/packages/wizzi with param "webpack"

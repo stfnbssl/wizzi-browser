@@ -1,0 +1,8 @@
+﻿$group
+
+    artifact .babelrc
+        src .babelrc.json.ittf
+        schema json
+        generator json/document
+        dest-path .babelrc
+        extension babelrc

@@ -1,0 +1,59 @@
+﻿module
+	kind es6
+
+	class UpdatesQueue
+		ctor
+			set this.queue = []
+
+		m set
+			param path
+			param data
+			_ this._removePrevious
+				@ 'set'
+				@ path
+			_ this.queue.push
+				{
+					@ oper 'set'
+					@ path path
+					@ data data
+		
+		m delete
+			param path
+			_ this._removePrevious
+				@ 'delete'
+				@ path
+			_ this.queue.push
+				{
+					@ oper 'delete'
+					@ path path
+
+		m startBatch
+			const updates = []
+			set this.pendingUpdates = []
+			foreach item in this.queue
+				_ updates.push(item)
+				_ this.pendingUpdates.push(item)
+			set this.queue = []
+			return updates
+		
+		m commitBatch
+			delete this.pendingUpdates
+		
+		m rollbackBatch
+			foreach item in this.queue
+				_ this.pendingUpdates.push(item)
+			set this.queue = this.pendingUpdates
+			delete this.pendingUpdates
+
+		m _removePrevious
+			param oper
+			param path
+			const copy = []
+			foreach item in this.queue
+				if item.path === path && item.oper === oper
+					# skip
+				else
+					_ copy.push(item)
+			set this.queue = copy
+
+	export default UpdatesQueue

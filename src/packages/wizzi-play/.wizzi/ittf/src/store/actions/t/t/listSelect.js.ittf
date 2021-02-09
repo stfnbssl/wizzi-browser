@@ -1,0 +1,187 @@
+﻿$group
+	$params &app, listName, isIttf:boolean|true
+
+	$
+		var listname = listName.toLowerCase()
+		var listNAME = listName.toUpperCase()
+		var contentParam = listName === 'Snippet' ? 'codeContent' : 'ittfContent'
+
+	$if listName === 'Fragment' || listName === 'Template'
+		
+		# thunk.withExtraArgument
+		wz-const select${listName}
+			=>
+				param ${listname}Name
+				return
+					=>
+						param dispatch
+						param getState
+						param extraArgument
+					
+						log '*** store.actions.schema.select${listName}', ${listname}Name
+					
+						const schemaState = getState().schema
+						const schemaObject = schemaState.schemas[schemaState.selectedSchema]
+
+						if ${listname}Name == null
+							log 'select${listName}. selectedIttfKind has been changed, look for previous'
+							if schemaState.selected${listName} && schemaState.selected${listName}.length > 0
+								set ${listname}Name = schemaState.selected${listName}
+							else
+								if schemaState.filtered${listName}s.length > 0
+									set ${listname}Name = schemaState.filtered${listName}s[0].name
+								else
+									set ${listname}Name = 'default'
+
+						_ dispatch
+							_ requestSelect${listName}
+
+						const wizziStore
+							_ extraArgument.WizziStore.getInstance
+						
+						_ wizziStore.get${listName}
+							@ schemaState.selectedSchema
+							@ ${listname}Name
+							f_cb_no_err( ${listname} )
+								log '*** store.actions.schema.select${listName}. retrieve err, ${listname}', err, ${listname}
+								if err
+									log '*** store.actions.schema.select${listName}. retrieve err', err
+									# TODO manage exception
+									throw err
+
+								if !${listname}
+								
+									# TODO simply add a new ${listname}, no data in documentObject.ittf
+
+									var documentObject
+								
+									if schemaObject.${listname}s
+										_ schemaObject.${listname}s.map
+											=>
+												param item
+												if item.name == ${listname}Name
+													set documentObject = item
+
+									if documentObject && documentObject.data 
+									
+										const ittf = documentObject.data.content
+								
+										_ dispatch
+											_ completeSelect${listName}
+												@ ${listname}Name
+												@ ittf
+								
+										_ dispatch
+											_ updateIttfMTree
+												@ ittf
+								
+										_ dispatch
+											_ change${listName}Document
+												@ schemaState.selectedSchema
+												@ ${listname}Name
+												@ ittf
+								
+									else
+									
+										_ dispatch
+											_ add${listName}
+												@ schemaState.selectedSchema
+												@ ${listname}Name
+							
+								else
+
+									log '*** store.actions.schema.select${listName}. ${listname}Name, content', ${listname}Name, ${listname}
+								
+									_ dispatch
+										_ completeSelect${listName}
+											@ ${listname}Name
+											@ ${listname}.data.content
+								
+									_ dispatch
+										_ updateIttfMTree
+											@ ${listname}.data.content
+
+									$if listName === 'Template'
+										_ dispatch
+											_ generateArtifact
+												@ schemaState.selectedSchema
+												@ 'templates'
+												@ ${listname}Name
+
+
+	wz-const requestSelect${listName}
+		=>
+			param ${listname}Name
+			return
+				{
+					@ type SELECT_${listNAME}_REQUEST
+					@ ${listname} ${listname}Name
+
+	wz-const completeSelect${listName}
+		=>
+			param ${listname}Name
+			param ${contentParam}
+			
+			return
+				{
+					@ type SELECT_${listNAME}_SUCCESS
+					@ ${listname} ${listname}Name
+					@ ${contentParam} ${contentParam}
+
+	# thunk.withExtraArgument
+	wz-const change${listName}Document
+		=>
+			param schemaName
+			param ${listname}Name
+			param ${contentParam}
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					_ dispatch
+						_ updateStoredDocument
+							@ schemaName
+							@ ${listname}Name
+							@ ${contentParam}
+							{
+								@ is${listName} true
+
+					$if listName === 'Example' || listName === 'Template'
+						_ dispatch
+							_ updateIttfMTree
+								@ ittfContent
+
+						$if app.testNoArtifactGeneration == false
+							const schemaState = getState().schema
+							if schemaState.selected${listName} && schemaState.selected${listName}.length > 0
+								_ dispatch
+									_ scheduleGenerateArtifact
+										@ schemaName
+										@ '${listname}s'
+										@ schemaState.selected${listName}
+					
+					$elif listName === 'Snippet'
+						_ dispatch
+							_ updateCodeAST
+								@ schemaName
+								@ ${contentParam}
+
+						$if app.testNoWizzify == false
+							const schemaState = getState().schema
+							if schemaState.selectedSnippet && schemaState.selectedSnippet.length > 0
+								_ dispatch
+									_ scheduleWizzifySnippet
+										@ schemaName
+										@ schemaState.selectedSnippet
+										@ ${contentParam}
+
+					
+	wz-const change${listName}Content
+		=>
+			param ${contentParam}
+			return
+				{
+					@ type ${listNAME}_CONTENT_CHANGED
+					@ ${contentParam} ${contentParam}

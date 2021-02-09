@@ -1,0 +1,13 @@
+﻿$group
+	$params &opt
+
+	@ resizer
+		{
+			@ width '18px'
+			@ height 'calc(100vh - 118px)'
+			@ cursor 'col-resize'
+			@ backgroundColor '#343436'
+			@ '&:hover'
+				{
+					@ backgroundColor '#565658'
+					@ transition 'all 1s ease'

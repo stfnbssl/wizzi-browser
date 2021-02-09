@@ -1,0 +1,190 @@
+﻿module
+    kind react
+	+
+	import_rsf_actions( LOAD_APP )
+	import { 
+		\b SCHEMA_SELECTION,
+		\b EXAMPLE_CONTENT_CHANGED,
+		\b FRAGMENT_CONTENT_CHANGED,
+		\b TEMPLATE_CONTENT_CHANGED,
+		\b SNIPPET_CONTENT_CHANGED,
+		\b SELECT_ITTF_KIND
+		\b } from '../actions'
+
+	import_rsf_actions( SELECT_EXAMPLE )
+	import_rsf_actions( ADD_EXAMPLE )
+	import_rsf_actions( RENAME_EXAMPLE )
+	import_rsf_actions( REMOVE_EXAMPLE )
+
+	import_rsf_actions( SELECT_FRAGMENT )
+	import_rsf_actions( ADD_FRAGMENT )
+	import_rsf_actions( RENAME_FRAGMENT )
+	import_rsf_actions( REMOVE_FRAGMENT )
+
+	import_rsf_actions( SELECT_TEMPLATE )
+	import_rsf_actions( ADD_TEMPLATE )
+	import_rsf_actions( RENAME_TEMPLATE )
+	import_rsf_actions( REMOVE_TEMPLATE )
+
+	import_rsf_actions( SELECT_SNIPPET )
+	import_rsf_actions( ADD_SNIPPET )
+	import_rsf_actions( RENAME_SNIPPET )
+	import_rsf_actions( REMOVE_SNIPPET )
+	
+	import LocalStorage from './localStorage'
+	var ls = new LocalStorage('play')
+	+
+	const schemaInitialState
+		{
+			{ schemas
+				{ js
+					[ examples
+					[ fragments
+					[ snippets
+					[ templates
+			@ selectedIttfKind ls.get('selectedIttfKind', 'examples', true)
+			@ selectedSchema ls.get('selectedSchema', 'js', true)
+			@ filteredExamples []
+			@ filteredFragments []
+			@ filteredSnippets []
+			@ filteredTemplates []
+			@ isLoadingContent false
+			@ selectedExample ls.get('selectedExample', '', true)
+			@ selectedFragment ls.get('selectedFragment', '', true)
+			@ selectedSnippet ls.get('selectedSnippet', '', true)
+			@ selectedTemplate ls.get('selectedTemplate', '', true)
+			@ ittfContent ''
+			@ codeContent ''
+	+
+	r( schema, schemaInitialState )
+
+		c( LOAD_APP_SUCCESS
+			{
+				@ ...state
+				@ schemas action.initialData.schemas
+	
+		c( SCHEMA_SELECTION
+			$append preprocess
+				_ ls.set('selectedSchema', action.schema)
+				var selectedIttfKind = ls.get(action.schema + '_selectedIttfKind', 'examples', true)
+				var exampleObject, fragmentObject, snippetObject, templateObject
+				const s = state.schemas[action.schema]
+				if s
+					if s.examples && s.examples.length > 0 
+						set exampleObject = s.examples[0]
+					else
+						set s.examples = []
+					if s.fragments && s.fragments.length > 0
+						set fragmentObject = s.fragments[0]
+					else
+						set s.fragments = []
+					if s.snippets && s.snippets.length > 0
+						set snippetObject = s.snippets[0]
+					else
+						set s.snippets = []
+					if s.templates && s.templates.length > 0
+						set templateObject = s.templates[0]
+					else
+						set s.templates = []
+			{
+				@ ...state
+				@ selectedSchema action.schema
+				@ selectedIttfKind selectedIttfKind
+				@ filteredExamples s ? s.examples : []
+				@ selectedExample exampleObject ? exampleObject.name : 'default'
+				@ filteredFragments s ? s.fragments : []
+				@ selectedFragment fragmentObject ? fragmentObject.name : 'default'
+				@ filteredSnippets s ? s.snippets : []
+				@ selectedSnippet snippetObject ? snippetObject.name : 'default'
+				@ filteredTemplates s ? s.templates : []
+				@ selectedTemplate templateObject ? templateObject.name : 'default'
+				@ ittfContent ''
+
+		c( SELECT_ITTF_KIND
+			$append preprocess
+				_ ls.set('selectedIttfKind', action.selectedIttfKind)
+				_ ls.set(state.selectedSchema + '_selectedIttfKind', action.selectedIttfKind)
+			{
+				@ ...state
+				@ selectedIttfKind action.selectedIttfKind
+		
+		c( SELECT_EXAMPLE_REQUEST
+			{
+				@ ...state
+				@ isLoadingContent true
+
+		c( SELECT_EXAMPLE_SUCCESS
+			$append preprocess
+				_ ls.set('selectedExample', action.example)
+			{
+				@ ...state
+				@ selectedExample action.example
+				@ ittfContent action.ittfContent
+				@ isLoadingContent false
+
+		c( EXAMPLE_CONTENT_CHANGED )
+			{
+				@ ...state
+				@ ittfContent action.ittfContent
+		
+		c( SELECT_FRAGMENT_REQUEST
+			{
+				@ ...state
+				@ isLoadingContent true
+
+		c( SELECT_FRAGMENT_SUCCESS
+			$append preprocess
+				_ ls.set('selectedFragment', action.fragment)
+			{
+				@ ...state
+				@ selectedFragment action.fragment
+				@ ittfContent action.ittfContent
+				@ isLoadingContent false
+
+		c( FRAGMENT_CONTENT_CHANGED )
+			{
+				@ ...state
+				@ ittfContent action.ittfContent
+
+		c( SELECT_TEMPLATE_REQUEST
+			{
+				@ ...state
+				@ isLoadingContent true
+
+		c( SELECT_TEMPLATE_SUCCESS
+			$append preprocess
+				_ ls.set('selectedTemplate', action.template)
+			{
+				@ ...state
+				@ selectedTemplate action.template
+				@ ittfContent action.ittfContent
+				@ isLoadingContent false
+
+		c( TEMPLATE_CONTENT_CHANGED )
+			{
+				@ ...state
+				@ ittfContent action.ittfContent
+
+		c( SELECT_SNIPPET_REQUEST
+			{
+				@ ...state
+				@ isLoadingContent true
+
+		c( SELECT_SNIPPET_SUCCESS
+			$append preprocess
+				_ ls.set('selectedSnippet', action.snippet)
+			{
+				@ ...state
+				@ selectedSnippet action.snippet
+				@ codeContent action.codeContent
+				@ isLoadingContent false
+
+		c( SNIPPET_CONTENT_CHANGED )
+			{
+				@ ...state
+				@ codeContent action.codeContent
+
+		listCrud( Example )
+		listCrud( Fragment )
+		listCrud( Snippet )
+		listCrud( Template )

@@ -1,0 +1,19 @@
+﻿$group
+	$params &app
+	
+	const path = require('path')
+	const resolve = path.resolve
+
+	$if app.useMonaco || app.useMonaco2 || app.useHotReplacement
+		const webpack = require('webpack')
+	
+	$if app.useMonaco
+		# const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+		const MonacoWebpackPlugin = require('monaco-editor-webpack-3-plugin')
+	
+	$if app.useMonaco2
+		const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
+
+	$if app.useVue
+		const HtmlWebpackPlugin = require('html-webpack-plugin')
+		const VueLoaderPlugin = require('vue-loader/lib/plugin')

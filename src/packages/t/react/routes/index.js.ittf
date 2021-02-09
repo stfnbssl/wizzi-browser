@@ -1,0 +1,39 @@
+﻿module
+    kind react
+    
+	# We only need to import the modules necessary for initial render
+    import CoreLayout from '../layouts/CoreLayout'
+    import Home from './Home'
+    
+	$if app.routes.login
+		import LoginRoute from './Login'
+		import SignupRoute from './Signup'
+    import ProjectsRoute from './Projects'
+    $if app.routes.account
+		import AccountRoute from './Account'
+    $if app.routes.login
+		import RecoverRoute from './Recover'
+    import NotFoundRoute from './NotFound'
+    
+	export 
+        const createRoutes
+            => 
+                param store
+                ({ 
+                    @ path '/'
+                    @ component CoreLayout
+                    @ indexRoute Home
+                    [ childRoutes 
+						$if app.routes.account
+							@ AccountRoute
+                        $if app.routes.login
+							@ LoginRoute
+							@ SignupRoute
+						$hook
+                        $if app.routes.login
+							# async route definitions receive store
+							_ RecoverRoute(store)
+                        # async route definitions receive store
+                        _ NotFoundRoute(store)
+    
+	export-default createRoutes

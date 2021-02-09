@@ -1,0 +1,59 @@
+﻿wfjob wizzi-standalone
+	
+	$include app-options
+	
+	$
+        var ittf_models_folder = path.join(__dirname, 'models');
+		var ittf_root_folder   = path.join(__dirname, 'root');
+		var ittf_src           = path.join(__dirname, 'src');
+		var ittf_html          = path.join(__dirname, 'html');
+        var dest_folder_dist   = path.resolve(__dirname, '..', '..', '..', '..', 'build', 'wizzi-standalone', 'dist');
+        var dest_folder_app    = path.resolve(__dirname, '..', '..', '..', '..', 'build', 'wizzi-standalone', 'app');
+		// var dest_folder        = 'c:/my/wizzi/webpack/wizzi-standalone/app'
+
+    model pkg
+        export-name pkg
+        schema json
+        src ${ittf_models_folder}/pkg.json.ittf
+
+    line models
+        cwd-folder ${ittf_models_folder}
+        wfjob/any_json()
+
+	line root
+		cwd-folder ${ittf_root_folder}
+
+		wfjob/.babelrc()
+        wfjob/any_js()
+			ignore ${ittf_root_folder}/**/*__copy.*/**/*.js.ittf
+		$include wfjob/any_json
+		$include wfjob/any_text
+        wfjob/any_plain(ps1)
+		$include wfjob/.gitignore
+
+	line src
+		cwd-folder ${ittf_src}
+		dest-folder ${dest_folder_app}/src
+
+		$include wfjob/any_js
+		$include wfjob/any_json
+		$include wfjob/any_css
+		$include wfjob/any_html
+		$include wfjob/any_svg
+		$include wfjob/any_plain_scss
+
+	line html
+		cwd-folder ${ittf_html}
+		dest-folder ${dest_folder_dist}
+		
+		$include wfjob/any_html
+		$include wfjob/any_js
+		$include wfjob/any_css
+		$include wfjob/any_svg
+
+	production
+		dest-folder ${dest_folder_app}
+        line-ref models
+		line-ref root
+		line-ref src
+		line-ref html

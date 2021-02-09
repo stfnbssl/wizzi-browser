@@ -1,0 +1,18 @@
+﻿$group
+
+	. {classes.toolbar}
+		. {classes.wizziTitleArea}
+			img
+				class logoImg
+				src images/logo.svg
+				width 90
+				height 30
+		. {classes.selectActions}
+		. {classes.primaryActions}
+			button
+				id edit-settings
+				class { classnames(classes.button, classes.buttonEditorSolid) }
+				@ onClick { this.handleSettingsClick }
+				< GearIcon
+					class {classes.iconSvg} 
+				+ Settings

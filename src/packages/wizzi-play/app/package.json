@@ -1,0 +1,43 @@
+{
+    "name": "wizzi-play",
+    "version": "0.0.1",
+    "description": "Wizzi factory playground",
+    "author": "Stefano Bassoli",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \\\"Error: no test specified\\\" && exit 1",
+        "build": "webpack"
+    },
+    "dependencies": {
+        "@material-ui/core": "^1.1.0",
+        "@material-ui/icons": "^1.1.0",
+        "classnames": "^2.2.6",
+        "react": "^16.0.0",
+        "react-dom": "^16.0.0",
+        "react-redux": "^6.0.0",
+        "react-json-view": "latest",
+        "monaco-editor": "^0.13.1",
+        "react-monaco-editor": "latest",
+        "redux": "^4.0.1",
+        "redux-devtools-extension": "^2.13.2",
+        "redux-logger": "^3.0.6",
+        "redux-observable": "^1.0.0",
+        "redux-thunk": "^2.1.0",
+        "reselect": "^4.0.0",
+        "rxjs": "^6.4.0",
+        "lru-cache": "latest"
+    },
+    "devDependencies": {
+        "fg-loadcss": "^2.0.1",
+        "file-loader": "^1.1.5",
+        "jss-rtl": "^0.2.1",
+        "raw-loader": "^0.5.1",
+        "url-loader": "^1.0.1",
+        "css-loader": "^0.28.11",
+        "style-loader": "^0.21.0",
+        "monaco-editor-webpack-3-plugin": "^1.2.1",
+        "webfontloader": "^1.6.28",
+        "webpack": "3.12.0"
+    }
+}

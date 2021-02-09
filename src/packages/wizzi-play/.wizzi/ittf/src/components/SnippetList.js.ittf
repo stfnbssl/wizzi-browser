@@ -1,0 +1,222 @@
+﻿r-component( SnippetList )
+
+	$append imports
+		import { 
+			\b Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+			\b Button, 
+			\b List, ListItem, ListItemText, 
+			\b ListItemSecondaryAction, Tooltip, IconButton,
+			\b TextField, InputAdornment 
+			\b } from '@material-ui/core'
+		import AddIcon from '@material-ui/icons/Add'
+		import DeleteIcon from '@material-ui/icons/Delete'
+		import UpdateIcon from '@material-ui/icons/Update'
+		const NO_CONFIRM = 0
+		const REMOVE_CONFIRM = 1
+		const RENAME_CONFIRM = 2
+
+	state
+		@ openRenameDelete false
+		@ confirmState NO_CONFIRM
+		@ newSnippet ''
+		@ oldSnippet ''
+		@ rendelSnippet ''
+
+	style
+		@ selected
+			{
+				@ color 'red'
+
+	=> handleNewSnippetChange
+		param event
+		_ this.setState
+			{
+				@ ...this.state
+				@ newSnippet event.target.value
+
+	=> handleRenDelSnippetChange
+		param event
+		_ this.setState
+			{
+				@ ...this.state
+				@ rendelSnippet event.target.value
+
+	=> handleRemoveSnippetDialog
+		param snippet
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState REMOVE_CONFIRM
+				@ openRenameDelete true
+				@ rendelSnippet snippet
+	
+	=> handleRenameSnippetDialog
+		param snippet
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState RENAME_CONFIRM
+				@ openRenameDelete true
+				@ oldSnippet snippet
+				@ rendelSnippet snippet
+
+	=> handleCloseRenameDelete
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState NO_CONFIRM
+				@ openRenameDelete false
+
+	=> handleAddSnippet
+		prop onAddSnippet
+		if this.state.newSnippet && this.state.newSnippet.length > 0
+			_ onAddSnippet
+				@ this.state.newSnippet
+
+	=> handleRenameSnippet
+		prop onRenameSnippet
+		if this.state.rendelSnippet && 
+			\b this.state.rendelSnippet.length > 0 &&
+			\b this.state.rendelSnippet !== this.state.oldSnippet
+			_ onRenameSnippet
+				@ this.state.oldSnippet
+				@ this.state.rendelSnippet
+
+	=> handleRemoveSnippet
+		prop onRemoveSnippet
+		if this.state.rendelSnippet && 
+			\b this.state.rendelSnippet.length > 0
+			_ onRemoveSnippet
+				@ this.state.rendelSnippet
+
+	render
+		
+		prop classes
+		prop schema
+		prop snippets
+		
+		# prop selectedName
+
+		const { newSnippet, rendelSnippet, openRenameDelete, confirmState } = this.state
+		
+		return
+
+			div
+				< Dialog
+					@ open {openRenameDelete}
+					@ onClose {this.handleCloseRenameDelete}
+					< DialogTitle
+						{
+							&&
+								+ confirmState == REMOVE_CONFIRM
+								p Remove snippet: { rendelSnippet }
+						{
+							&&
+								+ confirmState == RENAME_CONFIRM
+								p Rename snippet: { rendelSnippet }
+					< DialogContent
+						{
+							&&
+								+ confirmState == RENAME_CONFIRM
+								< TextField
+									@ autoFocus
+									@ margin dense
+									@ id snippetName
+									@ label { 'new name' }
+									@ type textfield
+									@ fullWidth
+									@ value {rendelSnippet}
+									@ onChange {this.handleRenDelSnippetChange}
+									@ InputProps
+										{
+											@ endAdornment
+												< InputAdornment
+													@ position end
+													+ { schema + '.ittf' }
+
+						< DialogActions
+							< Button
+								@ onClick {this.handleCloseRenameDelete}
+								@ color primary
+								+ Cancel
+							{
+								&&
+									+ confirmState == RENAME_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleRenameSnippet
+										@ color primary
+										+ Confirm rename
+							{
+								&&
+									+ confirmState == REMOVE_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleRemoveSnippet
+										@ color primary
+										+ Confirm remove
+				< DialogTitle
+					+ Add, rename or remove snippets
+				< TextField
+					@ autoFocus
+					@ margin dense
+					@ id snippetName
+					@ label { 'new snippet' }
+					@ type textfield
+					@ fullWidth
+					@ value {newSnippet}
+					@ onChange {this.handleNewSnippetChange}
+					@ InputProps
+						{
+							@ endAdornment
+								< InputAdornment
+									@ position end
+									< Tooltip
+										title "Add new snippet"
+										@ enterDelay {500}
+										< IconButton
+											@ aria-label Add
+											@ onClick { this.handleAddSnippet }
+											< AddIcon
+				< List
+					@ dense {true}
+					{
+						_ snippets.map
+							=>
+								param snippet
+								return
+									< ListItem
+										@ key {snippet.name}
+										@ disableGutters
+										@ onClick
+											=>
+												_ this.handleRenameSnippetDialog
+													@ snippet.name
+										$*
+										@ className {selectedName === snippet.name ? classes.selected : ''}
+										*$
+										< ListItemText
+											@ primary {schema + '/' + snippet.name }
+										< ListItemSecondaryAction
+											< Tooltip
+												title "Rename snippet"
+												@ enterDelay {500}
+												< IconButton
+													@ aria-label Update
+													@ onClick
+														=>
+															_ this.handleRenameSnippetDialog
+																@ example.name
+													< UpdateIcon
+											< Tooltip
+												title "Delete snippet"
+												@ enterDelay {500}
+												< IconButton
+													@ aria-label Delete
+													@ onClick
+														=>
+															_ this.handleRemoveSnippetDialog
+																@ snippet.name
+													< DeleteIcon

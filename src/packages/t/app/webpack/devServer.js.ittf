@@ -1,0 +1,7 @@
+﻿$group
+	$params &app
+
+	$if app.useHotReplacement
+		
+			@ open true
+			@ hot true

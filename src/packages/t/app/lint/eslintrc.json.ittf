@@ -1,0 +1,31 @@
+﻿$group
+	$params &app
+	
+	{ env
+		browser true
+		jest true
+	
+	[ extends
+		"airbnb" 
+		$if app.usePrettier
+			"plugin:prettier/recommended"
+	
+	parser "babel-eslint"
+	
+	[ plugins
+		$if app.usePrettier
+			"prettier"
+	
+	{ rules
+		class-methods-use-this 0
+		import/no-named-as-default 0
+		
+		$if app.usePrettier
+			prettier/prettier "error"
+		
+		[ react/jsx-filename-extension
+			"error" 
+			{ 
+				[ extensions
+					".js" 
+					".jsx" 

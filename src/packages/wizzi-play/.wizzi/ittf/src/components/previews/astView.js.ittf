@@ -1,0 +1,39 @@
+﻿r-component( AstView )
+	
+	$append imports
+
+		import ReactJson from 'react-json-view'
+		import MonacoEditor from '../MonacoEditor'
+
+		var styles
+			{
+				$*
+				@ margin '20px'
+				@ padding '20px'
+				*$
+				@ overflow 'auto'
+
+	render
+		prop codeAST
+		prop width
+		prop height
+		log 'AstView.render.codeAST', codeAST
+
+		var astString
+		try
+			set astString = JSON.stringify(codeAST, null, 2)
+		catch ex
+			set astString = 'Cannot stringify AST. Error: ' + (ex && ex.message)
+
+		return
+			div
+				style {styles}
+				< MonacoEditor 
+					@ value { astString }
+					@ width { width }
+					@ height { height }
+					@ theme 'vs-dark'
+				$*
+				< ReactJson
+					@ src { codeAST }
+				*$

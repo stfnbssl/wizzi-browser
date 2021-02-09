@@ -1,0 +1,21 @@
+﻿module
+	kind react
+
+	$include app-options
+	
+	react/store/reducers/index( &app )
+
+		$append imports
+			import appReducer from './appReducer'
+			import schemaReducer from './schemaReducer'
+			import ittfStoreReducer from './ittfStoreReducer'
+			import artifactReducer from './artifactReducer'
+			import snippetReducer from './snippetReducer'
+			import helpBoardReducer from './helpBoardReducer'
+
+		@ app appReducer
+		@ schema schemaReducer
+		@ ittfStore ittfStoreReducer
+		@ artifact artifactReducer
+		@ snippet snippetReducer
+		@ helpBoard helpBoardReducer

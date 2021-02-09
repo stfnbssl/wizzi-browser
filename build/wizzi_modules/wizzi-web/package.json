@@ -1,0 +1,48 @@
+{
+    "name": "wizzi-web",
+    "sideEffects": false,
+    "description": "A wizzi default plugin for html css svg markdown",
+    "author": {
+        "name": "Stefano Bassoli",
+        "email": "stfn.bssl@gmail.com"
+    },
+    "private": false,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-web"
+    },
+    "engines": {
+        "node": ">=0.10.28",
+        "npm": ">=1.4.28"
+    },
+    "scripts": {
+        "test": "mocha tests/**/*.js --full-trace",
+        "examples:css": "node examples/css",
+        "examples:graphql": "node examples/graphql",
+        "examples:html": "node examples/html",
+        "examples:md": "node examples/md",
+        "examples:svg": "node examples/svg",
+        "examples:vtt": "node examples/vtt",
+        "examples:vue": "node examples/vue"
+    },
+    "dependencies": {
+        "async": "^3.2.0",
+        "chalk": "^4.1.0",
+        "i": "^0.3.5",
+        "iconv-lite": "^0.6.2",
+        "json-stringify-safe": "^5.0.1",
+        "lodash": "^4.17.20",
+        "postcss": "^7.0.16",
+        "postcss-color-function": "^4.1.0"
+    },
+    "devDependencies": {
+        "del": "^6.0.0",
+        "expect.js": "^0.3.1"
+    }
+}

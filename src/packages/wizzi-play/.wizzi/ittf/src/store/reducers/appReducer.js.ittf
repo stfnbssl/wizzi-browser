@@ -1,0 +1,34 @@
+﻿module
+    kind react
+	+
+	import_rsf_actions( LOAD_APP )
+	+
+	const appInitialState
+		{
+			@ userState {}
+			@ isLoading false
+			@ loadError null
+	+
+	r( app, appInitialState )
+	
+		c( LOAD_APP_REQUEST
+			{
+				@ ...state
+				@ isLoading true
+				@ loadError null
+
+		c( LOAD_APP_SUCCESS
+			$append preprocess
+				# preprocess code goes here
+			{
+				@ ...state
+				@ userState action.initialData.userState || {}
+				@ isLoading false
+
+		c( LOAD_APP_FAILURE
+			{
+				@ ...state
+				@ isLoading false
+				@ loadError action.error
+
+

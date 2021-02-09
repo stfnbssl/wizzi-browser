@@ -1,0 +1,5 @@
+﻿$group
+	$params name
+
+	wz-const ${name} = '${name}'
+

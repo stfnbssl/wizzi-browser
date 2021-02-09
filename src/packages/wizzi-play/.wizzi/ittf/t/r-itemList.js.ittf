@@ -1,0 +1,235 @@
+﻿r-component( ${name} )
+	$params name
+
+	$
+		var namelower = name.toLowerCase();
+
+	$append imports
+		import { 
+			\b Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+			\b Button, 
+			\b List, ListItem, ListItemText, 
+			\b ListItemSecondaryAction, Tooltip, IconButton,
+			\b TextField, InputAdornment 
+			\b } from '@material-ui/core'
+		import AddIcon from '@material-ui/icons/Add'
+		import DeleteIcon from '@material-ui/icons/Delete'
+		import UpdateIcon from '@material-ui/icons/Update'
+		const NO_CONFIRM = 0
+		const REMOVE_CONFIRM = 1
+		const RENAME_CONFIRM = 2
+
+	state
+		@ openRenameDelete false
+		@ confirmState NO_CONFIRM
+		@ new${name} ''
+		@ old${name} ''
+		@ rendel${name} ''
+
+	style
+		@ selected
+			{
+				@ color 'red'
+
+	=> handleNew${name}Change
+		param event
+		_ this.setState
+			{
+				@ ...this.state
+				@ new${name} event.target.value
+
+	=> handleRenDel${name}Change
+		param event
+		_ this.setState
+			{
+				@ ...this.state
+				@ rendel${name} event.target.value
+
+	=> handleAdd${name}Dialog
+		param ${namelower}
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState ADD_CONFIRM
+				@ openAddDelete true
+				@ rendel${name} ${namelower}
+
+	=> handleRemove${name}Dialog
+		param ${namelower}
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState REMOVE_CONFIRM
+				@ openRenameDelete true
+				@ rendel${name} ${namelower}
+	
+	=> handleRename${name}Dialog
+		param ${namelower}
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState RENAME_CONFIRM
+				@ openRenameDelete true
+				@ old${name} ${namelower}
+				@ rendel${name} ${namelower}
+
+	=> handleCloseRenameDelete
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState NO_CONFIRM
+				@ openRenameDelete false
+
+	=> handleAdd${name}
+		prop onAdd${name}
+		if this.state.new${name} && this.state.new${name}.length > 0
+			_ onAdd${name}
+				@ this.state.new${name}
+
+	=> handleRename${name}
+		prop onRename${name}
+		if this.state.rendel${name} && 
+			\b this.state.rendel${name}.length > 0 &&
+			\b this.state.rendel${name} !== this.state.old${name}
+			_ onRename${name}
+				@ this.state.old${name}
+				@ this.state.rendel${name}
+
+	=> handleRemove${name}
+		prop onRemove${name}
+		if this.state.rendel${name} && 
+			\b this.state.rendel${name}.length > 0
+			_ onRemove${name}
+				@ this.state.rendel${name}
+
+	render
+		
+		prop classes
+		prop schema
+		prop ${namelower}s
+		
+		# prop selectedName
+
+		const { new${name}, rendel${name}, openRenameDelete, confirmState } = this.state
+		
+		return
+
+			div
+				< Dialog
+					@ open {openRenameDelete}
+					@ onClose {this.handleCloseRenameDelete}
+					< DialogTitle
+						{
+							&&
+								+ confirmState == REMOVE_CONFIRM
+								p Remove ${namelower}: { rendel${name} }
+						{
+							&&
+								+ confirmState == RENAME_CONFIRM
+								p Rename ${namelower}: { rendel${name} }
+					< DialogContent
+						{
+							&&
+								+ confirmState == RENAME_CONFIRM
+								< TextField
+									@ autoFocus
+									@ margin dense
+									@ id ${namelower}Name
+									@ label { 'new name' }
+									@ type textfield
+									@ fullWidth
+									@ value {rendel${name}}
+									@ onChange {this.handleRenDel${name}Change}
+									@ InputProps
+										{
+											@ endAdornment
+												< InputAdornment
+													@ position end
+													+ { schema + '.ittf' }
+
+						< DialogActions
+							< Button
+								@ onClick {this.handleCloseRenameDelete}
+								@ color primary
+								+ Cancel
+							{
+								&&
+									+ confirmState == RENAME_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleRename${name}
+										@ color primary
+										+ Confirm rename
+							{
+								&&
+									+ confirmState == REMOVE_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleRemove${name}
+										@ color primary
+										+ Confirm remove
+				< DialogTitle
+					+ Add, rename or remove ${namelower}s
+				< TextField
+					@ autoFocus
+					@ margin dense
+					@ id ${namelower}Name
+					@ label { 'new ${namelower}' }
+					@ type textfield
+					@ fullWidth
+					@ value {new${name}}
+					@ onChange {this.handleNew${name}Change}
+					@ InputProps
+						{
+							@ endAdornment
+								< InputAdornment
+									@ position end
+									< Tooltip
+										title "Add new ${namelower}"
+										@ enterDelay {500}
+										< IconButton
+											@ aria-label Add
+											@ onClick { this.handleAdd${name} }
+											< AddIcon
+				< List
+					@ dense {true}
+					{
+						_ ${namelower}s.map
+							=>
+								param ${namelower}
+								return
+									< ListItem
+										@ key {${namelower}.name}
+										@ disableGutters
+										@ onClick
+											=>
+												_ this.handleRename${name}Dialog
+													@ ${namelower}.name
+										$*
+										@ className {selectedName === ${namelower}.name ? classes.selected : ''}
+										*$
+										< ListItemText
+											@ primary {schema + '/' + ${namelower}.name }
+										< ListItemSecondaryAction
+											< Tooltip
+												title "Rename ${namelower}"
+												@ enterDelay {500}
+												< IconButton
+													@ aria-label Update
+													@ onClick
+														=>
+															_ this.handleRename${name}Dialog
+																@ ${namelower}.name
+													< UpdateIcon
+											< Tooltip
+												title "Delete ${namelower}"
+												@ enterDelay {500}
+												< IconButton
+													@ aria-label Delete
+													@ onClick
+														=>
+															_ this.handleRemove${name}Dialog
+																@ ${namelower}.name
+													< DeleteIcon

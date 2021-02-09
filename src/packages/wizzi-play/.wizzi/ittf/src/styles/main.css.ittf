@@ -1,0 +1,18 @@
+﻿css
+
+	< html, body
+		height 100%
+		overflow hidden
+		margin 0
+		padding 0
+		
+	< *
+		margin 0
+		padding 0
+		box-sizing border-box
+
+	. CodeMirror
+		min-width 200px
+		height calc(100vh - 158px)
+
+	$include hb-schema-doc

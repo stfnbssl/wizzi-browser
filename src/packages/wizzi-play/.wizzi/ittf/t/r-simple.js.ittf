@@ -1,0 +1,14 @@
+﻿module
+	$params name, kind|@@null
+	kind react
+
+	$include app-options
+
+	$
+		var md = {};
+		md.name = name;
+		md.connect = kind === 'connect';
+	
+	react/simple(&md, &app)
+
+		$hook

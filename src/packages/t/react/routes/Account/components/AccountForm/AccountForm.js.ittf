@@ -1,0 +1,71 @@
+﻿module
+    kind react
+    import React from 'react'
+    import PropTypes from 'prop-types'
+    import 
+        @ Field
+        from 'redux-form'
+    import Button from '@material-ui/core/Button'
+    import 
+        @ TextField
+        from 'redux-form-material-ui'
+    import ProviderDataForm from '../ProviderDataForm'
+    import classes from './AccountForm.scss'
+    export 
+        const AccountForm
+            => 
+                { 
+                    @ account account
+                    @ handleSubmit handleSubmit
+                    @ submitting submitting
+                    @ pristine pristine
+                form 
+                    @ className {classes.container}
+                    @ onSubmit {handleSubmit}
+                    h4 
+                        + Account
+                    div 
+                        @ className {classes.fields}
+                        < Field 
+                            @ fullWidth
+                            @ name "displayName"
+                            @ component {TextField}
+                            @ className {classes.field}
+                            @ label "Display Name"
+                        < Field 
+                            @ name "email"
+                            @ label "Email"
+                            @ component {TextField}
+                            @ fullWidth
+                            @ className {classes.field}
+                        < Field 
+                            @ name "avatarUrl"
+                            @ label "Avatar Url"
+                            @ component {TextField}
+                            @ className {classes.field}
+                            @ fullWidth
+                    { 
+                        && 
+                            set !!account && !!account.providerData
+                            div 
+                                h4 
+                                    + Linked Accounts
+                                < ProviderDataForm 
+                                    @ providerData {account.providerData}
+                    div 
+                        @ className {classes.submit}
+                        < Button 
+                            @ color "primary"
+                            @ type "submit"
+                            @ disabled {pristine || submitting}
+                            { 
+                                iif submitting
+                                    then 'Saving'
+                                    else 'Save'
+    set AccountForm.propTypes =
+        { 
+            @ account PropTypes.object
+            @ handleSubmit PropTypes.func.isRequired
+            @ pristine PropTypes.bool.isRequired
+            @ submitting PropTypes.bool.isRequired
+    export-default AccountForm

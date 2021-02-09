@@ -1,0 +1,5 @@
+﻿$group
+
+	artifact any_plain_scss
+		src ./**/*.scss
+		extension scss

@@ -1,0 +1,66 @@
+﻿$group
+	$params &app
+	
+	import App, {Container} from 'next/app'
+	import React from 'react'
+	
+	$if app.useRedux
+		import { Provider } from 'react-redux'
+		import configureStore from '../store/configureStore'
+		$if app.initialLoad
+			import { initialLoad } from '../store/actions'
+
+	$hook imports
+
+	$if app.useRedux
+		const isServer = typeof window === 'undefined'
+		const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
+		
+		function getOrCreateStore
+			param initialState
+
+			# Always make a new store if server, otherwise state is shared between requests
+			if isServer
+				$if app.initialLoad
+					let store = configureStore(initialState)
+					return
+						_ store.dispatch
+							_ initialLoad()
+				$else
+					return configureStore(initialState)
+
+			# Store in global variable if client
+			if !window[__NEXT_REDUX_STORE__]
+				$if app.initialLoad
+					let store = configureStore(initialState)
+					_ store.dispatch
+						_ initialLoad()
+					set window[__NEXT_REDUX_STORE__] = store
+				$else
+					set window[__NEXT_REDUX_STORE__] = configureStore(initialState)
+			return window[__NEXT_REDUX_STORE__]
+	
+	react MyApp
+		extends App
+
+		m getInitialProps
+			static
+			param { Component, router, ctx }
+			let pageProps = {}
+			if Component.getInitialProps
+				# TODO set pageProps = await Component.getInitialProps(ctx)
+				set pageProps = Component.getInitialProps(ctx)
+			return {pageProps}
+
+		render
+			prop Component
+			prop pageProps
+
+			return
+				< Container
+					< Provider
+						@ store { getOrCreateStore(pageProps.initialState) }
+						< Component
+							@ {...pageProps}
+	
+	export default MyApp

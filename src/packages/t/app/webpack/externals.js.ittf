@@ -1,0 +1,11 @@
+﻿$group
+	$params &app
+
+	[ externals
+		$if app.useReactExternals
+			{ 
+				@ "react" "React"
+				@ "react-dom" "ReactDOM"
+
+		$if app.useRequireHttp
+			@ require('webpack-require-http')

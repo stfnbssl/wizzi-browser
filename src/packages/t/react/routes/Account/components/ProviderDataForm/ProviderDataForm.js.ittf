@@ -1,0 +1,38 @@
+﻿module
+    kind react
+    import React from 'react'
+    import PropTypes from 'prop-types'
+    import List from '@material-ui/core/List'
+    import ListItem from '@material-ui/core/ListItem'
+    import ListItemIcon from '@material-ui/core/ListItemIcon'
+    import ListItemText from '@material-ui/core/ListItemText'
+    import ListSubheader from '@material-ui/core/ListSubheader'
+    import AccountCircle from '@material-ui/icons/AccountCircle'
+    import classes from './ProviderDataForm.scss'
+    export 
+        const ProviderData
+            => 
+                { 
+                    @ providerData providerData
+                div 
+                    @ className {classes.container}
+                    < List 
+                        @ subheader
+                            { 
+                                < ListSubheader 
+                                    + Accounts
+                        { 
+                            _ providerData.map
+                                => 
+                                    param providerAccount
+                                    param i
+                                    < ListItem 
+                                        @ key {i}
+                                        < ListItemIcon 
+                                            < AccountCircle 
+                                        < ListItemText 
+                                            @ primary {providerAccount.providerId}
+    set ProviderData.propTypes =
+        { 
+            @ providerData PropTypes.array.isRequired
+    export-default ProviderData

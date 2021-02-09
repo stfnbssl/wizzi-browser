@@ -1,0 +1,10 @@
+﻿html
+	head
+		@title Wizzi factory playground serverless app
+	body
+		# app
+		js https://www.gstatic.com/firebasejs/5.3.0/firebase.js
+		js https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js
+		js https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js
+		js ./scripts/wizzi-standalone.js
+		js ./scripts/wizzi-play.js

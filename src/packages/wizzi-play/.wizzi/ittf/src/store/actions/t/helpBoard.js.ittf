@@ -1,0 +1,125 @@
+﻿$group
+	+
+	decl( HB_UPDATE_ITTF_MTREE )
+	decl( HB_UPDATE_CODE_AST )
+	decl( HB_DOCUMENT_EDITOR_CURSOR_ACTIVITY )
+	+
+	# thunk.withExtraArgument
+	wz-const updateIttfMTree
+		=>
+			param ittfContent
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					var ittfMTree = {}
+					if ittfContent && ittfContent.length > 0
+						const wizziStore
+							_ extraArgument.WizziStore.getInstance
+
+						_ wizziStore.toIttfTreeEx
+							@ ittfContent
+							f_cb( ittfMTree )
+								_ dispatch
+									_ completeHbUpdateIttfMTree
+										@ ittfMTree
+					else
+						_ dispatch
+							_ completeHbUpdateIttfMTree
+								@ ittfMTree
+
+	+
+	wz-const completeHbUpdateIttfMTree
+		=>
+			param ittfMTree
+			log 'store.actions.completeUpdateIttfMTree', ittfMTree
+			return
+				{
+					@ type HB_UPDATE_ITTF_MTREE
+					@ ittfMTree ittfMTree
+
+	wz-const ittfEditorCursorActivity
+		=>
+			param cursor
+			log 'store.actions.ittfEditorCursorActivity', cursor
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					var
+						decl mTree = getState().helpBoard.ittfMTree
+						decl mTreeNode
+						decl schemaElementDoc = null
+					if mTree && mTree.findByRow
+						set mTreeNode = mTree.findByRow(cursor.line + 1)
+						log 'wizzi-studio.store.helpBoard.mTreeNode', mTreeNode
+						if mTreeNode
+							const wizziStore
+								_ extraArgument.WizziStore.getInstance
+							set schemaElementDoc
+								_ wizziStore.getSchemaElementDoc
+									@ mTreeNode
+					_ dispatch
+						_ completeIttfEditorCursorActivity
+							@ cursor
+							@ mTreeNode
+							@ schemaElementDoc
+
+	wz-const completeIttfEditorCursorActivity
+		=>
+			param cursor
+			param cursorNode
+			param schemaElementDoc
+			return
+				{
+					@ type HB_DOCUMENT_EDITOR_CURSOR_ACTIVITY
+					@ cursor cursor
+					@ cursorNode cursorNode
+					@ schemaElementDoc schemaElementDoc
+
+	+
+	# thunk.withExtraArgument
+	wz-const updateCodeAST
+		=>
+			param schemaName
+			param codeContent
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					log 'store.actions.updateCodeAST', schemaName, codeContent
+
+					var codeAST = {}
+					if codeContent && codeContent.length > 0
+						const wizziStore
+							_ extraArgument.WizziStore.getInstance
+
+						_ wizziStore.getCodeAST
+							@ schemaName
+							@ codeContent
+							f_cb_no_err( codeAST )
+								log 'store.actions.updateCodeAST.err.codeAST', err, codeAST
+								if err
+									_ dispatch
+										_ completeHbUpdateCodeAST
+											@ JSON.stringify(err, null, 4)
+								else
+									_ dispatch
+										_ completeHbUpdateCodeAST
+											@ codeAST
+
+	+
+	wz-const completeHbUpdateCodeAST
+		=>
+			param codeAST
+			log 'store.actions.completeHbUpdateCodeAST', codeAST
+			return
+				{
+					@ type HB_UPDATE_CODE_AST
+					@ codeAST codeAST

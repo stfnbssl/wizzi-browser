@@ -1,0 +1,129 @@
+﻿$group
+
+	$
+		// Default values
+
+		var app = {};
+		
+		app.name = 'The app name';
+		app.description = 'An app description';
+		app.version = '0.0.1';
+		app.author = 'Stefano Bassoli';
+		app.license = 'MIT';
+		app.copy = 'Stefano Bassoli - 2019';
+
+		app.hasDemo = false;
+		
+		app.useWebpack = false;
+		app.useRollup = false;
+		
+		app.useBabel = false;
+		app.useBabelRegister = false;
+		
+		app.useTypescript = false;
+
+		app.useReact = false;
+		app.useCreateReactApp = false;
+		app.rootElementId = 'app';
+		
+		app.useRedux = false;
+		app.useReduxMiddleware = false;
+		app.useReduxCompose = false;
+		app.useReduxForm = false;
+		app.useApiMiddleware = false;
+		app.apiMiddleware = {};
+		
+		app.rootContainer = null;
+		app.useNextjs = false;
+		app.useNextjsServer = false;
+		app.useNextjsServerExpress = false;
+		app.useLruCache = false;
+
+		// Wizzi
+		app.useWizziTools = false;
+		app.useWizziUtils = false;
+
+    	// Db
+		app.useFirebase = false
+		app.firebase = {}
+		app.useReduxLocalStorage = false;
+		app.reduxLocalStorageNestedKey = null;
+		app.localStorageKey = 'redux-local-storage';
+		app.useReduxFirestore = false;
+		// graphql
+		app.useGraphql = false;
+		app.graphql = {};
+		app.graphql.github = false;
+
+		// UI
+		app.useMaterialUi = false;
+		app.useMaterialUiIcons = false;
+		app.primaryColor = 'orange';
+		app.secondaryColor = 'green';
+		app.accentColor = 'red';
+		app.importMainStyles_before = null;
+		app.importMainStyles_after = null;
+		app.useSplitter = false;
+		app.useCssBaseline = false;
+		app.useCssBase = false;
+		app.useJsonView = false;
+		app.useReactMarkdown = false;
+
+		// Code edit and visualize
+		app.code = {};
+		app.useCodemirror = false;
+		app.codemirrorModes = [];
+		app.codemirrorThemes = [];
+		app.usePrismjs = false;
+		app.prismjsModes = [];
+		app.prismjsThemes = [];
+		app.useReactLowLight = false;
+		
+		// Code beautify
+		app.usePrettier = false;
+		app.useJsBeautify = false;
+		app.jsBeautifyModes = [];
+		
+		// Monaco editor
+		app.useMonaco = false;
+
+		app.useDevTools = false;
+		app.hotReload = false;
+		app.useReactPerf = false;
+		app.useNormalizr = false;
+		app.githubLink = false;
+		app.useSearch  = false;
+		app.useDrawer = true;
+		app.useMarkdownApi = false;
+		app.useMarkdownDemo = false;
+		
+		// Router
+		app.useRouter = false;
+		app.useReactRouter = false;
+		app.routeBasepath = '';
+
+		// Polyfill
+		app.polyfill = {}
+		app.polyfill.fetch = false
+		app.polyfill.objectAssign = false
+		app.polyfill.promise = false
+		app.polyfill.raf = false
+
+        // TODO create a built-in camelCase function in js-wizzi
+        function camelCase(name) {
+        	var ss = name.split('_')
+            var sb = [ss[0]];
+            for (var i=1; i<ss.length; i++) {
+            	sb.push(ss[i][0].toUpperCase() + ss[i].substr(1));
+            }
+        	return sb.join('');
+        }
+		// TODO create a built-in pascalCase function in js-wizzi
+        function pascalCase(name) {
+        	var ss = name.split('_')
+            var sb = [];
+            for (var i=0; i<ss.length; i++) {
+            	sb.push(ss[i][0].toUpperCase() + ss[i].substr(1));
+            }
+        	return sb.join('');
+        }

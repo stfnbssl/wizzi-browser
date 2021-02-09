@@ -1,0 +1,27 @@
+﻿$group
+	$params name, dialog
+
+	=> handleAdd${name}
+		param new${name}
+		param templateName
+		prop onAdd${name}
+		_ onAdd${name}
+			@ new${name}
+			@ templateName
+		_ this.handle${dialog}Cancel
+
+	=> handleRename${name}
+		param old${name}
+		param new${name}
+		prop onRename${name}
+		_ onRename${name}
+			@ old${name}
+			@ new${name}
+		_ this.handle${dialog}Cancel
+
+	=> handleRemove${name}
+		param old${name}
+		prop onRemove${name}
+		_ onRemove${name}
+			@ old${name}
+		_ this.handle${dialog}Cancel

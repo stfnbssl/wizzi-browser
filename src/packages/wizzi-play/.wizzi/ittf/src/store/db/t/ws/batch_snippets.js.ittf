@@ -1,0 +1,91 @@
+﻿$group
+
+	$if appEnvironment !== 'browser'
+
+		m initBatchLoadSnippets
+			param schemaName
+			set this.snippetsBatchSchema = schemaName
+			set this.snippetsBatch = {}
+		
+		m addBatchLoadSnippetsItem
+			param fileRelPath
+			param origBaseName
+			param content
+			if this.snippetsBatch[fileRelPath]
+				throw
+					new Error
+						@ 'WizziStore.addBatchLoadSnippetsItem. Duplicated snippet path: ' + fileRelPath
+			set this.snippetsBatch[fileRelPath]
+				{
+					@ name origBaseName
+					@ schema this.snippetsBatchSchema
+					@ content content
+			log 'addBatchLoadSnippetsItem', fileRelPath
+		
+		m addBatchLoadSnippetsFile
+			param filePath
+			param basePath
+			
+			set filePath = normalizeFile(filePath)
+			set basePath = normalizeFolder(basePath)
+			
+			if basePath.substr(-1) !== '/'
+				set basePath += '/'
+			const origBaseName = filePath.substr(basePath.length)
+			
+			const fileRelPath
+				_ this.pathNames.fileRelPath
+					@ origBaseName
+					@ this.snippetsBatchSchema
+
+			var content
+				_ this.vfile.read
+					@ filePath
+			_ this.addBatchLoadSnippetsItem(fileRelPath, origBaseName, content)
+		
+		m addBatchLoadSnippetsFolder
+			param folderPath
+			param basePath
+			log 'WizziStore.addBatchLoadSnippetsFolder folderPath, basePath', folderPath, basePath
+			const files
+				_ this.vfile.getFiles
+					@ folderPath
+			log 'WizziStore.addBatchLoadSnippetsFolder files', files
+			foreach f in files
+				if normalizeFile(f.fullPath).indexOf('/t/') < 0
+					_ this.addBatchLoadSnippetsFile(f.fullPath, basePath || folderPath)
+
+		m commitBatchLoadSnippets
+			param callback
+			log 'WizziStore.commitBatchLoadSnippets.snippetsBatch', Object.keys(this.snippetsBatch)
+			_ this.fb.setBatch
+				_ this.pathNames.snippetsCollPath
+				@ this.snippetsBatch
+				@ callback
+
+		m downloadSnippets
+			param schemaName
+			param destFolder
+			param callback
+			const that = this
+			_ this.getSnippets
+				{
+					@ schema schemaName
+				f_cb( snippets )
+					var filePath
+					foreach doc in snippets
+						log '***', destFolder, doc
+						set filePath
+							_ path.join
+								@ destFolder
+								@ doc.data.name
+						_ that.vfile.write
+							@ filePath
+							@ doc.data.content
+					const message = 'Download successful. Dest path: ' + destFolder
+					log message
+					r_cb( message )
+
+
+
+

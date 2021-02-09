@@ -1,0 +1,14 @@
+﻿$group
+	$params &app
+	
+	$if app.useApiMiddleware
+		$if app.useNormalizr
+			import { HTTP_REQUEST, Schemas } from '../../config/api.config'
+		$else
+			import { HTTP_REQUEST } from '../../config/api.config'
+	$if app.useFirestoreMiddleware
+		import { FIRESTORE_REQUEST } from '../../config/firestore.config'
+	+
+	const timers = {}
+	+
+	$hook

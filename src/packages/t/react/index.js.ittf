@@ -1,0 +1,79 @@
+﻿$group
+	$params &app
+
+	$
+		var rootContainer = app.rootContainer ? app.rootContainer : 'AppContainer';
+
+	$if app.useCodemirror
+		_ require('codemirror/lib/codemirror.css')
+		_ require('codemirror/mode/css/css')
+		_ require('codemirror/mode/yaml/yaml')
+		_ require('codemirror/mode/xml/xml')
+		_ require('codemirror/mode/javascript/javascript')
+		_ require('codemirror/theme/twilight.css')
+		_ require('codemirror/addon/scroll/simplescrollbars')
+	
+	$if app.importMainStyles
+		_ require('${app.importMainStyles}')
+
+	import React from 'react'
+	
+	$if app.hotReload
+		import { AppContainer } from 'react-hot-loader'
+	
+	$if app.useRedux
+		import { Provider } from 'react-redux'
+		import configureStore from './store/configureStore'
+		$if app.initialLoad
+			import { initialLoad } from './store/actions'
+	
+	$if app.useReactPerf
+		import ReactPerf from 'react-addons-perf'
+	
+	import { render } from 'react-dom'
+	import ${rootContainer} from './containers/${rootContainer}'
+
+	$hook imports
+
+	$if app.useReactPerf
+		set window.Perf = ReactPerf
+
+	$if app.useRedux
+		# preloadedState param not used
+		# export const store = configureStore(preloadedState)
+		export const store = configureStore()
+
+		$if app.initialLoad
+			_ store.dispatch
+				_ initialLoad()
+
+	const rootEl = document.querySelector('#${app.rootElementId}')
+
+	_ render
+		$if app.useRedux
+			< Provider
+				@ store {store}
+				< ${rootContainer}
+		$else
+			< ${rootContainer}
+		@ rootEl
+
+	$if app.hotReload
+		if process.env.NODE_ENV !== 'production' && module.hot
+			_ module.hot.accept
+				@ './containers/${rootContainer}'
+				=>
+					const NextApp = require('./containers/${rootContainer}').default
+					_ render
+						< AppContainer
+							@ errorReporter
+								=>
+									param { error }
+									throw error
+							$if app.useRedux
+								< Provider
+									@ store {store}
+									< NextApp
+							$else
+								< NextApp
+						@ rootEl

@@ -1,0 +1,178 @@
+html,  body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.CodeMirror {
+    min-width: 200px;
+    height: calc(100vh - 158px);
+}
+.hb-sch-doc-container {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 0.9rem;
+}
+.hb-sch-doc-box {
+    background-color: #657d88;
+    padding: 1rem;
+}
+.hb-sch-doc-label-title-1 {
+    text-rendering: optimizeLegibility;
+    background-color: #dee8ed;
+}
+.hb-sch-doc-label-1 {
+    text-rendering: optimizeLegibility;
+    font-size: 1rem;
+}
+.hb-sch-doc-title-1 {
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    font-size: 2.5rem;
+    line-height: 1.5;
+}
+.hb-sch-doc-label-2 {
+    text-rendering: optimizeLegibility;
+    font-size: 0.9rem;
+    color: #eeeeee;
+}
+.hb-sch-doc-title-2 {
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #eeeeee;
+}
+.hb-sch-doc-title-2b {
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #eeeeee;
+}
+.hb-sch-doc-label-3 {
+    text-rendering: optimizeLegibility;
+    font-size: 0.7rem;
+    line-height: 0.9;
+}
+.hb-sch-doc-title-3 {
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+.hb-sch-doc-element-box {
+    background-color: #c8d9e1;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.hb-sch-doc-attributes-box {
+    background-color: #f3ece9;
+    padding: 0.5rem;
+}
+.hb-sch-doc-relations-box {
+    background-color: #f3ece9;
+    padding: 0.5rem;
+}
+.hb-sch-doc-method-box {
+    background-color: #f3ece9;
+    margin-top: 0.4rem;
+}
+.hb-sch-doc-restricts-box {
+    background-color: #e7d9d3;
+    padding: 0.5rem;
+}
+.hb-sch-doc-e-subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+    font-size: 0.7rem;
+    line-height: 1;
+}
+.hb-sch-doc-e-subtitle-2 {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+    font-size: 0.6rem;
+    line-height: 0.8;
+}
+.hb-sch-doc-table {
+    border-collapse: collapse;
+    margin: 0;
+}
+.hb-sch-doc-table th, .hb-sch-doc-table td {
+    vertical-align: top;
+    padding: 0.1rem;
+}
+.hb-sch-doc-elements-list-item {
+}
+.hb-sch-doc-elements-list-item a {
+    color: #0000ee;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    padding: 5px;
+}
+.hb-sch-doc-elements-list-item a:before {
+    background-color: #0000ee;
+    content: '';
+    height: 2px;
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transition: width 0.3s ease-in-out;
+    -moz-transition: width 0.3s ease-in-out;
+    -o-transition: width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out;
+    width: 0;
+}
+.hb-sch-doc-elements-list-item a:hover {
+}
+.hb-sch-doc-elements-list-item a:hover:before {
+    width: 90%;
+}
+.pp-ln {
+    background-color: #333;
+}
+.pp-pln {
+    color: #BBB;
+}
+.pp-str {
+    color: #EC7600;
+}
+.pp-kwd {
+    color: #f79256;
+}
+.pp-com {
+    color: #66747B;
+}
+.pp-typ {
+    color: #678CB1;
+}
+.pp-lit {
+    color: #FACD22;
+}
+.pp-mix {
+    color: #ff0040;
+    cursor: pointer;
+}
+.pp-tag {
+    color: #8AC763;
+}
+.pp-atn {
+    color: #E0E2E4;
+}
+.pp-atv {
+    color: #EC7600;
+}
+.pp-expr {
+    color: #f3e877;
+}
+.pp-fun {
+    color: red;
+}
+.pp-arg {
+    color: yellow;
+}

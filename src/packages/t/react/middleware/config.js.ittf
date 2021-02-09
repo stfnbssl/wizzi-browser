@@ -1,0 +1,11 @@
+﻿$group
+	$params &app
+
+	$if app.useApiMiddleware
+		wz-const HTTP_REQUEST = 'HTTP_REQUEST'
+	$if app.useFirestoreMiddleware
+		wz-const FIREBASE_REQUEST = 'FIREBASE_REQUEST'
+	wz-const defaultTimeout = 20000
+	wz-const defaultResponseType = 'json'
+
+	$hook

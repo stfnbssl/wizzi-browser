@@ -1,0 +1,247 @@
+﻿$group
+	$params name
+
+	$
+		var namelower = name.toLowerCase()
+		var nameupper = name.toUpperCase()
+
+	wz-const add${name}
+		=>
+			param schemaName
+			param ${namelower}Name
+			$if name === 'Example'
+				param templateContent
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					log 'store.actions.schema.add${name}.request', schemaName, ${namelower}Name
+
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+					
+					_ dispatch
+						_ request${name}Add
+					
+					const documentName = getDocumentName(schemaName, ${namelower}Name, '${name}')
+
+					$if name === 'Snippet'
+						const content = ''
+					$elif name === 'Example'
+						const content = templateContent
+					$else
+						const content = (schemaName === 'js' ? 'module' : schemaName) + ' ' + ${namelower}Name
+					
+					_ wizziStore.set${name}
+						@ schemaName
+						@ documentName
+						@ content
+						f_cb_no_err(result)
+							if err
+								log 'store.actions.schema.add${name}.fail', schemaName, ${namelower}Name, err
+								return
+									_ fail${name}Add
+										@ err
+							log 'store.actions.schema.add${name}.success', schemaName, ${namelower}Name, result
+							_ dispatch
+								_ complete${name}Add
+									@ schemaName
+									@ documentName
+									@ result.schemas
+							_ dispatch
+								_ selectSchema
+									@ schemaName
+									@ documentName
+
+	wz-const request${name}Add
+		=>
+			log 'store.actions.schema.request${name}Add'
+			return
+				{
+					@ type ADD_${nameupper}_REQUEST
+	
+	wz-const fail${name}Add
+		=>
+			param error
+			log 'store.actions.schema.fail${name}Add'
+			return
+				{
+					@ type ADD_${nameupper}_FAILURE
+					@ error error
+	
+	wz-const complete${name}Add
+		=>
+			param schemaName
+			param ${namelower}Name
+			param schemas
+			log 'store.actions.schema.complete${name}Add', 'schemas', schemas
+			return
+				{
+					@ type ADD_${nameupper}_SUCCESS
+					@ schema schemaName
+					@ ${namelower} ${namelower}Name
+					@ schemas schemas
+
+	wz-const rename${name}
+		=>
+			param schemaName
+			param old${name}
+			param new${name}
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					log '*** store.actions.schema.rename${name}.request', schemaName, old${name}, new${name}
+
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+					
+					_ dispatch
+						_ request${name}Rename
+
+					const oldDocumentName = getDocumentName(schemaName, old${name})
+					const newDocumentName = getDocumentName(schemaName, new${name})
+					
+					# Updates the ${name}s array in the meta-schema document
+					_ wizziStore.rename${name}
+						@ schemaName
+						@ oldDocumentName
+						@ newDocumentName
+						f_cb_no_err(rename${name}Result)
+							if err
+								log '*** store.actions.schema.rename${name}.fail', schemaName, old${name}, new${name}, err
+								return
+									_ fail${name}Rename
+										@ err
+							log '*** store.actions.schema.add${name}.success', schemaName, old${name}, new${name}, rename${name}Result
+
+							_ dispatch
+								_ complete${name}Rename
+									@ schemaName
+									@ oldDocumentName
+									@ newDocumentName
+									@ rename${name}Result.schemas
+							
+							_ dispatch
+								_ selectSchema
+									@ schemaName
+									@ newDocumentName
+
+	wz-const request${name}Rename
+		=>
+			log 'store.actions.schema.request${name}Rename'
+			return
+				{
+					@ type RENAME_${nameupper}_REQUEST
+	
+	wz-const fail${name}Rename
+		=>
+			param error
+			log 'store.actions.schema.fail${name}Rename'
+			return
+				{
+					@ type RENAME_${nameupper}_FAILURE
+					@ error error
+	
+	wz-const complete${name}Rename
+		=>
+			param schemaName
+			param old${name}
+			param new${name}
+			param schemas
+			log 'store.actions.schema.complete${name}Rename', 'schemas', schemas
+			return
+				{
+					@ type RENAME_${nameupper}_SUCCESS
+					@ schema schemaName
+					@ old${name} old${name}
+					@ new${name} new${name}
+					@ schemas schemas
+
+	wz-const remove${name}
+		=>
+			param schemaName
+			param ${namelower}Name
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					log '*** store.actions.schema.remove${name}.request', schemaName, ${namelower}Name
+
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+					
+					_ dispatch
+						_ request${name}Remove
+
+					const documentName = getDocumentName(schemaName, ${namelower}Name)
+					
+					# Updates the ${name}s array in the meta-schema document
+					_ wizziStore.remove${name}
+						@ schemaName
+						@ documentName
+						f_cb_no_err(removeResult)
+							if err
+								log '*** store.actions.schema.remove${name}.fail', schemaName, ${namelower}Name, err
+								return
+									_ fail${name}Remove
+										@ err
+
+							_ dispatch
+								_ complete${name}Remove
+									@ schemaName
+									@ documentName
+									@ removeResult.schemas
+							
+							const schemaState = getState().schema
+							if schemaState.selectedSchema == schemaName && 
+								\b schemaState.selected${name} != ${namelower}Name
+								_ dispatch
+									_ selectSchema
+										@ schemaName
+										@ schemaState.selected${name}
+								return
+							
+							const schemaObject = schemaState.schemas[schemaName]
+							const ${namelower}Object = schemaObject.${namelower}s.length > 0 ? schemaObject.${namelower}s[0] : null
+							const goto${name} = ${namelower}Object ? ${namelower}Object.name : getDocumentName(schemaName, 'default')
+							
+							_ dispatch
+								_ selectSchema
+									@ schemaName
+									@ goto${name}
+
+	wz-const request${name}Remove
+		=>
+			log 'store.actions.schema.request${name}Remove'
+			return
+				{
+					@ type REMOVE_${nameupper}_REQUEST
+	
+	wz-const fail${name}Remove
+		=>
+			param error
+			log 'store.actions.schema.fail${name}Remove'
+			return
+				{
+					@ type REMOVE_${nameupper}_FAILURE
+					@ error error
+	
+	wz-const complete${name}Remove
+		=>
+			param schemaName
+			param ${namelower}Name
+			param schemas
+			log 'store.actions.schema.complete${name}Remove', 'schemas', schemas
+			return
+				{
+					@ type REMOVE_${nameupper}_SUCCESS
+					@ schema schemaName
+					@ ${namelower} ${namelower}Name
+					@ schemas schemas

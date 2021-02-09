@@ -1,0 +1,23 @@
+﻿module
+	kind react
+
+	$include app-options
+	
+	react/store/actions/index( &app )
+
+		$include app
+		schema(&app)
+		$include ittfStore
+		$include artifact
+		$include snippet
+		$include helpBoard
+
+	function getDocumentName
+		param schemaName
+		param name
+		param entity
+		var suffix = entity === 'Snippet' ? '.' + schemaName : '.' + schemaName +'.ittf'
+		if name.length > schemaName.length + 1 && name.indexOf(suffix, name.length - suffix.length) !== -1
+			return name
+		else
+			return name + suffix

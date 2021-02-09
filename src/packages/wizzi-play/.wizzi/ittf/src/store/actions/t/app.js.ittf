@@ -1,0 +1,62 @@
+﻿$group
+	+
+	decl_rsf( app, load )
+	+
+	# Redux entry point
+	# Must be called once, at application start.
+	wz-function initialLoad
+		param user
+		param options
+		return
+			function
+				param dispatch
+				param getState
+				param extraArgument
+				log 'actions.initialLoad.extraArgument', extraArgument
+
+				_ extraArgument.WizziStore.createInstance
+					@ user
+					@ options
+					f_cb_throw( wizziStore )
+						_ dispatch
+							_ requestAppLoad
+						_ wizziStore.getInitialData
+							f_cb_no_err( initialData )
+								log '*** store.actions.app.initialLoad.getSchemas', initialData
+								if err
+									return
+										_ dispatch
+											_ failAppLoad
+												@ err
+								_ dispatch
+									_ completeAppLoad
+										@ initialData
+								_ dispatch
+									_ selectSchema
+										@ getState().schema.selectedSchema
+
+
+	wz-const requestAppLoad
+		=>
+			log 'store.actions.app.requestAppLoad'
+			return
+				{
+					@ type LOAD_APP_REQUEST
+	
+	wz-const failAppLoad
+		=>
+			param error
+			log 'store.actions.app.failAppLoad'
+			return
+				{
+					@ type LOAD_APP_FAILURE
+					@ error error
+	
+	wz-const completeAppLoad
+		=>
+			param initialData
+			log 'store.actions.app.completeAppLoad'
+			return
+				{
+					@ type LOAD_APP_SUCCESS
+					@ initialData initialData

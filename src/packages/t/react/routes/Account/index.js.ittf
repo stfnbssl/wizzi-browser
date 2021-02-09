@@ -1,0 +1,10 @@
+﻿module
+    kind react
+    import 
+        @ ACCOUNT_PATH
+        from 'constants'
+    import component from './components/AccountPage'
+    export-default 
+        { 
+            @ path path
+            @ component component

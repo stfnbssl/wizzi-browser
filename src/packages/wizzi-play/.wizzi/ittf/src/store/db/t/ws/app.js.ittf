@@ -1,0 +1,12 @@
+﻿$group
+
+	$if appEnvironment === 'browser'
+
+		m getInitialData
+			param callback
+			_ this.getSchemas
+				f_cb( schemas )
+					const ret
+						{
+							@ schemas schemas
+					r_cb( ret )

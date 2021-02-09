@@ -1,0 +1,20 @@
+﻿$group
+	$params &app
+	
+	
+	$if app.useNextjs
+		
+		"next/babel"
+
+	$else
+
+		"@babel/env"
+
+		$if app.useReact
+			"@babel/react"
+			$* STOP
+			"@babel/stage-2"
+			*$
+
+		$if app.useTypescript
+			"@babel/typescript"

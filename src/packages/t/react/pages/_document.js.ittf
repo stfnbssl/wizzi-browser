@@ -1,0 +1,123 @@
+﻿$group
+	$params &app
+
+	import React from 'react'
+	import Document, { Head, Main, NextScript } from 'next/document'
+	import JssProvider from 'react-jss/lib/JssProvider'
+	import flush from 'styled-jsx/server'
+	import getPageContext from '../lib/getPageContext'
+
+	react MyDocument
+		extends Document
+
+		m getInitialProps
+			static
+			param { renderPage }
+			# Returns an object like: { html, head, errorHtml, chunks, styles }     
+			return renderPage()
+
+		render
+			prop pageContext
+			return
+				html
+					< Head
+						< title
+							+ My page
+						meta
+							@ charSet utf-8
+						+ { /* Use minimum-scale=1 to enable GPU rasterization */ }
+						meta
+							@ name viewport
+							@ content { 'user-scalable=0, initial-scale=1, ' +
+								\b 'minimum-scale=1, width=device-width, height=device-height' }
+						+ { /* PWA primary color */ }
+						meta
+							@ name theme-color
+							@ content {pageContext.theme.palette.primary.main}
+						link
+							@ rel stylesheet
+							@ href https://fonts.googleapis.com/css?family=Roboto:300,400,500
+
+						$if app.useCodemirror_stop
+							link
+								@ rel stylesheet
+								@ href https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.26.0/codemirror.css
+
+						$hook head-links
+
+					body
+						< Main
+						
+						$if app.useCodemirror_stop
+
+							< script
+								@ src https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.26.0/codemirror.js
+
+
+						$if app.useFirebase
+							
+							< script
+								@ src https://www.gstatic.com/firebasejs/5.0.4/firebase.js
+							< script
+								@ src https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js
+							< script
+								@ src https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js
+
+						$hook body-scripts
+
+						< NextScript
+
+
+	set MyDocument.getInitialProps
+		=>
+			param ctx
+			
+			# Resolution order
+			#
+			# On the server:
+			# 1. page.getInitialProps
+			# 2. document.getInitialProps
+			# 3. page.render
+			# 4. document.render
+			#
+			# On the server with error:
+			# 2. document.getInitialProps
+			# 3. page.render
+			# 4. document.render
+			#
+			# On the client
+			# 1. page.getInitialProps
+			# 3. page.render
+
+			# Get the context of the page to collected side effects.
+
+			const pageContext = getPageContext()
+			const page
+				_ ctx.renderPage
+					=>
+						param Component
+						return
+							=> 
+								param props
+								return
+									< JssProvider
+										@ registry {pageContext.sheetsRegistry}
+										@ generateClassName {pageContext.generateClassName}
+										< Component
+											@ pageContext {pageContext}
+											@ {...props} 
+			return
+				{
+					@ ...page
+					@ pageContext
+					@ styles
+						(
+							< React.Fragment
+								< style
+									@ id jss-server-side
+									@ dangerouslySetInnerHTML {{ __html: pageContext.sheetsRegistry.toString() }}
+								{
+									+ flush() || null
+
+	export default MyDocument
+

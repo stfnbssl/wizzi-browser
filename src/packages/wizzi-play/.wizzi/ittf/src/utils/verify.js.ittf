@@ -1,0 +1,65 @@
+﻿module
+	kind es6
+
+	var md = {}
+
+	set md.isString
+        function 
+            param test
+            return test !== null && typeof(test) === 'string'
+
+	set md.isEmpty
+        function 
+            param test
+            return md.isString(test) == false || test.length == 0
+    
+	set md.isNotEmpty
+        function 
+            param test
+			return md.isString(test) && test.length > 0
+
+	set md.isObject
+        function 
+            param test
+            if test === null || typeof(test) === 'undefined'
+                return false
+            return {}.toString.call(test) === '[object Object]'
+    
+	set md.isArray
+        function 
+            param test
+            if test === null || typeof(test) === 'undefined'
+                return false
+			if Array.isArray
+				return Array.isArray(test);
+			return {}.toString.call(test) === '[object Array]'
+
+	set md.isFunction
+        function 
+            param test
+            if test === null || typeof(test) === 'undefined'
+                return false
+            return {}.toString.call(test) === '[object Function]'
+
+	set md.replaceAll
+        function 
+            param text
+            param find
+            param replace
+            if md.isEmpty(text)
+                return text
+            return 
+                _ text.replace
+                    new RegExp
+                        _ md.escapeRegExp(find)
+                        @ 'g'
+                    @ replace
+
+	set md.escapeRegExp
+		function
+			param text
+			if md.isEmpty(text)
+				return text
+			return text.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1")
+
+	export default md

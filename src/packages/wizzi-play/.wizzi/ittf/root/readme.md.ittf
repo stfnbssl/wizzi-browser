@@ -1,0 +1,20 @@
+﻿md
+	p
+		@ align center
+		a
+			href https://wizzifactory.github.io
+			@ rel noopener
+			@ target _blank
+			img
+				@ width 450
+				@ src https://wizzifactory.github.io/images/logo.svg
+				@ alt Wizzi
+
+	h1 Wizzi play
+	p The wizzi factory playground
+
+	h2 Installation
+	p Wizzi play is available as an [npm package](https://www.npmjs.com/package/wizzi-play).
+
+	sh
+		+ npm install wizzi-play

@@ -1,0 +1,36 @@
+﻿html
+	head
+		@title Test wizzi-standalone
+	body
+		# app
+        js https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js
+		js ./scripts/${pkg.name}.js
+
+        ready
+            log 'wizziStandalone', wizziStandalone
+            log 'wizziStandalone.default', wizziStandalone.default
+            var wf = wizziStandalone.default
+            _ wf.initialize
+            log 'wf', wf
+            _ wf.wizzi.genFromText
+                [
+                    @ 'module'
+                    @ '    kind react'
+                    @ '    react Hello'
+                    @ '        state'
+                    @ '            @ name "stefi"'
+                    @ '        $foreach item in items'
+                    @ '            m ${__dollar}{item}'
+                    ._ join
+                        @ '\n'
+                {
+                    [ items
+                        @ 'alfa'
+                        @ 'beta'
+                {
+                    @ artifactName 'js/module'
+                =>
+                    param err
+                    param result
+                    log 'err', err
+                    log 'result', result

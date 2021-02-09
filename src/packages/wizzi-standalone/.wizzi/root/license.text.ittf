@@ -1,0 +1,7 @@
+﻿text
+	$
+		var app = {
+			copy: 'Stefano Bassoli - 2018 (stfn.bssl@gmail.com)'
+		};
+	
+	app/mit-license( &app )

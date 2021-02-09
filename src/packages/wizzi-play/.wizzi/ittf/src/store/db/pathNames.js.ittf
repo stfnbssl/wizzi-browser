@@ -1,0 +1,161 @@
+﻿module
+	kind es6
+
+	import path from 'path'
+
+	$if appEnvironment === 'browser'
+		import verify from '../../utils/verify'
+	$else
+		import { verify } from 'wizzi-utils'
+
+	# const EXAMPLES_PATH = 'ittf/default/default'
+	const SCHEMAS_COLL_PATH = 'schemas'
+	const EXAMPLES_COLL_PATH = 'sample'
+	const EXAMPLES_COLL_PATH2 = 'examples'
+	const SNIPPETS_COLL_PATH = 'snippets'
+	const FRAGMENTS_COLL_PATH = 'fragments'
+	const TEMPLATES_COLL_PATH = 'templates'
+	const PROJECTS_COLL_PATH = 'projects'
+
+	class PathNames
+
+		m ctor
+			param userId
+			param projectName
+			set this.userId = userId
+			set this.projectName = projectName
+
+		m projectDocName
+			param userId
+			return userId + '.projects'
+
+		m schemasCollPath
+			return SCHEMAS_COLL_PATH
+
+		m examplesCollPath
+			param schemaName
+			return 'schemas/' + schemaName + '/' + EXAMPLES_COLL_PATH2
+
+		m snippetsCollPath
+			param schemaName
+			return 'schemas/' + schemaName + '/' + SNIPPETS_COLL_PATH
+
+		m fragmentsCollPath
+			param schemaName
+			return 'schemas/' + schemaName + '/' + FRAGMENTS_COLL_PATH
+
+		m templatesCollPath
+			param schemaName
+			return 'schemas/' + schemaName + '/' + TEMPLATES_COLL_PATH
+
+		m fragmentDocName
+			param schemaName
+			return schemaName + '.fragments'
+
+		m projectsPath
+			param userId
+			return PROJECTS_COLL_PATH + '/' + this.projectDocName(userId)
+
+		m fragmentsPath
+			param schemaName
+			return EXAMPLES_COLL_PATH + '/' + this.fragmentDocName(schemaName)
+	
+		m ittfFileRelPath
+			param name
+			param schemaName
+			var relPath
+				_ this.stripIttfExtension
+					@ name
+					@ schemaName
+			return encodeDocName(relPath)
+
+		m fileRelPath
+			param name
+			param schemaName
+			var relPath
+				_ this.stripExtension
+					@ name
+					@ schemaName
+			return encodeDocName(relPath)
+
+		m examplePath
+			param name
+			param schemaName
+			return 'schemas/' + schemaName + '/' + EXAMPLES_COLL_PATH2 + '/' + this.ittfFileRelPath(name, schemaName)
+
+		m snippetPath
+			param name
+			param schemaName
+			return 'schemas/' + schemaName + '/' + SNIPPETS_COLL_PATH + '/' + this.fileRelPath(name, schemaName)
+
+		m fragmentPath
+			param name
+			param schemaName
+			return 'schemas/' + schemaName + '/' + FRAGMENTS_COLL_PATH + '/' + this.ittfFileRelPath(name, schemaName)
+
+		m templatePath
+			param name
+			param schemaName
+			return 'schemas/' + schemaName + '/' + TEMPLATES_COLL_PATH + '/' + this.ittfFileRelPath(name, schemaName)
+
+		m stripIttfExtension
+			param basename
+			param schemaName
+			set basename = normalizeFile(basename)
+			const suffix = '.' + schemaName + '.ittf'
+			if basename.substr(-suffix.length) === suffix
+				log 'stripIttfExtension: ' + basename.substr(0, basename.length - suffix.length)
+				return basename.substr(0, basename.length - suffix.length)
+			else
+				log 'stripIttfExtension.result:' + basename
+				return basename
+
+		m stripExtension
+			param basename
+			param schemaName
+			log 'stripExtension.basename.schemaName', basename, schemaName
+			set basename = normalizeFile(basename)
+			const suffix = '.' + schemaName
+			if basename.substr(-suffix.length) === suffix
+				log 'stripExtension.result:', basename.substr(0, basename.length - suffix.length)
+				return basename.substr(0, basename.length - suffix.length)
+			else
+				log 'stripExtension.result:' + basename
+				return basename
+
+		m replaceSchemaInIttfPath
+			param name
+			param oldSchemaName
+			param newSchemaName
+			var ret 
+				_ this.stripIttfExtension
+					@ name
+					@ oldSchemaName
+			return ret + '.' + newSchemaName + '.ittf'
+
+	export
+		function normalizeFile
+			param filePath
+			const basename = path.basename(filePath)
+			if basename === filePath
+				return basename
+			const dirname = path.dirname(filePath)
+			return verify.replaceAll(dirname, '\\', '/').toLowerCase() +
+				\b '/' + basename
+
+	export
+		function normalizeFolder
+			param folderPath
+			return verify.replaceAll(folderPath, '\\', '/').toLowerCase() 
+
+	export 
+		function encodeDocName
+			param name
+			return verify.replaceAll(name, '/', '[.]')
+
+	export
+		function decodeDocName
+			param name
+			return verify.replaceAll(name, '[.]', '/')
+
+	export default PathNames

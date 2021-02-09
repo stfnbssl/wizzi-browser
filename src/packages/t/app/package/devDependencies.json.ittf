@@ -1,0 +1,192 @@
+﻿$group
+	$params &app
+
+	$if app.useNextjs
+		next "^7.0.2-canary.18"
+
+		$*
+		babel-plugin-inline-dotenv "^1.1.1"
+		babel-plugin-transform-inline-environment-variables "^0.1.1"
+		*$
+
+	$elif app.useCreateReactApp
+
+	$else
+		
+		@babel(&app)
+
+		$if app.useTypescript
+			$if app.useAphrodite
+				@types/aphrodite "^0.5.13"
+			$if app.useReact
+				@types/classnames "^2.2.7"
+			$if app.useJest
+				@types/jest "^23.1.2"
+			$if app.usePrettier
+				@types/prettier "^1.10.0"		
+			$if app.useReact
+				@types/prop-types "15.5.8"
+			$if app.useReact
+				@types/react "16.7.20"
+				@types/react-dom "16.0.11"
+			$if app.useRedux
+				@types/react-redux "7.0.0"
+			$if app.useReactRouter
+				@types/react-router-dom "4.3.1"
+				$if app.useRedux
+					@types/react-router-redux "5.0.17"
+			$if app.useJest
+				@types/jest "22.2.3"
+    
+		$if app.useVue
+			@vue/cli-service "^3.3.0"
+
+		babel(&app)
+
+		$if app.useBabel
+			css-loader "^2.1.0"
+		
+		$if app.usePromise
+			es6-promise "^4.2.5"
+
+		$if app.useESlint
+			eslint "^5.12.0"
+			$if app.usePrettier
+				eslint-plugin-prettier "^3.0.1"
+				eslint-config-prettier "^3.3.0"
+				eslint-config-airbnb "17.1.0"
+				eslint-config-airbnb-base "13.1.0"
+			$if app.useWebpack
+				eslint-import-resolver-webpack "0.10.1"
+				eslint-plugin-import "2.14.0"
+			$if app.useReact
+				eslint-plugin-jsx-a11y "6.1.2"
+				eslint-plugin-react "7.11.1"
+			$if app.useRedux
+				eslint-plugin-redux-saga "0.9.0"
+
+		$if app.useVue || app.useTypescript
+			html-webpack-plugin "^3.2.0"
+
+		$if app.useHusky
+			husky "^1.3.1"
+
+		$if app.useJest
+			jest "^23.2.0"
+
+		$if app.useNodemon
+			nodemon "^1.17.5"
+
+	$if app.useVue
+		$if app.useMonaco2
+			monaco-editor-webpack-plugin "^1.7.0"
+
+		$if app.useRimraf
+			rimraf "^2.6.3"
+		
+		$if app.usePrettier
+			prettier "1.15.3"
+
+		$if app.useVue
+			vue "^2.5.22"
+			vue-loader "^15.6.0"
+			vue-style-loader "^4.1.2"
+			vue-template-compiler "^2.5.22"
+			$if app.useVuex
+				vuex "^3.1.0"
+			$if app.useVueRouter
+				vue-router "^3.0.2"
+			$if app.useVuetify
+				vuetify  "^1.4.3"
+
+	$if app.useWebpack
+
+		$if app.useVue
+			webpack "^4.29.0"
+			webpack-cli "^3.2.1"
+			webpack-dev-server "^3.1.14"
+			$if app.useRequireHttp
+				webpack-require-http "^0.4.3"
+		$else
+			fg-loadcss "^2.0.1"
+			file-loader "^1.1.5"
+			jss-rtl "^0.2.1"
+			raw-loader "^0.5.1"
+			url-loader "^1.0.1"
+			
+			$if app.webpack.loadCss || app.importMainStyles
+				css-loader "^0.28.11"
+				style-loader "^0.21.0"
+			
+			$if app.useCodemirror || app.usePrismjs
+				sass-loader "7.0.3"
+				node-sass "4.9.0"
+			
+			$if app.useMonaco
+				$$ monaco-editor-webpack-plugin "latest"
+				monaco-editor-webpack-3-plugin "^1.2.1"
+			
+			# https://github.com/typekit/webfontloader
+			webfontloader "^1.6.28"
+			
+			$if app.useMonaco
+				$*
+				webpack "^4.8.3"
+				webpack-cli "^2.1.3"
+				*$
+				$*
+				webpack "^4.20.2"
+				webpack-cli "^3.1.1"
+				*$
+				webpack "3.12.0"
+			$elif app.useTypescript
+				webpack "^4.29.0"
+				webpack-cli "^3.2.1"
+				webpack-bundle-analyzer "^3.0.0"
+				webpack-dev-server "^3.1.14"
+			$else
+				webpack "3.10.0"
+				webpack-bundle-analyzer "^2.9.1"
+
+			$if app.useWebpackDev
+				webpack-dev-middleware "3.4.0"
+				webpack-hot-middleware "2.24.3"
+				webpack-pwa-manifest "3.7.1"
+
+	$elif app.importMainStyles
+		$*
+			Some frameworks (ex. Next-js) use webapack internally
+			but loaders can be added in config files.
+		*$
+		css-loader "^0.28.11"
+		style-loader "^0.21.0"
+
+	$if app.useTypescript
+			
+		typescript "^3.2.2"
+		awesome-typescript-loader "latest"
+		source-map-loader "latest"
+
+		$if app.useJest
+			ts-jest "^23.10.0"
+			
+		$if app.useTSLint
+			tslint "^5.12.0"
+			$if app.useReact
+				tslint-react "3.6.0"
+
+			$* STOP
+			tslint-config-prettier "^1.15.0"
+			tslint-config-standard "^8.0.1"
+			tslint-consistent-codestyle "1.15.0"
+			tslint-divid "1.3.0"
+			tslint-eslint-rules "5.4.0"
+			tslint-immutable "5.0.1"
+			tslint-microsoft-contrib "6.0.0"
+			tslint-misc-rules "3.5.1"
+			*$
+
+		$if app.useVue
+			@vue/cli-plugin-typescript "^3.3.0"    
+        
+        

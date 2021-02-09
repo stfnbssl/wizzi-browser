@@ -1,0 +1,91 @@
+﻿$group
+
+	$
+
+		if (app.useBabelNode) {
+			app.useNodemon = true;
+		}
+
+		if (app.useNextjs) {
+			app.useReact = true;
+			if (app.useNextjsServerExpress) {
+				app.useNextjsServer = true;
+			}
+		}
+
+		if (app.useReduxFirestore) {
+			app.useRedux = true;
+		}
+
+		if (app.useRedux) {
+			app.useReact = true;
+			app.useDevTools = !!app.useDevTools
+			if (app.useReduxThunk || app.useReduxLogger || 
+				app.useApiMiddleware || app.useThunkWithExtraArgument) {
+				app.useReduxMiddleware = true
+			}
+			if (app.useReduxFirestore) {
+				app.useFirebase = true;
+				app.useReduxCompose = true;
+			}
+		}
+
+		if (app.useVue) {
+			app.useBabel = true;
+			app.useWebpack = true;
+			app.useRimraf = true;
+			app.useHotReplacement = true;
+			if (app.useVuex) {
+				app.usePromise = true;
+			}
+		}
+
+		if (app.useMaterialUi) {
+			app.useReact = true;
+			if (!app.rootContainer) {
+				app.rootContainer = 'MuiThemeContainer';
+			}
+			if (!app.primaryColor) {
+				app.primaryColor = 'orange';
+				app.secondaryColor = 'green';
+				app.accentColor = 'red';
+			}
+			if (!app.useCssBaseline) {
+				app.useCssBaseline = false;
+			}
+		}
+
+		if (!app.useBabelRegister) {
+			if (app.useReact && !app.useNextjs) {
+				app.useWebpack = true;
+				// VIA app.useBabel = true;
+				app.webpack = {};
+				app.webpack.loadCss = true;
+				if (!app.rootContainer) {
+					app.rootContainer = 'AppContainer';
+				}
+			}
+		}
+
+		if (app.useMaterialUi) {
+			if (!app.primaryColor) {
+				app.primaryColor = 'orange';
+				app.secondaryColor = 'green';
+				app.accentColor = 'red';
+			}
+		}
+
+		if (app.useWizzi || app.useWizziTools) {
+			app.useWizziUtils = true;
+		}
+
+        if (app.code.schemas)
+		{
+			var keys = Object.keys(app.code.schemas);
+			for (var i=0; i<keys.length; i++) {
+        		var item = app.code.schemas[keys[i]];
+				if (item.prismjs) { app.usePrismjs = true; app.prismjsModes.push(item.prismjs.mode); }
+				if (item.codeMirror) { app.useCodemirror = true; app.codemirrorModes.push(item.codeMirror.mode); }
+				if (item.jsbeautify) { app.useJsBeautify = true; app.jsBeautifyModes.push(item.jsbeautify.mode); }
+			}
+		}

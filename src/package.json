@@ -1,0 +1,36 @@
+{
+    "name": "wizzi-browser",
+    "version": "0.0.1",
+    "description": "Wizzi standalone for browser",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wizzifactory/wizzi-browser.git"
+    },
+    "keywords": [],
+    "author": {
+        "name": "Stefano Bassoli",
+        "email": "sbassoli.dev@gmail.com"
+    },
+    "private": false,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/wizzifactory/wizzi-browser/blob/master/license.txt"
+        }
+    ],
+    "homepage": "https://github.com/wizzifactory/wizzi-browser#readme",
+    "bugs": {
+        "url": "https://github.com/wizzifactory/wizzi-browser/issues"
+    },
+    "devDependencies": {
+        "wizzi": "^0.7.21",
+        "wizzi-core": "^0.7.1",
+        "wizzi-js": "^0.7.7",
+        "wizzi-utils": "^0.7.12",
+        "wizzi-web": "^0.7.7",
+        "wizzi-meta": "^0.6.6"
+    }
+}

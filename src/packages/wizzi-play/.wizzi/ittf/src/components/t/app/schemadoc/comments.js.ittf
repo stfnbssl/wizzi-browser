@@ -1,0 +1,15 @@
+﻿var Comments
+	=>
+		param { comments: c }
+		if !c || !c.length
+			return null
+		else
+			return
+				div
+					@ className hb-sch-doc-comments-box
+					{
+						_ c.map
+							=>
+								param comment
+								return
+									div { comment }

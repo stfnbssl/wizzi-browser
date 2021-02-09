@@ -1,0 +1,23 @@
+﻿module
+	$params &app
+	kind react
+
+	$if app.useReduxFirestore
+		import { getFirebase } from 'react-redux-firebase'
+
+	$if app.useFbFsClient
+		import FbFsClient from '../store/db/fbFsClient'
+
+	$if app.useWizziStore
+		import WizziStore from '../store/db/wizziStore'
+	
+	const extraArguments
+		{
+			$if app.useReduxFirestore
+				@ getFirebase getFirebase
+			$if app.useFbFsClient
+				@ FbFsClient FbFsClient
+			$if app.useWizziStore
+				@ WizziStore WizziStore
+
+	export default extraArguments

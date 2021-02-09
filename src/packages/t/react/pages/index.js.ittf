@@ -1,0 +1,37 @@
+﻿$group
+	$params &app
+
+	$
+		var rootContainer = app.rootContainer ? app.rootContainer : 'AppContainer';
+
+	$if app.useCodemirror
+		_ require('codemirror/lib/codemirror.css')
+		_ require('codemirror/mode/css/css')
+		_ require('codemirror/mode/yaml/yaml')
+		_ require('codemirror/mode/javascript/javascript')
+		_ require('codemirror/theme/twilight.css')
+		_ require('codemirror/addon/scroll/simplescrollbars')
+	
+	$if app.importMainStyles
+		_ require('${app.importMainStyles}')
+
+	import React from 'react'
+	
+	$if app.useReactPerf
+		import ReactPerf from 'react-addons-perf'
+	
+	import ${rootContainer} from '../containers/${rootContainer}'
+
+	$hook imports
+
+	$if app.useReactPerf
+		set window.Perf = ReactPerf
+
+	react Index
+
+		render
+			return
+				< ${rootContainer}
+
+	export default Index
+

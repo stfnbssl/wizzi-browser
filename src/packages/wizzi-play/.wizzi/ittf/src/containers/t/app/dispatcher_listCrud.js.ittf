@@ -1,0 +1,42 @@
+﻿$group
+	$params itemName
+
+	$
+		var itemname = itemName.toLowerCase()
+		var add = itemName === 'Example' ? 'addExampleWithTemplate' : 'add' + itemName
+
+	@ dispatchAdd${itemName}
+		=>
+			param schemaName
+			param ${itemname}Name
+			$if itemName === 'Example'
+				param templateName
+			log 'dispatchAdd${itemName}', schemaName, ${itemname}Name
+			_ dispatch
+				_ ${add}
+					@ schemaName
+					@ ${itemname}Name
+					$if itemName === 'Example' 
+						@ templateName
+
+	@ dispatchRename${itemName}
+		=>
+			param schemaName
+			param old${itemName}
+			param new${itemName}
+			log 'dispatchRename${itemName}', old${itemName}, new${itemName}
+			_ dispatch
+				_ rename${itemName}
+					@ schemaName
+					@ old${itemName}
+					@ new${itemName}
+
+	@ dispatchRemove${itemName}
+		=>
+			param schemaName
+			param ${itemname}Name
+			log 'dispatchRemove${itemName}', schemaName, ${itemname}Name
+			_ dispatch
+				_ remove${itemName}
+					@ schemaName
+					@ ${itemname}Name

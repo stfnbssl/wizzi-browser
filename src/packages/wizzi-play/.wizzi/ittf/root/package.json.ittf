@@ -1,0 +1,60 @@
+﻿{
+	
+	name "wizzi-play"
+	
+	version "0.0.1"
+	
+	description  "Wizzi factory webpack bundler for serverless wizzi-play app."
+	
+	scripts
+		{
+			build "webpack"
+	
+	dependencies
+		{
+			react "^16.0.0"
+			react-dom "^16.0.0"
+			react-redux "^5.0.1"
+			redux-devtools-extension "^2.13.2"
+			redux-logger "^3.0.6"
+			redux "^3.6.0"
+			redux-thunk "^2.1.0"
+
+	devDependencies
+		{
+			@babel/cli "7.0.0-beta.42"
+			@babel/core "7.0.0-beta.42"
+			@babel/node "7.0.0-beta.42"
+			@babel/plugin-transform-object-assign "7.0.0-beta.42"
+			@babel/plugin-transform-runtime "7.0.0-beta.42"
+			@babel/preset-env "7.0.0-beta.42"
+			@babel/preset-flow "7.0.0-beta.42"
+			@babel/preset-react "7.0.0-beta.42"
+			@babel/preset-stage-1 "7.0.0-beta.42"
+			@babel/register "7.0.0-beta.42"
+			# https://github.com/DefinitelyTyped/DefinitelyTyped
+			@types/react "^16.3.14"
+			# https://github.com/postcss/autoprefixer
+			autoprefixer "^8.0.0"
+			# https://github.com/moroshko/autosuggest-highlight
+			autosuggest-highlight "^3.1.1"
+			babel-eslint "^8.2.2"
+			babel-loader "8.0.0-beta.2"
+			babel-plugin-istanbul "^4.1.5"
+			babel-plugin-module-resolver "^3.0.0"
+			babel-plugin-preval "^1.6.4"
+			babel-plugin-react-remove-properties "^0.2.5"
+			babel-plugin-transform-dev-warning "^0.1.0"
+			babel-plugin-transform-react-constant-elements "^6.23.0"
+			babel-plugin-transform-react-remove-prop-types "^0.4.10"
+			fg-loadcss "^2.0.1"
+			file-loader "^1.1.5"
+			jss-rtl "^0.2.1"
+			raw-loader "^0.5.1"
+			url-loader "^1.0.1"
+			# https://github.com/typekit/webfontloader
+			webfontloader "^1.6.28"
+			webpack "3.10.0"
+			webpack-bundle-analyzer "^2.9.1"
+			# https://developers.google.com/web/tools/workbox/
+			# workbox-build "^3.0.1"

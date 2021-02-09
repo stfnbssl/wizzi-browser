@@ -1,0 +1,132 @@
+﻿$group
+
+	$$ . {classes.editbox}
+	< Splitter
+		@ split vertical
+		@ secondaryInitialSize { 1000 }
+		@ primaryMinSize {100}
+		@ secondaryMinSize {100}
+		@ onResize { this.handleSplitter1Resize }
+		. {classes.editorbox}
+			. {classes.editorHead}
+				button
+					class { classnames(classes.button, classes.buttonMedium, classes.miniButton)}  
+					@ onClick { this.handleSettingsClick }
+					< GearIcon
+						class {classes.iconSvg} 
+				span {ittfHeadText}
+					class {classes.editorHeadText}
+				$include ittf_head
+			{
+				&&
+					+ (isLoadingContent)
+					< Avatar
+						src images/loading_animation.gif
+						class {classes.avatar}
+			{
+				&&
+					+ !(isLoadingContent)
+					< MonacoEditor 
+						class {classes.editor}
+						@ value { documentContent }
+						@ width { splitter1Sizes.primary }
+						@ height { splitter1Sizes.third }
+						@ theme 'vs-dark'
+						@ onChange { this.handleDocumentContentChanged }
+						@ onCursorActivity { this.handleCursorActivity }
+						@ options {optionsIttf}
+
+		< Splitter
+			@ split vertical
+			@ secondaryInitialSize { 500 }
+			@ primaryMinSize {100}
+			@ secondaryMinSize {100}
+			@ totalSize { splitter1Sizes.secondary } 
+			@ onResize { this.handleSplitter2Resize }
+			. {classes.editorbox}
+				. {classes.editorHead}
+					button
+						class { classnames(classes.button, classes.buttonMedium, classes.miniButton)}  
+						< GearIcon
+							class {classes.iconSvg} 
+					span {generatedHeadText}
+						class {classes.editorHeadText}
+					{
+						&&
+							+ (selectedIttfKind === 'snippets' && processedContent)
+							. {classes.editorHeadControls}
+								button
+									class { classnames(classes.editorButton) }
+									@ onClick { this.handleWizzifiedDiffClick }
+									+ Wizzified diff
+				{
+					&&
+						+ isProcessingContent
+						< Avatar
+							src images/loading_animation.gif
+							class {classes.avatar}
+				{
+					&&
+						+ !(isProcessingContent)
+						< MonacoEditor 
+							class {classes.editor}
+							@ theme 'vs-dark'
+							@ width { splitter2Sizes.primary }
+							@ height { splitter2Sizes.third }
+							@ value {processError || processedContent}
+							@ options {optionsGenerated}
+			. {classes.editorbox}
+				. {classes.editorHead}
+					button
+						class { classnames(classes.button, classes.buttonMedium, classes.miniButton)}  
+						< GearIcon
+							class {classes.iconSvg} 
+					span {helpBoardHeadText}
+						class {classes.editorHeadText}
+					{
+						&&
+							+ (hasPreview)
+							. {classes.editorHeadControls}
+								button
+									class { classnames(classes.editorButton) }
+									@ onClick { this.handlePreviewClick }
+									+ Preview
+				{
+					&& 
+						+ (showSchemaDocs && hbSchemaElementDoc)
+						. {classes.editorPane}
+							< SchemaElementDoc
+								@ element { hbSchemaElementDoc }
+				{
+					&&
+						+ (showPreview && selectedSchema == 'html')
+						. {classes.editorPane}
+							< HtmlPreview
+								@ content { generatedArtifactText }
+				{
+					&&
+						+ (showPreview && selectedSchema == 'svg')
+						. {classes.editorPane}
+							< SvgPreview
+								@ content { generatedArtifactText }
+				{
+					&&
+						+ (selectedIttfKind === 'snippets' && hbCodeAST )
+						. {classes.editorPane}
+							< AstView
+								@ codeAST { hbCodeAST }
+								@ width { splitter2Sizes.secondary }
+								@ height { splitter2Sizes.third }
+
+				$*
+				hr
+				pre
+					< Typography
+						+ { JSON.stringify( this.state.cursor, null, 4) }
+						br
+						+ { JSON.stringify( hbCursorNode, null, 4) }
+						br
+						+ {hbSchemaElementDoc && JSON.stringify( hbSchemaElementDoc, null, 4) }
+						br
+						+ { JSON.stringify( hbIttfMTree, null, 4) }
+				*$

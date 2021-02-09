@@ -1,0 +1,22 @@
+﻿r-component( SvgPreview )
+	
+	$append imports
+
+		var styles
+			{
+				@ backgroundColor '#fff'
+				@ margin '20px'
+				@ padding '20px'
+
+	render
+		prop content
+		function createMarkup
+			return
+				{
+					@ __html content
+
+		return
+			div
+				style {styles}
+				div
+					@ dangerouslySetInnerHTML { createMarkup() }

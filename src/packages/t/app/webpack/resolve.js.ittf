@@ -1,0 +1,17 @@
+﻿$group
+	$params &app
+
+	[ extensions
+		@ ".js"
+		$if app.useTypescript
+			@ ".ts"
+		$if app.useReact
+			@ ".jsx"
+			$if app.useTypescript
+				@ ".tsx"
+		@ ".json"
+		$if app.useVue
+			@ ".vue"
+	{ alias
+		$if app.useVue
+			@ '@' resolve('src')

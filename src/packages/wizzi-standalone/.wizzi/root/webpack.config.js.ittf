@@ -1,0 +1,34 @@
+﻿module
+	kind es6
+
+    $include v08/app/webpack/imports
+
+	set module.exports
+		{
+            @ mode "development"
+			[ entry
+				@ './src/index.js'
+			
+			{ module
+				[ rules
+					$include v08/app/webpack/module.rules
+
+			{ resolve
+                $include v08/app/webpack/resolve
+			
+			{ output
+				@ path path.resolve(__dirname, '..', 'dist', 'scripts')
+				@ filename '${pkg.name}.js'
+                $include v08/app/webpack/output
+			
+			{ node
+
+			[ plugins
+                $include v08/app/webpack/plugins
+			
+			@ devtool 'cheap-module-source-map'
+			
+            $include v08/app/webpack/externals
+
+			{ devServer
+                $include v08/app/webpack/devServer

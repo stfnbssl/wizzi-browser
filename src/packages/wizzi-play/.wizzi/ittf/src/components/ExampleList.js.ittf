@@ -1,0 +1,278 @@
+﻿r-component( ExampleList )
+
+	$append imports
+		import { 
+			\b Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+			\b Button, 
+			\b List, ListItem, ListItemText, 
+			\b ListItemSecondaryAction, Tooltip, IconButton,
+			\b TextField, InputAdornment , Select, MenuItem
+			\b } from '@material-ui/core'
+		import AddIcon from '@material-ui/icons/Add'
+		import DeleteIcon from '@material-ui/icons/Delete'
+		import UpdateIcon from '@material-ui/icons/Update'
+		const NO_CONFIRM = 0
+		const REMOVE_CONFIRM = 1
+		const RENAME_CONFIRM = 2
+		const ADD_CONFIRM = 3
+
+	state
+		@ openAddRenameDelete false
+		@ confirmState NO_CONFIRM
+		@ newExample ''
+		@ oldExample ''
+		@ rendelExample ''
+		@ selectedTemplate '-- None'
+
+	style
+		@ selected
+			{
+				@ color 'red'
+
+	=> handleNewExampleChange
+		param event
+		_ this.setState
+			{
+				@ ...this.state
+				@ newExample event.target.value
+
+	=> handleRenDelExampleChange
+		param event
+		_ this.setState
+			{
+				@ ...this.state
+				@ rendelExample event.target.value
+
+	=> handleAddExampleDialog
+		param example
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState ADD_CONFIRM
+				@ openAddRenameDelete true
+				@ rendelExample this.state.newExample
+
+	=> handleSelectTemplate
+		param e
+		_ this.setState
+			{
+				@ ...this.state
+				@ selectedTemplate e.target.value
+
+	=> handleRemoveExampleDialog
+		param example
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState REMOVE_CONFIRM
+				@ openAddRenameDelete true
+				@ rendelExample example
+	
+	=> handleRenameExampleDialog
+		param example
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState RENAME_CONFIRM
+				@ openAddRenameDelete true
+				@ oldExample example
+				@ rendelExample example
+
+	=> handleCloseAddRenameDelete
+		_ this.setState
+			{
+				@ ...this.state
+				@ confirmState NO_CONFIRM
+				@ openAddRenameDelete false
+
+	=> handleAddExample
+		prop onAddExample
+		if this.state.newExample && this.state.newExample.length > 0
+			var templateName = this.state.selectedTemplate === '-- None' ? '' : this.state.selectedTemplate
+			_ onAddExample
+				@ this.state.newExample
+				@ templateName
+
+	=> handleRenameExample
+		prop onRenameExample
+		if this.state.rendelExample && 
+			\b this.state.rendelExample.length > 0 &&
+			\b this.state.rendelExample !== this.state.oldExample
+			_ onRenameExample
+				@ this.state.oldExample
+				@ this.state.rendelExample
+
+	=> handleRemoveExample
+		prop onRemoveExample
+		if this.state.rendelExample && 
+			\b this.state.rendelExample.length > 0
+			_ onRemoveExample
+				@ this.state.rendelExample
+
+	render
+		
+		prop classes
+		prop schema
+		prop examples
+		prop templates
+		
+		# prop selectedName
+		const { newExample, selectedTemplate, rendelExample, openAddRenameDelete, confirmState } = this.state
+		const templatesForSelect = [{ name: '-- None'}].concat(templates)
+		
+		return
+
+			div
+				< Dialog
+					@ open {openAddRenameDelete}
+					@ onClose {this.handleCloseAddRenameDelete}
+					< DialogTitle
+						{
+							&&
+								+ confirmState == ADD_CONFIRM
+								p Create example: { rendelExample }
+						{
+							&&
+								+ confirmState == REMOVE_CONFIRM
+								p Remove example: { rendelExample }
+						{
+							&&
+								+ confirmState == RENAME_CONFIRM
+								p Rename example: { rendelExample }
+					< DialogContent
+						{
+							&&
+								+ confirmState == ADD_CONFIRM
+								div
+									p Select template
+									< Select
+										@ value { selectedTemplate }
+										@ onChange {this.handleSelectTemplate}
+										{
+											_ templatesForSelect.map
+												=>
+													param item
+													return
+														< MenuItem
+															@ value {item.name}
+															@ key {item.name}
+															+ {item.name}
+						{
+							&&
+								+ confirmState == RENAME_CONFIRM
+								< TextField
+									@ autoFocus
+									@ margin dense
+									@ id exampleName
+									@ label { 'new name' }
+									@ type textfield
+									@ fullWidth
+									@ value {rendelExample}
+									@ onChange {this.handleRenDelExampleChange}
+									@ InputProps
+										{
+											@ endAdornment
+												< InputAdornment
+													@ position end
+													+ { schema + '.ittf' }
+
+						< DialogActions
+							< Button
+								@ onClick {this.handleCloseAddRenameDelete}
+								@ color primary
+								+ Cancel
+							{
+								&&
+									+ confirmState == ADD_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleAddExample
+										@ color primary
+										+ Confirm create
+							{
+								&&
+									+ confirmState == RENAME_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleRenameExample
+										@ color primary
+										+ Confirm rename
+							{
+								&&
+									+ confirmState == REMOVE_CONFIRM
+									< Button
+										@ onClick
+											=>
+												_ this.handleRemoveExample
+										@ color primary
+										+ Confirm remove
+				< DialogTitle
+					+ Add, rename or remove examples
+				< TextField
+					@ autoFocus
+					@ margin dense
+					@ id exampleName
+					@ label { 'new example' }
+					@ type textfield
+					@ fullWidth
+					@ value {newExample}
+					@ onChange {this.handleNewExampleChange}
+					@ InputProps
+						{
+							@ endAdornment
+								< InputAdornment
+									@ position end
+									< Tooltip
+										title "Add new example"
+										@ enterDelay {500}
+										< IconButton
+											@ aria-label Add
+											@ onClick
+												=>
+													_ this.handleAddExampleDialog
+											$*
+											@ onClick { this.handleAddExample }
+											*$
+											< AddIcon
+				< List
+					@ dense {true}
+					{
+						_ examples.map
+							=>
+								param example
+								return
+									< ListItem
+										@ key {example.name}
+										@ disableGutters
+										@ onClick
+											=>
+												_ this.handleRenameExampleDialog
+													@ example.name
+										$*
+										@ className {selectedName === example.name ? classes.selected : ''}
+										*$
+										< ListItemText
+											@ primary {schema + '/' + example.name }
+										< ListItemSecondaryAction
+											< Tooltip
+												title "Rename example"
+												@ enterDelay {500}
+												< IconButton
+													@ aria-label Update
+													@ onClick
+														=>
+															_ this.handleRenameExampleDialog
+																@ example.name
+													< UpdateIcon
+											< Tooltip
+												title "Delete example"
+												@ enterDelay {500}
+												< IconButton
+													@ aria-label Delete
+													@ onClick
+														=>
+															_ this.handleRemoveExampleDialog
+																@ example.name
+													< DeleteIcon

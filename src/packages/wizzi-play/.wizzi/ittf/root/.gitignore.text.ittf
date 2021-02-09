@@ -1,0 +1,3 @@
+﻿text
+	$include app-options
+	app/.gitignore( &app )

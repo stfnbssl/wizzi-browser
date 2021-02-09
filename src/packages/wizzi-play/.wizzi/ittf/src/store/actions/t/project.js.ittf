@@ -1,0 +1,206 @@
+﻿$group
+	$params &app
+	+
+	decl( USER_SELECTION )
+	decl_rsf( project, select )
+	decl_rsf( project, add )
+	decl_rsf( project, rename )
+	decl_rsf( project, remove )
+	
+	+
+	wz-const selectSchema
+		=>
+			param schemaName
+			param projectName
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					log '*** store.actions.schema.selectSchema', schemaName, projectName
+
+					const schemaState = getState().schema
+					const schemaObject = schemaState.schemas[schemaName]
+
+					_ dispatch
+						_ completeSelectSchema
+							@ schemaName
+
+					if schemaState.selectedIttfKind === 'projects'
+
+						if !projectName || projectName.length < 1
+							const projectObject = schemaObject.projects && schemaObject.projects.length > 0 ? schemaObject.projects[0] : null
+							set projectName = projectObject ? (projectObject.name || 'default') : 'default'
+					
+						log '*** store.actions.schema.selectSchema before selectProject dispatch', schemaName, projectName
+						
+						_ dispatch
+							_ selectProject
+								@ projectName
+
+					else
+
+						var fragmentName = projectName
+						
+						if !fragmentName || fragmentName.length < 1
+							const fragmentObject = schemaObject.fragments && schemaObject.fragments.length > 0 ? schemaObject.fragments[0] : null
+							set fragmentName = fragmentObject ? (fragmentObject.name || 'default') : 'default'
+					
+						log '*** store.actions.schema.selectSchema before selectFragment dispatch', schemaName, fragmentName
+
+						_ dispatch
+							_ selectFragment
+								@ fragmentName
+
+
+	wz-const completeSelectSchema
+		=>
+			param schemaName
+			return
+				{
+					@ type SCHEMA_SELECTION
+					@ schema schemaName
+	
+	wz-const selectDocument
+		=>
+			param documentName
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+					
+					const schemaState = getState().schema
+
+					log '*** store.actions.schema.selectDocument', documentName, schemaState
+
+					if schemaState.selectedIttfKind === 'projects'
+						_ dispatch
+							_ selectProject(documentName)
+					else
+						_ dispatch
+							_ selectFragment(documentName)
+
+	# thunk.withExtraArgument
+	wz-const selectProject
+		=>
+			param projectName
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+					log '*** store.actions.schema.selectProject', projectName
+					
+					const schemaState = getState().schema
+					const schemaObject = schemaState.schemas[schemaState.selectedSchema]
+					
+					if projectName == null
+						log '-1> selectedIttfKind has been changed, look for previous project'
+						if schemaState.selectedProject && schemaState.selectedProject.length > 0
+							set projectName = schemaState.selectedProject
+							log 'found previous ', projectName
+						else
+							if schemaState.filteredProjects.length > 0
+								set projectName = schemaState.filteredProjects[0].name
+								log '-1> selected first of schema ', projectName
+							else
+								log '-1> fall back to default ', projectName
+								set fragmentName = 'default'
+
+					_ dispatch
+						_ requestSelectProject
+
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+
+					_ wizziStore.getProject
+						@ schemaState.selectedSchema
+						@ projectName
+						f_cb_no_err( projectItem )
+							# log '*** store.actions.schema.selectProject. getProject err, projectItem', err, projectItem
+							# return
+							if err
+								log '*** store.actions.schema.selectProject. getProject err', err
+								# TODO manage exception
+								throw err
+
+							if projectItem == null
+								
+								var projectObject
+								
+								# TODO simply add a new fragment, no data in projectObject.ittf
+
+								if schemaObject.projects
+									_ schemaObject.projects.map
+										=>
+											param item
+											if item.name == projectName
+												set projectObject = item
+								
+								if projectObject && projectObject.ittf 
+									
+									const ittf = projectObject.ittf.join('\n') 
+									
+									_ dispatch
+										_ completeSelectProject
+											@ projectName
+											@ ittf
+								
+									_ dispatch
+										_ updateIttfMTree
+											@ ittf
+								
+									_ dispatch
+										_ changeProjectMainIttf
+											@ schemaState.selectedSchema
+											@ projectName
+											@ ittf
+
+								else
+									_ dispatch
+										_ addProject
+											@ schemaState.selectedSchema
+											@ projectName
+
+							else
+
+								log '*** store.actions.schema.selectProject. retrieved projectItem.data.content', projectItem.data.content
+								
+								_ dispatch
+									_ completeSelectProject
+										@ projectName
+										@ projectItem.data.content
+								
+								_ dispatch
+									_ updateIttfMTree
+										@ projectItem.data.content
+								
+								$if app.testNoArtifactGeneration == false
+									_ dispatch
+										_ generateArtifact
+											@ schemaState.selectedSchema
+											@ 'examples'
+											@ projectName
+
+	wz-const requestSelectProject
+		=>
+			param projectName
+			return
+				{
+					@ type SELECT_EXAMPLE_REQUEST
+					@ project projectName
+
+	wz-const completeSelectProject
+		=>
+			param projectName
+			param ittfContent
+			return
+				{
+					@ type SELECT_EXAMPLE_SUCCESS
+					@ project projectName
+					@ ittfContent ittfContent
+
+
+	listCrud( Project )

@@ -1,0 +1,45 @@
+{
+    "name": "wizzi",
+    "sideEffects": false,
+    "description": "The wizzi factory..",
+    "author": {
+        "name": "Stefano Bassoli",
+        "email": "stfn.bssl@gmail.com"
+    },
+    "private": false,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi"
+    },
+    "engines": {
+        "node": ">=0.10.28",
+        "npm": ">=1.4.28"
+    },
+    "scripts": {
+        "test": "mocha tests/all/**/*.js --full-trace",
+        "test:quick": "mocha tests/quick/**/*.js --full-trace",
+        "examples:css": "node examples/css",
+        "examples:graphql": "node examples/graphql",
+        "examples:html": "node examples/html",
+        "examples:js": "node examples/js",
+        "examples:plugin": "node examples/plugins/sample && node examples/plugins/sample/dist/examples"
+    },
+    "dependencies": {
+        "async": "^3.2.0",
+        "chalk": "^4.1.0",
+        "iconv-lite": "^0.6.2",
+        "json-stringify-safe": "^5.0.1",
+        "lodash": "^4.17.20",
+        "extsprintf": "^1.2.0"
+    },
+    "devDependencies": {
+        "del": "^6.0.0",
+        "expect.js": "^0.3.1"
+    }
+}

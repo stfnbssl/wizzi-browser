@@ -1,0 +1,4284 @@
+{
+  "name": "site",
+  "preserveTags": true,
+  "requires": [],
+  "exportTos": [],
+  "elements": [
+    {
+      "name": "comment",
+      "super": null,
+      "isRoot": false,
+      "tags": [
+        "#"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "item",
+          "tags": [
+            "item"
+          ]
+        },
+        {
+          "name": "site",
+          "tags": [
+            "site"
+          ]
+        },
+        {
+          "name": "meta",
+          "tags": [
+            "meta"
+          ]
+        },
+        {
+          "name": "category",
+          "tags": [
+            "category"
+          ]
+        },
+        {
+          "name": "demo",
+          "tags": [
+            "demo"
+          ]
+        },
+        {
+          "name": "link",
+          "tags": [
+            "link"
+          ]
+        },
+        {
+          "name": "headerItem",
+          "tags": [
+            "headerItem"
+          ]
+        },
+        {
+          "name": "header",
+          "tags": [
+            "header"
+          ]
+        },
+        {
+          "name": "logo",
+          "tags": [
+            "logo"
+          ]
+        },
+        {
+          "name": "navigation",
+          "tags": [
+            "navigation"
+          ]
+        },
+        {
+          "name": "searchBar",
+          "tags": [
+            "searchBar"
+          ]
+        },
+        {
+          "name": "memberLogin",
+          "tags": [
+            "memberLogin"
+          ]
+        },
+        {
+          "name": "socialMedia",
+          "tags": [
+            "socialMedia"
+          ]
+        },
+        {
+          "name": "giveButton",
+          "tags": [
+            "giveButton"
+          ]
+        },
+        {
+          "name": "footerItem",
+          "tags": [
+            "footerItem"
+          ]
+        },
+        {
+          "name": "footer",
+          "tags": [
+            "footer"
+          ]
+        },
+        {
+          "name": "subFooter",
+          "tags": [
+            "subFooter"
+          ]
+        },
+        {
+          "name": "copyright",
+          "tags": [
+            "copyright"
+          ]
+        },
+        {
+          "name": "newsletter",
+          "tags": [
+            "newsletter"
+          ]
+        },
+        {
+          "name": "contactForm",
+          "tags": [
+            "contactForm"
+          ]
+        },
+        {
+          "name": "press",
+          "tags": [
+            "press"
+          ]
+        },
+        {
+          "name": "siteMap",
+          "tags": [
+            "siteMap"
+          ]
+        },
+        {
+          "name": "termOfUse",
+          "tags": [
+            "termOfUse"
+          ]
+        },
+        {
+          "name": "aboutUs",
+          "tags": [
+            "aboutUs"
+          ]
+        },
+        {
+          "name": "seoKeywords",
+          "tags": [
+            "seoKeywords"
+          ]
+        },
+        {
+          "name": "miniGallery",
+          "tags": [
+            "miniGallery"
+          ]
+        },
+        {
+          "name": "awards",
+          "tags": [
+            "awards"
+          ]
+        },
+        {
+          "name": "popularRecent",
+          "tags": [
+            "popularRecent"
+          ]
+        },
+        {
+          "name": "callToAction",
+          "tags": [
+            "callToAction"
+          ]
+        },
+        {
+          "name": "panel",
+          "tags": [
+            "panel"
+          ]
+        },
+        {
+          "name": "grid",
+          "tags": [
+            "grid"
+          ]
+        },
+        {
+          "name": "flex",
+          "tags": [
+            "flex"
+          ]
+        },
+        {
+          "name": "gridItem",
+          "tags": [
+            "grid-item"
+          ]
+        },
+        {
+          "name": "table",
+          "tags": [
+            "table"
+          ]
+        },
+        {
+          "name": "style",
+          "tags": [
+            "style"
+          ]
+        },
+        {
+          "name": "theme",
+          "tags": [
+            "theme"
+          ]
+        },
+        {
+          "name": "color",
+          "tags": [
+            "color"
+          ]
+        },
+        {
+          "name": "attribute",
+          "tags": [
+            "@"
+          ]
+        },
+        {
+          "name": "markup",
+          "tags": [
+            "markup"
+          ]
+        },
+        {
+          "name": "div",
+          "tags": [
+            "div"
+          ]
+        },
+        {
+          "name": "p",
+          "tags": [
+            "p"
+          ]
+        },
+        {
+          "name": "span",
+          "tags": [
+            "span"
+          ]
+        },
+        {
+          "name": "ul",
+          "tags": [
+            "ul"
+          ]
+        },
+        {
+          "name": "li",
+          "tags": [
+            "li"
+          ]
+        },
+        {
+          "name": "a",
+          "tags": [
+            "a"
+          ]
+        },
+        {
+          "name": "h1",
+          "tags": [
+            "h1"
+          ]
+        },
+        {
+          "name": "h2",
+          "tags": [
+            "h2"
+          ]
+        },
+        {
+          "name": "h3",
+          "tags": [
+            "h3"
+          ]
+        },
+        {
+          "name": "h4",
+          "tags": [
+            "h4"
+          ]
+        },
+        {
+          "name": "widget",
+          "tags": [
+            "widget"
+          ]
+        },
+        {
+          "name": "headline",
+          "tags": [
+            "headline"
+          ]
+        },
+        {
+          "name": "callToAction",
+          "tags": [
+            "callToAction"
+          ]
+        },
+        {
+          "name": "supportingImage",
+          "tags": [
+            "supportingImage"
+          ]
+        },
+        {
+          "name": "card",
+          "tags": [
+            "card"
+          ]
+        },
+        {
+          "name": "image",
+          "tags": [
+            "image"
+          ]
+        },
+        {
+          "name": "menu",
+          "tags": [
+            "menu"
+          ]
+        },
+        {
+          "name": "menuitem",
+          "tags": [
+            "menu-item"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "item",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "item"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "item",
+          "role": "items",
+          "tags": [
+            "item"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "site",
+      "super": "comment",
+      "isRoot": true,
+      "tags": [
+        "site"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "page",
+          "role": "pages",
+          "tags": [
+            "page"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "meta",
+          "role": "metas",
+          "tags": [
+            "meta"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [
+        {
+          "name": "getDemosByPath",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [
+            "path"
+          ],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ret",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "item in this.metas",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "item.getDemosByPath",
+                  "statements": [
+                    {
+                      "tag": "set",
+                      "name": "set",
+                      "value": "ret = item.getDemosByPath(path)",
+                      "statements": []
+                    },
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "ret",
+                      "statements": [
+                        {
+                          "tag": "return",
+                          "name": "xreturn",
+                          "value": "ret",
+                          "statements": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "[]",
+              "statements": []
+            }
+          ],
+          "comments": []
+        },
+        {
+          "name": "getCategoriesByPath",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [
+            "path"
+          ],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ret",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "item in this.metas",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "item.getCategoriesByPath",
+                  "statements": [
+                    {
+                      "tag": "set",
+                      "name": "set",
+                      "value": "ret = item.getCategoriesByPath(path)",
+                      "statements": []
+                    },
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "ret",
+                      "statements": [
+                        {
+                          "tag": "return",
+                          "name": "xreturn",
+                          "value": "ret",
+                          "statements": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "[]",
+              "statements": []
+            }
+          ],
+          "comments": []
+        },
+        {
+          "name": "getLinksByPath",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [
+            "path"
+          ],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ret",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "item in this.metas",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "item.getLinksByPath",
+                  "statements": [
+                    {
+                      "tag": "set",
+                      "name": "set",
+                      "value": "ret = item.getLinksByPath(path)",
+                      "statements": []
+                    },
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "ret",
+                      "statements": [
+                        {
+                          "tag": "return",
+                          "name": "xreturn",
+                          "value": "ret",
+                          "statements": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "[]",
+              "statements": []
+            }
+          ],
+          "comments": []
+        }
+      ],
+      "comments": [
+        "The root element of the site schema."
+      ]
+    },
+    {
+      "name": "page",
+      "super": null,
+      "isRoot": false,
+      "tags": [
+        "page"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "header",
+          "role": null,
+          "tags": [
+            "header"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "footer",
+          "role": null,
+          "tags": [
+            "footer"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "meta",
+          "role": "metas",
+          "tags": [
+            "meta"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "contextModel",
+      "super": null,
+      "isRoot": false,
+      "tags": [
+        "context-model"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "string",
+          "tags": [
+            "type"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "tags": [
+            "path"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "meta",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "meta"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "label",
+          "type": "string",
+          "tags": [
+            "label"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "markup",
+          "role": null,
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "meta",
+          "role": "metas",
+          "tags": [
+            "meta"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "contextModel",
+          "role": "contextModels",
+          "tags": [
+            "context-model"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "category",
+          "tags": [
+            "category"
+          ]
+        },
+        {
+          "name": "demo",
+          "tags": [
+            "demo"
+          ]
+        },
+        {
+          "name": "link",
+          "tags": [
+            "link"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "category",
+      "super": "meta",
+      "isRoot": false,
+      "tags": [
+        "category"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "label",
+          "type": "string",
+          "tags": [
+            "label"
+          ],
+          "flags": "",
+          "inheritedFrom": "meta",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "markup",
+          "role": null,
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "meta",
+          "role": "metas",
+          "tags": [
+            "meta"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "contextModel",
+          "role": "contextModels",
+          "tags": [
+            "context-model"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [
+        {
+          "name": "wzinitialize",
+          "isStatic": false,
+          "isKnownMethod": true,
+          "params": [],
+          "statements": [
+            {
+              "tag": "set",
+              "name": "set",
+              "value": "this.nameLower = this.wzName.toLowerCase()",
+              "statements": []
+            },
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "cpath = [this.nameLower]",
+              "statements": []
+            },
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "prn = this.wzParent",
+              "statements": []
+            },
+            {
+              "tag": "while",
+              "name": "xwhile",
+              "value": "prn && prn.wzElement === 'category'",
+              "statements": [
+                {
+                  "tag": "_",
+                  "name": "call",
+                  "value": "cpath.splice(0, 0, prn.wzName.toLowerCase())",
+                  "statements": []
+                },
+                {
+                  "tag": "set",
+                  "name": "set",
+                  "value": "prn = prn.wzParent",
+                  "statements": []
+                }
+              ]
+            },
+            {
+              "tag": "set",
+              "name": "set",
+              "value": "this.categoryPath = cpath.join('/')",
+              "statements": []
+            }
+          ],
+          "comments": [
+            "log 'category.wzinitialize.name,categoryPath', this.wzName, this.categoryPath"
+          ]
+        },
+        {
+          "name": "getDemos",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ret = []",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "item in this.metas",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "item.wzElement === 'demo'",
+                  "statements": [
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "ret.push(item)",
+                      "statements": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "ret",
+              "statements": []
+            }
+          ],
+          "comments": []
+        },
+        {
+          "name": "getCategories",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ret = []",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "item in this.metas",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "item.wzElement === 'category'",
+                  "statements": [
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "ret.push(item)",
+                      "statements": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "ret",
+              "statements": []
+            }
+          ],
+          "comments": []
+        },
+        {
+          "name": "getLinks",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ret = []",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "item in this.metas",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "item.wzElement === 'link'",
+                  "statements": [
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "ret.push(item)",
+                      "statements": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "ret",
+              "statements": []
+            }
+          ],
+          "comments": []
+        },
+        {
+          "name": "getDemosByPath",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [
+            "path"
+          ],
+          "statements": [
+            {
+              "tag": "if",
+              "name": "xif",
+              "value": "this.categoryPath === path",
+              "statements": [
+                {
+                  "tag": "return",
+                  "name": "xreturn",
+                  "value": "this.getDemos()",
+                  "statements": []
+                }
+              ]
+            },
+            {
+              "tag": "else",
+              "name": "xelse",
+              "value": "",
+              "statements": [
+                {
+                  "tag": "var",
+                  "name": "xvar",
+                  "value": "ret",
+                  "statements": []
+                },
+                {
+                  "tag": "foreach",
+                  "name": "foreach",
+                  "value": "item in this.metas",
+                  "statements": [
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "item.getDemosByPath",
+                      "statements": [
+                        {
+                          "tag": "set",
+                          "name": "set",
+                          "value": "ret = item.getDemosByPath(path)",
+                          "statements": []
+                        },
+                        {
+                          "tag": "if",
+                          "name": "xif",
+                          "value": "ret",
+                          "statements": [
+                            {
+                              "tag": "return",
+                              "name": "xreturn",
+                              "value": "ret",
+                              "statements": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "return",
+                  "name": "xreturn",
+                  "value": "null",
+                  "statements": []
+                }
+              ]
+            }
+          ],
+          "comments": [
+            "log 'category.getDemosByPath', path, this.categoryPath"
+          ]
+        },
+        {
+          "name": "getCategoriesByPath",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [
+            "path"
+          ],
+          "statements": [
+            {
+              "tag": "if",
+              "name": "xif",
+              "value": "this.categoryPath === path",
+              "statements": [
+                {
+                  "tag": "return",
+                  "name": "xreturn",
+                  "value": "this.getCategories()",
+                  "statements": []
+                }
+              ]
+            },
+            {
+              "tag": "else",
+              "name": "xelse",
+              "value": "",
+              "statements": [
+                {
+                  "tag": "var",
+                  "name": "xvar",
+                  "value": "ret",
+                  "statements": []
+                },
+                {
+                  "tag": "foreach",
+                  "name": "foreach",
+                  "value": "item in this.metas",
+                  "statements": [
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "item.getCategoriesByPath",
+                      "statements": [
+                        {
+                          "tag": "set",
+                          "name": "set",
+                          "value": "ret = item.getCategoriesByPath(path)",
+                          "statements": []
+                        },
+                        {
+                          "tag": "if",
+                          "name": "xif",
+                          "value": "ret",
+                          "statements": [
+                            {
+                              "tag": "return",
+                              "name": "xreturn",
+                              "value": "ret",
+                              "statements": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "return",
+                  "name": "xreturn",
+                  "value": "null",
+                  "statements": []
+                }
+              ]
+            }
+          ],
+          "comments": []
+        },
+        {
+          "name": "getLinksByPath",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [
+            "path"
+          ],
+          "statements": [
+            {
+              "tag": "if",
+              "name": "xif",
+              "value": "this.categoryPath === path",
+              "statements": [
+                {
+                  "tag": "return",
+                  "name": "xreturn",
+                  "value": "this.getLinks()",
+                  "statements": []
+                }
+              ]
+            },
+            {
+              "tag": "else",
+              "name": "xelse",
+              "value": "",
+              "statements": [
+                {
+                  "tag": "var",
+                  "name": "xvar",
+                  "value": "ret",
+                  "statements": []
+                },
+                {
+                  "tag": "foreach",
+                  "name": "foreach",
+                  "value": "item in this.metas",
+                  "statements": [
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "item.getCategoriesByPath",
+                      "statements": [
+                        {
+                          "tag": "set",
+                          "name": "set",
+                          "value": "ret = item.getLinksByPath(path)",
+                          "statements": []
+                        },
+                        {
+                          "tag": "if",
+                          "name": "xif",
+                          "value": "ret",
+                          "statements": [
+                            {
+                              "tag": "return",
+                              "name": "xreturn",
+                              "value": "ret",
+                              "statements": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "return",
+                  "name": "xreturn",
+                  "value": "null",
+                  "statements": []
+                }
+              ]
+            }
+          ],
+          "comments": []
+        }
+      ],
+      "comments": []
+    },
+    {
+      "name": "demo",
+      "super": "meta",
+      "isRoot": false,
+      "tags": [
+        "demo"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "label",
+          "type": "string",
+          "tags": [
+            "label"
+          ],
+          "flags": "",
+          "inheritedFrom": "meta",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "markup",
+          "role": null,
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "meta",
+          "role": "metas",
+          "tags": [
+            "meta"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "contextModel",
+          "role": "contextModels",
+          "tags": [
+            "context-model"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [
+        {
+          "name": "wzinitialize",
+          "isStatic": false,
+          "isKnownMethod": true,
+          "params": [],
+          "statements": [
+            {
+              "tag": "set",
+              "name": "set",
+              "value": "this.nameLower = this.wzName.toLowerCase()",
+              "statements": []
+            },
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "cpath = [this.nameLower]",
+              "statements": []
+            },
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "prn = this.wzParent",
+              "statements": []
+            },
+            {
+              "tag": "while",
+              "name": "xwhile",
+              "value": "prn && prn.wzElement === 'category'",
+              "statements": [
+                {
+                  "tag": "_",
+                  "name": "call",
+                  "value": "cpath.splice(0, 0, prn.wzName.toLowerCase())",
+                  "statements": []
+                },
+                {
+                  "tag": "set",
+                  "name": "set",
+                  "value": "prn = prn.wzParent",
+                  "statements": []
+                }
+              ]
+            },
+            {
+              "tag": "set",
+              "name": "set",
+              "value": "this.demoPath = cpath.join('/')",
+              "statements": []
+            }
+          ],
+          "comments": [
+            "log 'demo.wzinitialize.name,demoPath', this.wzName, this.demoPath"
+          ]
+        },
+        {
+          "name": "getUri",
+          "isStatic": false,
+          "isKnownMethod": false,
+          "params": [],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "sb = [ this.demoPath, '/index.html.ittf' ]",
+              "statements": []
+            },
+            {
+              "tag": "if",
+              "name": "xif",
+              "value": "this.contextModels.length > 0",
+              "statements": [
+                {
+                  "tag": "_",
+                  "name": "call",
+                  "value": "sb.push",
+                  "statements": [
+                    {
+                      "tag": "@",
+                      "name": "jsPropertyOrValue",
+                      "value": "'?_context='",
+                      "statements": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "var",
+                  "name": "xvar",
+                  "value": "seen = false",
+                  "statements": []
+                },
+                {
+                  "tag": "foreach",
+                  "name": "foreach",
+                  "value": "item in this.contextModels",
+                  "statements": [
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "seen",
+                      "statements": [
+                        {
+                          "tag": "_",
+                          "name": "call",
+                          "value": "sb.push",
+                          "statements": [
+                            {
+                              "tag": "@",
+                              "name": "jsPropertyOrValue",
+                              "value": "';'",
+                              "statements": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "sb.push",
+                      "statements": [
+                        {
+                          "tag": "@",
+                          "name": "jsPropertyOrValue",
+                          "value": "item.wzName",
+                          "statements": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "foreach",
+                  "name": "foreach",
+                  "value": "item in this.contextModels",
+                  "statements": [
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "sb.push",
+                      "statements": [
+                        {
+                          "tag": "@",
+                          "name": "jsPropertyOrValue",
+                          "value": "'&_' + item.wzName + '=' + item.type",
+                          "statements": []
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "if",
+                      "name": "xif",
+                      "value": "verify.isNotEmpty(item.path)",
+                      "statements": [
+                        {
+                          "tag": "_",
+                          "name": "call",
+                          "value": "sb.push",
+                          "statements": [
+                            {
+                              "tag": "@",
+                              "name": "jsPropertyOrValue",
+                              "value": "';' + item.path",
+                              "statements": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "return",
+              "name": "xreturn",
+              "value": "sb.join('')",
+              "statements": []
+            }
+          ],
+          "comments": []
+        }
+      ],
+      "comments": []
+    },
+    {
+      "name": "link",
+      "super": "meta",
+      "isRoot": false,
+      "tags": [
+        "link"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "stars",
+          "type": "string",
+          "tags": [
+            "stars"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "tags": [
+            "label"
+          ],
+          "flags": "",
+          "inheritedFrom": "meta",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "markup",
+          "role": null,
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "meta",
+          "role": "metas",
+          "tags": [
+            "meta"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "contextModel",
+          "role": "contextModels",
+          "tags": [
+            "context-model"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "meta",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "headerItem",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "headerItem"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "header",
+          "tags": [
+            "header"
+          ]
+        },
+        {
+          "name": "logo",
+          "tags": [
+            "logo"
+          ]
+        },
+        {
+          "name": "navigation",
+          "tags": [
+            "navigation"
+          ]
+        },
+        {
+          "name": "searchBar",
+          "tags": [
+            "searchBar"
+          ]
+        },
+        {
+          "name": "memberLogin",
+          "tags": [
+            "memberLogin"
+          ]
+        },
+        {
+          "name": "socialMedia",
+          "tags": [
+            "socialMedia"
+          ]
+        },
+        {
+          "name": "giveButton",
+          "tags": [
+            "giveButton"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "header",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "header"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "logo",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "logo"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "navigation",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "navigation"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "searchBar",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "searchBar"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "memberLogin",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "memberLogin"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "socialMedia",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "socialMedia"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "giveButton",
+      "super": "headerItem",
+      "isRoot": false,
+      "tags": [
+        "giveButton"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "footerItem",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "footerItem"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "footer",
+          "tags": [
+            "footer"
+          ]
+        },
+        {
+          "name": "subFooter",
+          "tags": [
+            "subFooter"
+          ]
+        },
+        {
+          "name": "copyright",
+          "tags": [
+            "copyright"
+          ]
+        },
+        {
+          "name": "newsletter",
+          "tags": [
+            "newsletter"
+          ]
+        },
+        {
+          "name": "contactForm",
+          "tags": [
+            "contactForm"
+          ]
+        },
+        {
+          "name": "press",
+          "tags": [
+            "press"
+          ]
+        },
+        {
+          "name": "siteMap",
+          "tags": [
+            "siteMap"
+          ]
+        },
+        {
+          "name": "termOfUse",
+          "tags": [
+            "termOfUse"
+          ]
+        },
+        {
+          "name": "aboutUs",
+          "tags": [
+            "aboutUs"
+          ]
+        },
+        {
+          "name": "seoKeywords",
+          "tags": [
+            "seoKeywords"
+          ]
+        },
+        {
+          "name": "miniGallery",
+          "tags": [
+            "miniGallery"
+          ]
+        },
+        {
+          "name": "awards",
+          "tags": [
+            "awards"
+          ]
+        },
+        {
+          "name": "popularRecent",
+          "tags": [
+            "popularRecent"
+          ]
+        },
+        {
+          "name": "callToAction",
+          "tags": [
+            "callToAction"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "footer",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "footer"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": [
+        "https://icons8.com/articles/website-footer-design/",
+        "https://mayvendev.com/blog/15-tips-for-creating-a-great-website-footer"
+      ]
+    },
+    {
+      "name": "subFooter",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "subFooter"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "copyright",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "copyright"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "newsletter",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "newsletter"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "contactForm",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "contactForm"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "press",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "press"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "siteMap",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "siteMap"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "termOfUse",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "termOfUse"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "aboutUs",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "aboutUs"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "seoKeywords",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "seoKeywords"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "miniGallery",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "miniGallery"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "awards",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "awards"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "popularRecent",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "popularRecent"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "callToAction",
+      "super": "footerItem",
+      "isRoot": false,
+      "tags": [
+        "callToAction"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "footerItem",
+          "role": "footerItems",
+          "tags": [
+            "footerItem"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "footerItem",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "panel",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "panel"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "panel",
+          "role": "panels",
+          "tags": [
+            "panel"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "widget",
+          "role": "widgets",
+          "tags": [
+            "widget"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "grid",
+          "tags": [
+            "grid"
+          ]
+        },
+        {
+          "name": "flex",
+          "tags": [
+            "flex"
+          ]
+        },
+        {
+          "name": "gridItem",
+          "tags": [
+            "grid-item"
+          ]
+        },
+        {
+          "name": "table",
+          "tags": [
+            "table"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "grid",
+      "super": "panel",
+      "isRoot": false,
+      "tags": [
+        "grid"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "panel",
+          "role": "panels",
+          "tags": [
+            "panel"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "widget",
+          "role": "widgets",
+          "tags": [
+            "widget"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "flex",
+      "super": "panel",
+      "isRoot": false,
+      "tags": [
+        "flex"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "panel",
+          "role": "panels",
+          "tags": [
+            "panel"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "widget",
+          "role": "widgets",
+          "tags": [
+            "widget"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "gridItem",
+      "super": "panel",
+      "isRoot": false,
+      "tags": [
+        "grid-item"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "panel",
+          "role": "panels",
+          "tags": [
+            "panel"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "widget",
+          "role": "widgets",
+          "tags": [
+            "widget"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "table",
+      "super": "panel",
+      "isRoot": false,
+      "tags": [
+        "table"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "panel",
+          "role": "panels",
+          "tags": [
+            "panel"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "widget",
+          "role": "widgets",
+          "tags": [
+            "widget"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "panel",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "style",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "style"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "style",
+          "role": "styles",
+          "tags": [
+            "style"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "theme",
+          "tags": [
+            "theme"
+          ]
+        },
+        {
+          "name": "color",
+          "tags": [
+            "color"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "theme",
+      "super": "style",
+      "isRoot": false,
+      "tags": [
+        "theme"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "style",
+          "role": "styles",
+          "tags": [
+            "style"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "style",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "color",
+      "super": "style",
+      "isRoot": false,
+      "tags": [
+        "color"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "style",
+          "role": "styles",
+          "tags": [
+            "style"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "style",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "attribute",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "@"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "markup",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "markup"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "div",
+          "tags": [
+            "div"
+          ]
+        },
+        {
+          "name": "p",
+          "tags": [
+            "p"
+          ]
+        },
+        {
+          "name": "span",
+          "tags": [
+            "span"
+          ]
+        },
+        {
+          "name": "ul",
+          "tags": [
+            "ul"
+          ]
+        },
+        {
+          "name": "li",
+          "tags": [
+            "li"
+          ]
+        },
+        {
+          "name": "a",
+          "tags": [
+            "a"
+          ]
+        },
+        {
+          "name": "h1",
+          "tags": [
+            "h1"
+          ]
+        },
+        {
+          "name": "h2",
+          "tags": [
+            "h2"
+          ]
+        },
+        {
+          "name": "h3",
+          "tags": [
+            "h3"
+          ]
+        },
+        {
+          "name": "h4",
+          "tags": [
+            "h4"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "div",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "div"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "p",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "p"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "span",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "span"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "ul",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "ul"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "li",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "li"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "a",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "a"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "href",
+          "type": "string",
+          "tags": [
+            "href"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "h1",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "h1"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "h2",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "h2"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "h3",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "h3"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "h4",
+      "super": "markup",
+      "isRoot": false,
+      "tags": [
+        "h4"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "markup",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "markup",
+          "role": "markups",
+          "tags": [
+            "markup"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "markup",
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "widget",
+      "super": "comment",
+      "isRoot": false,
+      "tags": [
+        "widget"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [
+        {
+          "name": "headline",
+          "tags": [
+            "headline"
+          ]
+        },
+        {
+          "name": "callToAction",
+          "tags": [
+            "callToAction"
+          ]
+        },
+        {
+          "name": "supportingImage",
+          "tags": [
+            "supportingImage"
+          ]
+        },
+        {
+          "name": "card",
+          "tags": [
+            "card"
+          ]
+        },
+        {
+          "name": "image",
+          "tags": [
+            "image"
+          ]
+        },
+        {
+          "name": "menu",
+          "tags": [
+            "menu"
+          ]
+        },
+        {
+          "name": "menuitem",
+          "tags": [
+            "menu-item"
+          ]
+        }
+      ],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "headline",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "headline"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "callToAction",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "callToAction"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "supportingImage",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "supportingImage"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "card",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "card"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "image",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "image"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "tags": [
+            "src"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "menu",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "menu"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "menuitem",
+          "role": "menuitems",
+          "tags": [
+            "menu-item"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "menuitem",
+      "super": "widget",
+      "isRoot": false,
+      "tags": [
+        "menu-item"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "url",
+          "type": "string",
+          "tags": [
+            "url"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "image",
+          "role": null,
+          "tags": [
+            "image"
+          ],
+          "cardinality": "one-to-one",
+          "flags": "is-one-to-one ",
+          "inheritedFrom": null,
+          "comments": []
+        },
+        {
+          "name": "comment",
+          "role": "comments",
+          "tags": [
+            "#"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "comment",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    }
+  ]
+}

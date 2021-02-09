@@ -1,0 +1,33 @@
+﻿$group
+
+	$hook imports
+
+	wz-function errorUtil
+		param source
+		return 
+			function
+				param message
+				param method
+				return
+					{
+						@ __is_error true
+						@ message message
+						@ source source + '/' + method
+
+	wz-function throwErrorUtil
+		param source
+		var errorBuilder = errorUtil(source)
+		return 
+			function
+				param message
+				param method
+				set message
+					_ errorBuilder
+						@ message
+						@ method
+				log message
+				throw
+					new Error
+						@ message
+
+	$hook

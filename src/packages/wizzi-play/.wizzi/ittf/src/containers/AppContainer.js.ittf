@@ -1,0 +1,220 @@
+﻿r-container( App )
+
+	$append imports
+		import { 
+			\b selectSchema,
+			\b selectDocument,
+			\b selectIttfKind,
+			\b changeDocumentContent,
+			\b ittfEditorCursorActivity,
+			\b wizzifiedDiffRequest,
+			\b addExampleWithTemplate,
+			\b renameExample,
+			\b removeExample,
+			\b addFragment,
+			\b renameFragment,
+			\b removeFragment,
+			\b addTemplate,
+			\b renameTemplate,
+			\b removeTemplate,
+			\b addSnippet,
+			\b renameSnippet,
+			\b removeSnippet
+			\b } from '../store/actions'
+		import App from '../components/App'
+
+	did-mount
+		prop selectedSchema
+		prop dispatchSelectSchema
+		log 'appContainer.DidMount.selectedSchema', selectedSchema
+		log 'dispatchSelectSchema supressed'
+		#
+			if selectedSchema && selectedSchema.length > 0
+				_ dispatchSelectSchema
+					@ selectedSchema
+
+	=> handleSelectIttfKind
+		param selectedIttfKind
+		prop dispatchSelectIttfKind
+		# log 'dispatchSelectIttfKind', selectedIttfKind
+		_ dispatchSelectIttfKind
+			@ selectedIttfKind
+
+	=> handleSelectSchema
+		param e
+		prop dispatchSelectSchema
+		log 'handleSelectSchema', e.target.value
+		_ dispatchSelectSchema
+			@ e.target.value
+
+	=> handleSelectDocument
+		param documentName
+		prop dispatchSelectDocument
+		_ dispatchSelectDocument
+			@ documentName
+
+	=> handleDocumentContentChanged
+		param value
+		prop dispatchChangeDocumentContent
+		_ dispatchChangeDocumentContent
+			@ value
+
+	=> handleIttfEditorCursorActivity
+		param cursor
+		param documentContent
+		prop dispatchIttfEditorCursorActivity
+		_ dispatchIttfEditorCursorActivity
+			@ cursor
+			@ documentContent
+
+	=> handleWizzifiedDiffRequest
+		param schemaName
+		param wizzifiedSnippet
+		prop dispatchWizzifiedDiffRequest
+		_ dispatchWizzifiedDiffRequest
+			@ schemaName
+			@ wizzifiedSnippet
+
+	app/handler_listCrud( Fragment )
+	app/handler_listCrud( Template )
+	app/handler_listCrud( Example )
+	app/handler_listCrud( Snippet )
+
+	render
+		prop schemas
+		prop selectedSchema
+		prop selectedIttfKind
+		app/prop_extract_listCrud( Example )
+		app/prop_extract_listCrud( Fragment )
+		app/prop_extract_listCrud( Template )
+		app/prop_extract_listCrud( Snippet )
+		prop ittfContent
+		prop codeContent
+		prop generatedArtifactText
+		prop hbIttfMTree
+		prop hbCodeAST
+		prop hbCursorNode
+		prop wizzifiedSnippet
+		prop hbSchemaElementDoc
+		prop generationError
+		prop wizzifyError
+		prop isLoadingContent
+		prop isProcessingContent
+		prop originalModel
+		prop modifiedModel
+
+		return
+			< App
+				@ schemas {schemas}
+				@ selectedIttfKind {selectedIttfKind}
+				@ selectedSchema {selectedSchema}
+				@ ittfContent {ittfContent}
+				@ codeContent {codeContent}
+				@ generatedArtifactText {generatedArtifactText}
+				@ wizzifiedSnippet {wizzifiedSnippet}
+				@ hbIttfMTree {hbIttfMTree}
+				@ hbCodeAST {hbCodeAST}
+				@ hbCursorNode {hbCursorNode}
+				@ hbSchemaElementDoc {hbSchemaElementDoc}
+				@ generationError {generationError}
+				@ wizzifyError {wizzifyError}
+				@ isLoadingContent {isLoadingContent}
+				@ isProcessingContent {isProcessingContent}
+				@ originalModel { originalModel }
+				@ modifiedModel { modifiedModel }
+				@ onSelectIttfKind {this.handleSelectIttfKind}
+				@ onSelectSchema {this.handleSelectSchema}
+				@ onSelectDocument {this.handleSelectDocument}
+				@ onDocumentContentChanged {this.handleDocumentContentChanged}
+				@ onIttfEditorCursorActivity {this.handleIttfEditorCursorActivity}
+				@ onWizzifiedDiffRequest {this.handleWizzifiedDiffRequest}
+				app/prop_listCrud( Example )
+				app/prop_listCrud( Fragment )
+				app/prop_listCrud( Template )
+				app/prop_listCrud( Snippet )
+
+	$append state-to-props
+		@ schemas state.schema.schemas
+		@ selectedIttfKind state.schema.selectedIttfKind
+		@ selectedSchema state.schema.selectedSchema
+		@ filteredExamples state.schema.filteredExamples
+		@ selectedExample state.schema.selectedExample
+		@ filteredFragments state.schema.filteredFragments
+		@ selectedFragment state.schema.selectedFragment
+		@ filteredTemplates state.schema.filteredTemplates
+		@ selectedTemplate state.schema.selectedTemplate
+		@ filteredSnippets state.schema.filteredSnippets
+		@ selectedSnippet state.schema.selectedSnippet
+		@ ittfContent state.schema.ittfContent
+		@ codeContent state.schema.codeContent
+		@ generatedArtifactText state.artifact.generatedText
+		@ generationError ( state.artifact.generateError ? JSON.stringify(state.artifact.generateError, null, 2) : null )
+		@ isLoadingContent state.schema.isLoadingContent
+		@ isProcessingContent state.artifact.isGenerating || state.snippet.isWizzifying
+		@ wizzifiedSnippet state.snippet.wizzifiedSnippet
+		@ wizzifyError ( state.snippet.wizzifyError ? state.snippet.wizzifyError.message : '' )
+		@ hbIttfMTree state.helpBoard.ittfMTree
+		@ hbCodeAST state.helpBoard.codeAST
+		@ hbCursorNode state.helpBoard.cursorNode
+		@ hbSchemaElementDoc state.helpBoard.schemaElementDoc
+		@ originalModel state.helpBoard.originalModel
+		@ modifiedModel state.helpBoard.modifiedModel
+
+	$append dispatch-to-props
+
+		@ dispatchSelectIttfKind
+			=>
+				param selectedIttfKind
+				log 'dispatchSelectIttfKind', selectedIttfKind
+				_ dispatch
+					_ selectIttfKind
+						@ selectedIttfKind
+
+		@ dispatchSelectSchema
+			=>
+				param schema
+				log 'dispatchSelectSchema', schema
+				_ dispatch
+					_ selectSchema
+						@ schema
+		
+		@ dispatchSelectDocument
+			=>
+				param documentName
+				log 'dispatchSelectDocument', documentName
+				_ dispatch
+					_ selectDocument
+						@ documentName
+
+		@ dispatchChangeDocumentContent
+			=>
+				param documentContent
+				log 'dispatchChangeDocumentContent', documentContent
+				_ dispatch
+					_ changeDocumentContent
+						@ documentContent
+
+		@ dispatchIttfEditorCursorActivity
+			=>
+				param cursor
+				param documentContent
+				# log 'dispatchIttfEditorCursorActivity', cursor
+				_ dispatch
+					_ ittfEditorCursorActivity
+						@ cursor
+						@ documentContent
+
+		@ dispatchWizzifiedDiffRequest
+			=>
+				param schemaName
+				param wizzified
+				# log 'dispatchWizzifiedDiffRequest', schemaName
+				_ dispatch
+					_ wizzifiedDiffRequest
+						@ schemaName
+						@ wizzified
+
+		app/dispatcher_listCrud( Example )
+		app/dispatcher_listCrud( Fragment )
+		app/dispatcher_listCrud( Template )
+		app/dispatcher_listCrud( Snippet )

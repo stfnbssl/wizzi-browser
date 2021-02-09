@@ -1,0 +1,6 @@
+﻿$group
+	$params &app
+
+	wz-const FIRESTORE_REQUEST = 'FIRESTORE_REQUEST'
+	wz-const defaultTimeout = 20000
+	wz-const defaultResponseType = 'json'

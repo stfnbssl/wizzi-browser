@@ -1,0 +1,10 @@
+﻿module
+    kind react
+    import 
+        @ LOGIN_PATH
+        from 'constants'
+    import component from './components/LoginPage'
+    export-default 
+        { 
+            @ path path
+            @ component component

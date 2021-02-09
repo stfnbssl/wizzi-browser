@@ -1,0 +1,128 @@
+﻿r-component( MonacoDiff )
+	
+	$append imports
+
+		import * as monaco from 'monaco-editor'
+		function noop
+
+	style
+
+	prop width
+		one-of-type
+			string
+			number
+		default '100%'
+
+	prop height
+		one-of-type
+			string
+			number
+		default '100%'
+
+	prop originalModel
+		string
+		required
+
+	prop modifiedModel
+		string
+		required
+
+	did-mount
+		_ this.initMonaco
+
+	will-unmount
+		_ this.destroyMonaco()
+
+	did-update
+			
+		prop originalModel
+		prop modifiedModel
+
+		var obj_originalModel = monaco.editor.createModel(originalModel)
+		var obj_modifiedModel = monaco.editor.createModel(modifiedModel)
+
+		_ this.diffEditor.setModel
+			{
+				@ original obj_originalModel
+				@ modified obj_modifiedModel
+
+	m initMonaco
+
+		# called by -> did-mount
+		# log 'initMonaco', this.containerElement
+			
+		const { originalModel, modifiedModel } = this.props
+			
+		if this.containerElement
+
+			set this.diffEditor
+				_ monaco.editor.createDiffEditor
+					@ this.containerElement
+					{
+						@ enableSplitViewResizing false
+						@ renderSideBySide true
+
+			var obj_originalModel = monaco.editor.createModel(originalModel)
+			var obj_modifiedModel = monaco.editor.createModel(modifiedModel)
+			
+			_ this.diffEditor.setModel
+				{
+					@ original obj_originalModel
+					@ modified obj_modifiedModel
+			
+			# STOP
+				const navi = this.navi
+					_ monaco.editor.createDiffNavigator
+						@ this.diffEditor
+						{
+							# resets the navigator state when the user selects something in the editor
+							@ followsCaret true 
+							# jump from line to line
+							@ ignoreCharChanges true
+
+				_ window.setInterval
+					function
+						_ navi.next()
+					@ 2000
+
+	m destroyMonaco
+
+		# called by -> will-unmount
+
+		# TODO VIA???
+			if typeof this.diffEditor !== 'undefined'
+				_ this.diffEditor.dispose()
+			if typeof this.navi !== 'undefined'
+				_ this.navi.dispose()
+
+	=> assignRef
+		param component
+		# log 'assignRef', component
+		if component
+			set this.containerElement = component
+
+	render
+		prop width
+		prop height
+
+		const fixedWidth = width.toString().indexOf('%') !== -1 ? width : `${width}px`
+		const fixedHeight = height.toString().indexOf('%') !== -1 ? height : `${height}px`
+
+		const style
+			{
+				@ width fixedWidth
+				@ height fixedHeight
+				@ padding '4px'
+
+		return
+			. react-monaco-editor-container
+				@ ref {this.assignRef}
+				@ style {style}
+	
+
+
+
+
+
+
+

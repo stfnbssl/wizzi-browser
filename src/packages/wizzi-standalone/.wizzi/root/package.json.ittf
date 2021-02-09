@@ -1,0 +1,51 @@
+﻿{
+	name "${pkg.name}"
+	version "${pkg.version}"
+    description "${pkg.description}"
+	author "${pkg.author}"
+	license "${pkg.license}"
+	
+    { scripts
+		test "echo \"Error: no test specified\" && exit 1"
+    	$include v08/app/package/webpack/scripts
+	
+    { dependencies
+		$include v08/app/package/webpack/dependencies
+
+	{ devDependencies
+		$include v08/app/package/webpack/devDependencies
+        async "^2.1.5"
+        chalk "^1.1.3"
+        iconv-lite "^0.4.15"
+        json-stringify-safe "^5.0.1"
+        lodash "^4.17.4"
+        extsprintf "^1.2.0"
+        glob "^7.1.2"
+        hashids "latest"
+        i "^0.3.5"
+        promise "^7.1.1"
+        randomstring "latest"
+        css "latest"
+        scss-parser "latest"
+        jszip "3.1.3"
+        escodegen "latest"
+        esprima "latest"
+        gonzales-pe "latest"
+        graphql "latest"
+        xml2js "latest"
+        $$ files written here from wizzi/packages
+        $$ when the global context varianle "isWebpackTarget" is set to "true"
+        $*
+        wizzi-helpers "file:../../wizzi-helpers/dist"
+        wizzi-utils "file:../../wizzi-utils/dist"
+        wizzi-mtree "file:../../wizzi-mtree/dist"
+        wizzi-repo "file:../../wizzi-repo/dist"
+        wizzi "file:../../wizzi/dist"
+
+        wizzi-git "file:../../wizzi-git/dist"
+        wizzi-tools "file:../../wizzi-tools/dist"
+        wizzi-js "file:../../../../wizzi/packages/wizzi-js/dist"
+        wizzi-web "file:../../../../wizzi/packages/wizzi-web/dist"
+        wizzi-core "file:../../../../wizzi/packages/wizzi-core/dist"
+        wizzi-meta "file:../../../../wizzi/packages/wizzi-meta/dist"
+        *$

@@ -1,0 +1,28 @@
+﻿r-component( HtmlPreview )
+	
+	$append imports
+		$$ import Frame from 'react-frame-component'
+
+		var styles
+			{
+				$*
+				@ border '1px solid'
+				@ width '100vw'
+				@ height '100vh'
+				@ margin '5px'
+				*$
+				@ backgroundColor '#fff'
+
+	render
+		prop content
+		function createMarkup
+			return
+				{
+					@ __html content
+
+		return
+			$$ < Frame
+			div
+				style {styles}
+				div
+					@ dangerouslySetInnerHTML { createMarkup() }

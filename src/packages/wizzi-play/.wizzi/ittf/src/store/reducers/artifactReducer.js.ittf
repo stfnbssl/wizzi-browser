@@ -1,0 +1,37 @@
+﻿module
+	kind react
+	+
+	import_rsf_actions( GENERATE_ARTIFACT )
+	import { 
+		\b EXAMPLE_SELECTION,
+		\b SELECT_FRAGMENT_REQUEST
+		\b } from '../actions'
+	+
+	const artifactInitialState
+		{
+			@ isGenerating false
+			@ generateError null
+			@ generatedText ''
+	+
+	r( artifact, artifactInitialState )
+
+		c( GENERATE_ARTIFACT_REQUEST
+			{
+				@ ...state
+				@ isGenerating true
+				@ generateError null
+		
+		c( GENERATE_ARTIFACT_SUCCESS
+			{
+				@ ...state
+				@ generatedText action.text
+				@ isGenerating false
+				@ generateError null
+		
+		c( GENERATE_ARTIFACT_FAILURE
+			{
+				@ ...state
+				@ generatedText ''
+				@ isGenerating false
+				@ generateError action.error
+

@@ -1,0 +1,50 @@
+﻿$group
+	$params &app
+
+	$if app.useTypescript
+		$if app.useBabel
+			{
+				@ test /\.(ts|js|jsx)x?$/
+				@ exclude /node_modules/
+				[ use
+					@ 'babel-loader'
+		$else
+			{
+				@ test /\.tsx?$/
+				@ loader "awesome-typescript-loader" 
+			{
+				@ test /\.js$/
+				@ loader "source-map-loader"
+				@ enforce "pre"
+	$else
+		{	
+			@ test /\.(js|jsx)$/
+			@ exclude /node_modules/
+			[ use
+				@ 'babel-loader'
+	
+	$if app.useVue
+		{	
+			@ test /\.vue$/
+			@ exclude /node_modules/
+			[ use
+				@ 'vue-loader'
+
+	{
+		@ test /\.css$/
+		[ use
+			$if app.webpack
+				$if app.webpack.loadCss || app.importMainStyles
+					@ 'style-loader'
+			$if app.useVue
+				@ 'vue-style-loader'
+			@ 'css-loader'
+
+	$if app.useCodemirror || app.useMonaco || app.usePrismjs
+		{
+			@ test /(\.scss)$/
+			@ exclude /(node_modules)/
+			[ use
+				@ 'style-loader'
+				@ 'css-loader'
+				@ 'sass-loader'

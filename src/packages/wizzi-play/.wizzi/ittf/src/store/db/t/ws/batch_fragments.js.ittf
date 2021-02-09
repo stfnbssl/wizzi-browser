@@ -1,0 +1,75 @@
+﻿$group
+
+	$if appEnvironment !== 'browser'
+
+		m initBatchLoadFragments
+			param schemaName
+			set this.fragmentsBatchSchema = schemaName
+			set this.fragmentsBatch = {}
+		
+		m addBatchLoadFragmentsItem
+			param name
+			param content
+			if this.fragmentsBatch[name]
+				throw
+					new Error
+						@ 'WizziStore.addBatchLoadFragmentsItem. Duplicated fragment name: ' + name
+			set this.fragmentsBatch[name] = content
+		
+		m addBatchLoadFragmentsFile
+			param filePath
+			param basePath
+			set filePath = normalizeFile(filePath)
+			set basePath = normalizeFolder(basePath)
+			if basePath.substr(-1) !== '/'
+				set basePath += '/'
+			const name = filePath.substr(basePath.length)
+			var content
+				_ this.vfile.read
+					@ filePath
+			_ this.addBatchLoadFragmentsItem(name, content)
+		
+		m addBatchLoadFragmentsFolder
+			param folderPath
+			param basePath
+			const files
+				_ this.vfile.getFiles
+					@ folderPath
+			log 'WizziStore.addBatchLoadFragmentsFolder files', files
+			foreach f in files
+				if normalizeFile(f.fullPath).indexOf('/t/') > -1
+					_ this.addBatchLoadFragmentsFile(f.fullPath, basePath || folderPath)
+		
+		m commitBatchLoadFragments
+			param callback
+			# log 'this.commitBatchLoadFragments', this.fragmentsBatch
+			_ this.fb.setDocument
+				_ this.pathNames.fragmentsPath(this.fragmentsBatchSchema)
+				@ this.fragmentsBatch
+				@ callback
+
+		m downloadFragments
+			param schemaName
+			param destFolder
+			param callback
+			const that = this
+			_ this.fb.getDocument
+				_ this.pathNames.fragmentsPath
+					@ schemaName
+				f_cb( result )
+					var filePath
+					foreach name in Object.keys(result)
+						set filePath
+							_ path.join
+								@ destFolder
+								@ name
+						_ that.vfile.write
+							@ filePath
+							@ result[name]
+					const message = 'Download successful. Dest path: ' + destFolder
+					log message
+					r_cb( message )
+
+
+
+

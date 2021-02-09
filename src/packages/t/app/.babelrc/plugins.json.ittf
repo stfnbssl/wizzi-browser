@@ -1,0 +1,21 @@
+﻿$group
+	$params &app
+	
+	
+	plugins
+		[
+			"@babel/proposal-class-properties"
+			"@babel/proposal-object-rest-spread"
+			$if app.usePrismjs
+				[
+					"prismjs"
+					{
+						languages
+							[
+								$foreach m in app.prismjsModes
+									"${m}"
+						plugins ["line-numbers"]
+						theme "twilight"
+						css true
+			$if app.useDinamicImport
+				"@babel/plugin-syntax-dynamic-import"

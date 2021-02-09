@@ -1,0 +1,35 @@
+﻿$group
+	$params itemName
+
+	$
+		var itemname = itemName.toLowerCase()
+
+	=> handleAdd${itemName}
+		param ${itemname}Name
+		$if itemName === 'Example'
+			param templateName
+		prop selectedSchema
+		prop dispatchAdd${itemName}
+		_ dispatchAdd${itemName}
+			@ selectedSchema
+			@ ${itemname}Name
+			$if itemName === 'Example'
+				@ templateName
+
+	=> handleRename${itemName}
+		param old${itemName}
+		param new${itemName}
+		prop selectedSchema
+		prop dispatchRename${itemName}
+		_ dispatchRename${itemName}
+			@ selectedSchema
+			@ old${itemName}
+			@ new${itemName}
+
+	=> handleRemove${itemName}
+		param ${itemname}Name
+		prop selectedSchema
+		prop dispatchRemove${itemName}
+		_ dispatchRemove${itemName}
+			@ selectedSchema
+			@ ${itemname}Name

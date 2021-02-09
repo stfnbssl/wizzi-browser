@@ -1,0 +1,187 @@
+﻿$group
+	$params item_Name, item_Names
+
+	$
+		var item_name = item_Name.toLowerCase();
+		var item_names = item_Names.toLowerCase();
+
+	m get${item_Names}
+		param options
+		param callback
+		const getOptions = {}
+		if options.schema
+			var ${item_names} = ${item_names}Cache.get(options.schema)
+			if ${item_names}
+				r_cb( ${item_names} )
+			_ this.fb.getCollection
+				_ this.pathNames.${item_names}CollPath
+					@ options.schema
+				{
+				a_cb( ${item_names} )
+					_ ${item_names}Cache.set(options.schema, ${item_names})
+					r_cb( ${item_names} )
+		else
+			r_cb_error( Error )
+				@ 'get${item_Names} requires a schema property in the options parameters'
+
+	m get${item_Name}
+		param schemaName
+		param name
+		param callback
+		log 'WizziStore.get${item_Name}', schemaName, name
+		_ this.get${item_Names}
+			{
+				@ schema schemaName
+			a_cb( ${item_names} )
+				log 'WizziStore.get${item_Name}', schemaName, name, ${item_names}
+				foreach item in ${item_names}
+					if item.data.name === name
+						log 'WizziStore.get${item_Name}', 'got', item
+						r_cb( item )
+				log 'WizziStore.get${item_Name}', 'not found'
+				r_cb( null )
+		
+	m set${item_Name}
+		param schemaName
+		param name
+		param content
+		param callback
+		log 'WizziStore.set${item_Name}', schemaName, name, content
+		_ this.get${item_Names}
+			{
+				@ schema schemaName
+			a_cb( ${item_names} )
+				var inserted = 0
+				var updated = 0
+				var ${item_name}Data = null
+				foreach item in ${item_names}
+					if item.data.name === name
+						set item.data.content = content
+						set ${item_name}Data = item
+				if ${item_name}Data == null
+					# TODO this changes cache content. Is it OK?
+					log 'WizziStore.set${item_Name} not found', schemaName, name, content
+					$if item_Name === 'Snippet'
+						log 'WizziStore.set${item_Name} create', this.pathNames.fileRelPath(name, schemaName)
+					$else
+						log 'WizziStore.set${item_Name} create', this.pathNames.ittfFileRelPath(name, schemaName)
+					set ${item_name}Data
+						{
+							@ path
+								$if item_Name === 'Snippet'
+									_ this.pathNames.fileRelPath
+										@ name
+										@ schemaName
+								$else
+									_ this.pathNames.ittfFileRelPath
+										@ name
+										@ schemaName
+							{ data
+								@ schema schemaName
+								@ name name
+								@ content content
+					_ ${item_names}.push(${item_name}Data)
+					set inserted++
+				else
+					set updated++
+				_ this.updatesQueue.set
+					_ this.pathNames.${item_name}Path
+						@ name
+						@ schemaName
+					@ ${item_name}Data.data
+				_ this.setSchema${item_Name}
+					@ schemaName
+					@ name
+				_ this.scheduleCloudUpdate
+				const result
+					{
+						@ inserted inserted
+						@ updated updated
+						@ item ${item_name}Data
+						@ schemas this.schemas
+						@ message 'WizziStore.set${item_Name} successfull ' + schemaName + '/' + name
+				r_cb( result)
+
+	m remove${item_Name}
+		param schemaName
+		param name
+		param callback
+		log 'WizziStore.remove${item_Name}', schemaName, name
+		_ this.get${item_Names}
+			{
+				@ schema schemaName
+			a_cb( ${item_names} )
+				var copy = [], ${item_name}Data
+				foreach item in ${item_names}
+					if item.data.name !== name
+						_ copy.push(item)
+					else
+						set ${item_name}Data = item
+				if ${item_names}.length == copy.length
+					r_cb_error( Error
+						@ 'Remove error. ${item_Name} does not exists: ' + schemaName + '/' + name
+				_ ${item_names}Cache.set(schemaName, copy)
+				_ this.updatesQueue.delete
+					_ this.pathNames.${item_name}Path
+						@ name
+						@ schemaName
+				_ this.removeSchema${item_Name}
+					@ schemaName
+					@ name
+				_ this.scheduleCloudUpdate
+				const message = 'WizziStore.remove{item_Name} successfull ' + schemaName + '/' + name
+				log message
+				const result
+					{
+						@ deleted 1
+						@ item ${item_name}Data
+						@ schemas this.schemas
+						@ message message 
+				r_cb( result)
+
+	m rename${item_Name}
+		param schemaName
+		param oldName
+		param newName
+		param callback
+		log 'WizziStore.rename${item_Name}', schemaName, oldName, newName
+		_ this.get${item_Names}
+			{
+				@ schema schemaName
+			a_cb( ${item_names} )
+				var oldItem = null
+				foreach item in ${item_names}
+					if item.data.name === newName
+						r_cb_error( Error
+							@ 'Rename error. ${item_Name} new name already exists: ' + schemaName + '/' + newName
+					if item.data.name === oldName
+						set item.data.name = newName
+						set oldItem = item.data
+				if oldItem == null
+					r_cb_error( Error
+						@ 'Rename error. ${item_Name} new name already exists: ' + schemaName + '/' + newName
+				_ ${item_names}Cache.set(schemaName, ${item_names})
+				_ this.updatesQueue.delete
+					_ this.pathNames.${item_name}Path
+						@ oldName
+						@ schemaName
+				_ this.renameSchema${item_Name}
+					@ schemaName
+					@ oldName
+					@ newName
+				_ this.updatesQueue.set
+					_ this.pathNames.${item_name}Path
+						@ newName
+						@ schemaName
+					@ oldItem
+				_ this.scheduleCloudUpdate
+				const message = 'rename${item_Name} successfull ' + schemaName + '/' + oldName + '/' + newName
+				log message
+				const result
+					{
+						@ schemas this.schemas
+						@ message message 
+				r_cb( result)
+
+
+

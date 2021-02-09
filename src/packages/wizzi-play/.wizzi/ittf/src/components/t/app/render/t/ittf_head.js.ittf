@@ -1,0 +1,55 @@
+﻿$group
+
+	. {classes.editorHeadControls}
+		. {classes.editorHeadControl}
+			< Select
+				@ value {selectedIttfKind}
+				@ onChange {this.handleSelectIttfKind}
+				< MenuItem
+					@ value {'examples'}
+					@ key {'examples'}
+					+ {'examples'}
+				< MenuItem
+					@ value {'fragments'}
+					@ key {'fragments'}
+					+ {'fragments'}
+				< MenuItem
+					@ value {'snippets'}
+					@ key {'snippets'}
+					+ {'snippets'}
+				< MenuItem
+					@ value {'templates'}
+					@ key {'templates'}
+					+ {'templates'}
+
+		. {classes.editorHeadControl}
+			< Select
+				@ value {selectedSchema}
+				@ onChange {onSelectSchema}
+				{
+					&& 
+						+ schemas && Object.keys(schemas).length > 0 
+						_ Object.keys(schemas).map
+							=>
+								param item
+								return
+									< MenuItem
+										@ value {item}
+										@ key {item}
+										+ {item}
+		
+		. {classes.editorHeadControl}
+			< Select
+				@ value {selectedDocument}
+				@ onChange {this.handleSelectDocument}
+				{
+					&&
+						+ documents && documents.length > 0 
+						_ documents.map
+							=>
+								param item
+								return
+									< MenuItem
+										@ value {item.name}
+										@ key {item.name}
+										+ {item.name}

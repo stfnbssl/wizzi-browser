@@ -1,0 +1,32 @@
+﻿module
+	kind react
+	+
+	import_rsf_actions( ITTF_CLOUD_UPDATE )
+	+
+	const ittfStoreInitialState
+		{
+			@ isCloudUpdating false
+			@ updateError null
+			@ updatedMessage ''
+	+
+	r( ittfStore, ittfStoreInitialState )
+
+		c( ITTF_CLOUD_UPDATE_REQUEST
+			{
+				@ ...state
+				@ isCloudUpdating true
+				@ updatedMessage ''
+				@ updateError null
+
+		c( ITTF_CLOUD_UPDATE_SUCCESS
+			{
+				@ ...state
+				@ isCloudUpdating false
+				@ updatedMessage action.message
+				@ updateError null
+
+		c( ITTF_CLOUD_UPDATE_FAILURE
+			{
+				@ ...state
+				@ isCloudUpdating false
+				@ updateError action.error

@@ -1,0 +1,16 @@
+﻿$group
+	$params &app
+
+	wz-const HTTP_REQUEST = 'HTTP_REQUEST'
+	wz-const defaultTimeout = 20000
+	wz-const defaultResponseType = 'json'
+
+	var apiServer = null
+	$if app.apiMiddleware.server
+		set apiServer
+			{
+				@ https ${app.apiMiddleware.server.https}
+				@ host '${app.apiMiddleware.server.host}'
+				@ port ${app.apiMiddleware.server.port}
+
+	wz-const server = apiServer

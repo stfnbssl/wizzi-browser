@@ -1,0 +1,154 @@
+﻿$group
+	+
+	decl_rsf( snippet, wizzify )
+	decl_rsf( wizzified, generate )
+	+
+	# thunk.withExtraArgument
+	wz-const scheduleWizzifySnippet
+		=>
+			param schemaName
+			param snippetName
+			param codeContent
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+
+					if timers['wizzifySnippet']
+						_ clearTimeout
+							@ timers['wizzifySnippet']
+						log 'store.actions.scheduleGenerateSnippet. Cleared previous schedule.', new Date()
+			
+					set timers['wizzifySnippet']
+						_ setTimeout
+							function
+								_ dispatch
+									_ wizzifySnippet
+										@ schemaName
+										@ snippetName
+										@ codeContent
+								log 'store.actions.scheduleGenerateSnippet. dispatched.', new Date()
+							@ 2 * 1000
+
+	# thunk.withExtraArgument
+	wz-const wizzifySnippet
+		=>
+			param schemaName
+			param snippetName
+			param codeContent
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+					
+					log '*** store.actions.snippet.wizzifySnippet'
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+							
+					_ dispatch
+						_ requestSnippetWizzification
+							@ schemaName
+							@ snippetName
+					
+					_ wizziStore.wizzifySnippet
+						@ schemaName
+						@ codeContent
+						f_cb_no_err( wizzifiedSnippet )
+							if err
+								return
+									_ dispatch
+										_ failSnippetWizzification
+											@ schemaName
+											@ snippetName
+											@ err
+							_ dispatch
+								_ completeSnippetWizzification
+									@ schemaName
+									@ snippetName
+									@ wizzifiedSnippet
+
+	wz-const requestSnippetWizzification
+		=>
+			param schemaName
+			param snippetName
+			return
+				{
+					@ type WIZZIFY_SNIPPET_REQUEST
+					@ schemaName schemaName
+					@ snippetName snippetName
+	
+	wz-const failSnippetWizzification
+		=>
+			param schemaName
+			param snippetName
+			param error
+			return
+				{
+					@ type WIZZIFY_SNIPPET_FAILURE
+					@ schemaName schemaName
+					@ snippetName snippetName
+					@ error error
+	
+	wz-const completeSnippetWizzification
+		=>
+			param schemaName
+			param snippetName
+			param wizzifiedSnippet
+			return
+				{
+					@ type WIZZIFY_SNIPPET_SUCCESS
+					@ schemaName schemaName
+					@ snippetName snippetName
+					@ wizzifiedSnippet wizzifiedSnippet
+
+
+	wz-const wizzifiedDiffRequest
+		=>
+			param schemaName
+			param wizzifiedSnippet
+			return
+				=>
+					param dispatch
+					param getState
+					param extraArgument
+					
+					log '*** store.actions.snippet.wizzifiedDiffRequest'
+					const wizziStore
+						_ extraArgument.WizziStore.getInstance
+
+					_ wizziStore.simpleGenerate
+						@ schemaName
+						@ wizzifiedSnippet
+						f_cb_no_err( generatedText )
+							if err
+								return
+									_ dispatch
+										_ failWizzifiedGeneration
+											@ err
+							_ dispatch
+								_ completeWizzifiedGeneration
+									@ wizzifiedSnippet
+									@ generatedText
+
+	wz-const failWizzifiedGeneration
+		=>
+			param error
+			return
+				{
+					@ type GENERATE_WIZZIFIED_FAILURE
+					@ error error
+	
+	wz-const completeWizzifiedGeneration
+		=>
+			param wizzifiedSnippet
+			param generatedText
+			return
+				{
+					@ type GENERATE_WIZZIFIED_SUCCESS
+					@ wizzifiedSnippet wizzifiedSnippet
+					@ generatedText generatedText
+
+
+

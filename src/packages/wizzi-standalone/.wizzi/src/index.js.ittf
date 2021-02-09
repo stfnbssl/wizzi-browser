@@ -1,0 +1,369 @@
+﻿module
+	kind es6
+
+	var wizzi = require('wizzi')
+
+	var initialized = false
+
+	var md
+		{
+			@ __wf null
+	set md.wizzi = wizzi
+	set md.wizzi.IttfMTreeEx = require('wizzi-utils').IttfMTreeEx
+	set md.wizzi.asisLoader = require('wizzi-utils').asisLoader
+	set md.wizziUtils = require('wizzi-utils')
+	$$ set md.wizziGit = require('wizzi-git')
+	$$ set md.wizziTools = require('wizzi-tools')
+	set md.wizziJs = require('wizzi-js')
+	set md.wizziWeb = require('wizzi-web')
+	set md.wizziCore = require('wizzi-core')
+	set md.JsonComponents = require('wizzi-repo').JsonComponents
+	
+	set md.initialize
+		function
+			if initialized
+				return
+			set window.wizziJs = md.wizziJs
+			set window.wizziWeb = md.wizziWeb
+			set window.wizziCore = md.wizziCore
+			set initialized = true
+	
+	
+
+	var verify = md.wizziUtils.verify
+
+	function DEFAULT_PLUGINS
+		return
+			[
+				@ window.wizziCore
+				@ window.wizziJs
+				@ window.wizziWeb
+
+	var DEFAULT_ARTIFACTS
+		{
+			@ css 'css/document'
+			@ graphql 'graphql/docs'
+			@ html 'html/document'
+			@ js 'js/module'
+			@ ts 'ts/module'
+			@ json 'json/document'
+			@ md 'md/document'
+			@ scss 'scss/document'
+			@ svg 'svg/document'
+			@ text 'text/document'
+			@ vtt 'vtt/document'
+			@ vue 'vue/document'
+			@ xml 'xml/document'
+
+	function getDocumentInfo
+		param ittfDocumentPath
+		var idp = verify.replaceAll(ittfDocumentPath, '\\', '/').toLowerCase()
+		var ss = idp.split('/')
+		var name = ss[ss.length-1]
+		set ss = name.split('.')
+		return
+			{
+				@ isIttf ss[ss.length-1] === 'ittf'
+				@ schema ss[ss.length-1] === 'ittf' ? ss[ss.length-2] : 'null'
+
+	set md.createFactory
+		function
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			if md.__wf != null
+				r_cb( md.__wf )
+
+			_ md.initialize
+			
+			var mdItems = DEFAULT_PLUGINS().concat(options.mds || [])
+			_ md.wizzi.browsernoaclFactory
+				{
+					{ plugins
+						@ items pluginItems
+					@ globalContext options.globalContext || {}
+				f_cb( wf )
+					set md.__wf = wf
+					r_cb( wf )
+
+	set md.createJsonFactoryLight
+		function
+			param options
+			param callback
+			
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			_ md.initialize
+			
+			var pluginItems = DEFAULT_PLUGINS().concat(options.plugins || [])
+			_ wizzi.jsonnoaclFactory
+				{
+					{ plugins
+						@ items pluginItems
+					@ jsonFsData options.jsonFsData
+					@ globalContext options.globalContext || {}
+				@ callback
+
+	#
+		# param
+		#   { options
+		#     { modelContext
+		
+	set md.mtree
+		function
+			param ittfDocumentPath
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			var context = options.modelContext || {}
+
+			_ md.createFactory
+				f_cb( wf )
+					_ wf.loadMTree
+						@ ittfDocumentPath
+						@ context
+						@ callback
+
+	#
+		# param
+		#   { options
+		#     { modelContext
+		
+	set md.mtreeDebug
+		function
+			param ittfDocumentPath
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			var context = options.modelContext || {}
+
+			_ md.createFactory
+				f_cb( wf )
+					_ wf.loadMTreeDebugInfo
+						@ ittfDocumentPath
+						@ context
+						@ callback
+
+	set md.canGen
+		function
+			param schema
+			param artifactName
+			param callback
+			if typeof callback === 'undefined'
+				set callback = artifactName
+				set artifactName = null
+			# TODO check artifactName
+			r_cb( !!DEFAULT_ARTIFACTS[schema] )
+
+	#
+		# param
+		#   { options
+		#     string artifactName
+		#     { modelContext
+		#     { artifactContext
+		
+	set md.gen
+		function
+			param ittfDocumentPath
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			var di = getDocumentInfo(ittfDocumentPath)
+			log 'wizzi.standalone.gen.getDocumentInfo', di
+			if di.isIttf == false
+				return
+					_ callback
+						{
+							@ message 'Invalid ittfDocumentPath. Should be an ittf document path. Received: ' + ittfDocumentPath
+							@ method 'wizzi.standalone.gen'
+
+			var artifactName = options.artifactName || DEFAULT_ARTIFACTS[di.schema]
+			if !artifactName
+				return
+					_ callback
+						{
+							@ message 'Cannot find artifact generator for ittfDocumentPath: ' + ittfDocumentPath
+							@ method 'wizzi.standalone.gen'
+
+			_ md.createFactory
+				f_cb( wf )
+					_ wf.loadModelAndGenerateArtifact
+						@ ittfDocumentPath
+						{
+							{ modelRequestContext
+								@ mTreeBuildUpContext options.modelContext
+							@ artifactRequestContext options.artifactContext
+						@ artifactName
+						@ callback
+
+	#
+		# param
+		#   { options
+		#     string artifactName
+		#     { modelContext
+		#     { artifactContext
+		
+	set md.genFromText
+		function
+			param ittfContent
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			
+			var schema
+			if verify.isNotEmpty(options.artifactName)
+				var ss = options.artifactName.split('/')
+				set schema = ss[0]
+			else
+				set schema = options.schemaName || options.schema
+			var artifactName = options.artifactName || DEFAULT_ARTIFACTS[schema]
+
+			# A basefolder is required
+			var tempIttfUri = "c:/basefolder/temp." + schema + '.ittf'
+			var documents
+				[
+					{
+						@ path tempIttfUri
+						@ content ittfContent
+
+			_ md.JsonComponents.createJsonFsData
+				@ documents
+				f_cb( jsonFsData )
+					set options.jsonFsData = jsonFsData
+					_ md.createJsonFactoryLight
+						@ options
+						f_cb(wf)
+							_ wf.loadModelAndGenerateArtifact
+								@ tempIttfUri
+								{
+									{ modelRequestContext
+										@ mTreeBuildUpContext options.modelContext
+									@ artifactRequestContext options.artifactContext
+								@ artifactName
+								@ callback
+
+	#
+		# param
+		#   { options
+		#     { productionOptions
+		#     { globalContext
+	set md.wizziJob
+		function
+			param ittfDocumentPath
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			var productionOptions
+				_ Object.assign
+					{
+						@ indentSpaces 4
+						@ verbose 2
+					@ options.productionOptions || {} 
+			
+			var modelContext = options.modelContext || {}
+			var globalContext = options.globalContext || {}
+
+			_ md.createFactory
+				f_cb( wf )
+					checked_call( pman
+						_ wf.createProductionManager
+							@ productionOptions
+							@ globalContext
+					+
+					checked_call( notUsed
+						_ pman.addJobRequest
+							{ 
+								@ wfjob
+									{ 
+										@ ittfDocumentUri ittfDocumentPath
+					+
+					_ pman.run
+						f_cb( runResult )
+							# log 'wizzi-standalone.job.result', result
+							# r_cb( runResult )
+							_ pman.persistToFile
+								f_cb( persistResult )
+									_ pman.terminate
+									r_cb()
+										{
+											@ run runResult
+											@ persist persistResult
+
+	#
+		# param
+		#   { options
+		#     { productionOptions
+		#     { globalContext
+	set md.wizziSchema
+		function
+			param ittfDocumentPath
+			param options
+			param callback
+
+			if typeof callback === 'undefined'
+				set callback = options
+				set options = {}
+
+			var productionOptions
+				_ Object.assign
+					{
+						@ indentSpaces 4
+						@ verbose 2
+					@ options.productionOptions || {} 
+			
+			var modelContext = options.modelContext || {}
+			var globalContext = options.globalContext || {}
+
+			_ md.createFactory
+				f_cb( wf )
+					checked_call( pman
+						_ wf.createProductionManager
+							@ productionOptions
+							@ globalContext
+					+
+					checked_call( notUsed
+						_ pman.addJobRequest
+							{ 
+								@ wfjob
+									{ 
+										@ ittfDocumentUri ittfDocumentPath
+					+
+					_ pman.run
+						f_cb( runResult )
+							# log 'wizzi-standalone.job.result', result
+							# r_cb( runResult )
+							_ pman.persistToFile
+								f_cb( persistResult )
+									_ pman.terminate
+									r_cb()
+										{
+											@ run runResult
+											@ persist persistResult
+
+    export default md

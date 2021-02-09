@@ -1,0 +1,63 @@
+﻿$group
+	$params &md, &app
+	kind react
+
+	import React from 'react'
+	import PropTypes from 'prop-types'
+	
+	$if app.useRedux
+		import { connect } from 'react-redux'
+	
+	$if md.withRouter
+		import { withRouter } from 'react-router'
+
+	$if md.withStyles
+		import classNames from 'classnames'
+		import { withStyles } from '@material-ui/core/styles'
+
+	$if md.withContext
+		import { ${md.withContext.name} } from '${md.withContext.path}'
+	
+	+
+	$hook imports
+	+
+	react ${md.name}Container
+		$hook
+		+
+
+	$if md.withStyles
+		const ${md.name}Styled 
+			_ withStyles
+				@ styles
+				( 
+					@ ${md.name}Container
+	$else
+		const ${md.name}Styled = ${md.name}Container
+
+	$if md.withContext
+		const ${md.name}Contexted 
+			_ ${md.withContext.name}
+				@ ${md.name}Styled 
+	$else
+		const ${md.name}Contexted = ${md.name}Styled
+
+	$if app.useRedux
+		redux-maps(&app)
+		export default
+			$if md.withRouter
+				_ withRouter
+					_ connect
+						@ mapStateToProps
+						@ mapDispatchToProps
+						@ mergeProps
+						(
+							@ ${md.name}Contexted 
+			$else
+				_ connect
+					@ mapStateToProps
+					@ mapDispatchToProps
+					@ mergeProps
+					(
+						@ ${md.name}Contexted 
+	$else
+		export default ${md.name}Contexted

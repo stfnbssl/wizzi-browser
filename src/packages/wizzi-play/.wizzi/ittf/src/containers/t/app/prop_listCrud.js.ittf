@@ -1,0 +1,12 @@
+﻿$group
+	$params name
+
+	$
+		var namelower = name.toLowerCase()
+
+	@ ${namelower}s { filtered${name}s }
+	@ selected${name} { selected${name} }
+	@ onAdd${name} { this.handleAdd${name} }
+	@ onRename${name} { this.handleRename${name} }
+	@ onRemove${name} { this.handleRemove${name} }
+

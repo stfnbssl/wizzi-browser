@@ -1,0 +1,25 @@
+﻿$group
+	$params &md, &app
+
+	import React from "react"
+	$if md.connect
+		import { connect } from 'react-redux'
+
+	$hook imports
+
+	const ${md.name}
+		$hook
+
+	$if md.connect
+		redux-maps(&app)
+
+	$if md.connect
+		export default
+			_ connect
+				@ mapStateToProps
+				@ mapDispatchToProps
+				@ mergeProps
+				(
+					@ ${md.name}
+	$else
+		export default ${md.name}

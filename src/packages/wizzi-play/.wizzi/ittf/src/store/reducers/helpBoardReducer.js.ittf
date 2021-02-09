@@ -1,0 +1,59 @@
+﻿module
+	kind react
+	+
+	import { 
+		\b HB_UPDATE_ITTF_MTREE,
+		\b HB_UPDATE_CODE_AST,
+		\b HB_DOCUMENT_EDITOR_CURSOR_ACTIVITY,
+		\b SNIPPET_CONTENT_CHANGED,
+		\b } from '../actions'
+	import_rsf_actions( SELECT_SNIPPET )
+	import_rsf_actions( GENERATE_WIZZIFIED )
+	+
+	const helpBoardInitialState
+		{
+			@ ittfMTree {}
+			@ codeAST {}
+			@ cursorNode {}
+			@ originalModel 'just some text\n\nHello World\n\nSome more text'
+			@ modifiedModel 'just some Text\n\nHello World\n\nSome more changes'
+
+	+
+	r( helpBoard, helpBoardInitialState )
+
+		c( HB_UPDATE_ITTF_MTREE
+			{
+				@ ...state
+				@ ittfMTree action.ittfMTree
+
+		c( HB_UPDATE_CODE_AST
+			{
+				@ ...state
+				@ codeAST action.codeAST
+
+		c( HB_DOCUMENT_EDITOR_CURSOR_ACTIVITY)
+			{
+				@ ...state
+				@ cursor action.cursor
+				@ cursorNode action.cursorNode
+				@ schemaElementDoc action.schemaElementDoc
+
+		c( SELECT_SNIPPET_SUCCESS
+			{
+				@ ...state
+				@ originalModel action.codeContent
+
+		c( SNIPPET_CONTENT_CHANGED )
+			{
+				@ ...state
+				@ originalModel action.codeContent
+
+		c( GENERATE_WIZZIFIED_SUCCESS
+			{
+				@ ...state
+				@ modifiedModel action.generatedText
+
+		c( GENERATE_WIZZIFIED_FAILURE
+			{
+				@ ...state
+				@ modifiedModel JSON.stringify(action.error, null, 2)

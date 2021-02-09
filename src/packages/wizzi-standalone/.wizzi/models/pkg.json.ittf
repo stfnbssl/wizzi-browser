@@ -1,0 +1,23 @@
+{
+	
+    name "wizzi-standalone"
+	version "0.0.1"
+	description "Wizzi standalone for browser"
+	author "Stefano Bassoli"
+	license "MIT"
+
+    { Build
+        useWebpack true
+        { webpack
+            useNodePolifills true
+            [ externals
+                {
+                    name "lodash"
+                    root "_"
+        useBabel true
+        { babel
+        isLibrary true
+        { library
+            name "wizziStandalone"
+            target "var"
+    { Code

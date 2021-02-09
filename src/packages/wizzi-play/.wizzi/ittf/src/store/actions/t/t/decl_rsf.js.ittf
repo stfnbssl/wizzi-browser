@@ -1,0 +1,10 @@
+﻿$group
+	$params name, m1
+
+	+
+	# ${name}
+	wz-const ${m1.toUpperCase()}_${name.toUpperCase()} = '${m1.toUpperCase()}_${name.toUpperCase()}'
+	wz-const ${m1.toUpperCase()}_${name.toUpperCase()}_REQUEST = '${m1.toUpperCase()}_${name.toUpperCase()}_REQUEST'
+	wz-const ${m1.toUpperCase()}_${name.toUpperCase()}_SUCCESS = '${m1.toUpperCase()}_${name.toUpperCase()}_SUCCESS'
+	wz-const ${m1.toUpperCase()}_${name.toUpperCase()}_FAILURE = '${m1.toUpperCase()}_${name.toUpperCase()}_FAILURE'
+

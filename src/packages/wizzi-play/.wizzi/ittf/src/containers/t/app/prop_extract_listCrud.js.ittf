@@ -1,0 +1,6 @@
+﻿$group
+	$params name
+
+	prop filtered${name}s
+	prop selected${name}
+

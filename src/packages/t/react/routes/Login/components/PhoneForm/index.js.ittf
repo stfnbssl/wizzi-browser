@@ -1,0 +1,5 @@
+﻿module
+	kind es6
+
+	import PhoneForm from './PhoneForm'
+	export default PhoneForm

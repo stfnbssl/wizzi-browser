@@ -1,0 +1,99 @@
+﻿$group
+	$params &md, &app
+
+	import React from 'react'
+	import PropTypes from 'prop-types'
+	
+	$if app.useMaterialUi
+		import classNames from 'classnames'
+		import { withStyles } from '@material-ui/core/styles'
+
+	$if app.useNextjs
+		import withRoot from '../lib/withRoot'
+	
+	$if !(app.useNextjs) && (md.withWidth || md.connect || md.pure)
+		import compose from 'recompose/compose'
+	
+	$if md.withWidth
+		import withWidth, { isWidthUp } from 'material-ui/utils/withWidth'
+	
+	$if md.withContext
+		import { ${md.withContext.name} } from '${md.withContext.path}'
+	
+	$if md.connect
+		import { connect } from 'react-redux'
+	
+	$if md.pure
+		import pure from 'recompose/pure'
+
+	$hook imports
+
+	react ${md.name}
+		$hook
+
+	$if app.useRedux && app.useNextjs && md.connect
+		redux-maps(&app)
+	+
+
+	$
+		var nameSuffix = '';
+
+	$if md.withContext
+		const ${md.name}Contexted
+			_ ${md.withContext.name}
+				@ ${md.name + nameSuffix}
+		$
+			nameSuffix = 'Contexted'
+	
+	$if app.useMaterialUi
+		
+		export default
+			$if md.withWidth || md.connect || md.pure
+				_ compose
+					$if md.pure
+						@ pure
+					_ withStyles
+						@ styles
+					$if md.withWidth
+						_ withWidth()
+					$if md.connect
+						_ connect()
+					( 
+						@ ${md.name + nameSuffix}
+			$elif app.useNextjs
+				_ withRoot
+					_ withStyles
+						@ styles
+						( 
+							@ ${md.name + nameSuffix}
+			$else
+				_ withStyles
+					@ styles
+					( 
+						@ ${md.name + nameSuffix}
+	
+	$elif app.useRedux && app.useNextjs && md.connect
+		
+		export default
+			_ connect
+				@ mapStateToProps
+				@ mapDispatchToProps
+				@ mergeProps
+				(
+					@ ${md.name + nameSuffix}
+
+	$else
+		
+		export default
+			$if md.withWidth || md.connect || md.pure
+				_ compose
+					$if md.pure
+						@ pure
+					$if md.withWidth
+						_ withWidth()
+					$if md.connect
+						_ connect()
+					(
+						@ ${md.name + nameSuffix}
+			$else
+				+ ${md.name + nameSuffix}

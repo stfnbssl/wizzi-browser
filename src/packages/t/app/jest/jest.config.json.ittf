@@ -1,0 +1,27 @@
+﻿$group
+	$params &app
+
+    verbose true
+    
+	{ transform
+        $$TODO .(ts|tsx) "ts-jest"
+    
+	testRegex "(/spec/.*|\\.(test|spec))\\.(ts|tsx|js)$"
+    
+	[ moduleFileExtensions
+        "ts" 
+        "tsx" 
+        "js" 
+    
+	{ moduleNameMapper
+        $$TODO ^Components/(.*) "./src/components/$1"
+    
+	{ globals
+        { window
+        { ts-jest
+            tsConfig "./tsconfig.json"
+    
+	[ setupFiles
+        "./jest.stubs.js" 
+    
+	testURL "http://localhost/"

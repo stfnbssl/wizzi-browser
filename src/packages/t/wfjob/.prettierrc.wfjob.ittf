@@ -1,0 +1,9 @@
+﻿$group
+
+	$if app.usePrettier
+		artifact .prettierrc
+			src .prettierrc.json.ittf
+			schema json
+			generator json/document
+			dest-path .prettierrc
+			extension prettierrc
