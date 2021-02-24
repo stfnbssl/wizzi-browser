@@ -27,8 +27,6 @@
 			set window.wizziWeb = md.wizziWeb
 			set window.wizziCore = md.wizziCore
 			set initialized = true
-	
-	
 
 	var verify = md.wizziUtils.verify
 
@@ -80,7 +78,7 @@
 
 			_ md.initialize
 			
-			var mdItems = DEFAULT_PLUGINS().concat(options.mds || [])
+			var pluginItems = DEFAULT_PLUGINS().concat(options.plugins || [])
 			_ md.wizzi.browsernoaclFactory
 				{
 					{ plugins

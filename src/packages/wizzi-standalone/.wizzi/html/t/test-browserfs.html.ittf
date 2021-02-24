@@ -1,0 +1,166 @@
+$group
+
+    function createFS
+        param callback
+        var ws = wizziStandalone.default
+        var u = ws.wizziUtils
+        log 'createFS.wizziUtils', u
+        _ u.vfile
+            f_cb_test( vfile )
+                log 'createFS.created vfile', vfile
+                r_cb( vfile )
+
+    function testWriteGen
+        param vfile
+        param callback
+
+        var filePath = '/ixdb/wizzi/default/test1.js.ittf'
+        _ vfile.write
+            @ filePath
+            [
+                @ 'module'
+                @ '    kind react'
+                @ '    react Hello'
+                @ '        state'
+                @ '            @ name "stefi"'
+                ._ join
+                    @ '\n'
+            f_cb_test( result )
+                _ ws.gen
+                    @ filePath
+                    f_cb_test( artifactText )
+                        log 'artifactText', artifactText
+                        _ testWriteGen_2
+                            @ vfile
+                            @ callback
+                        
+    function testWriteGen_2
+        param vfile
+        param callback
+        var filePath_1t = '/ixdb/wizzi/default/html/t/lia.html.ittf'
+        var filePath_1p = '/ixdb/wizzi/default/html/index.html.ittf'
+        _ writeFile
+            @ vfile
+            @ filePath_1t
+            @ '1t'
+            f_cb_test()
+                _ writeFile
+                    @ vfile
+                    @ filePath_1p
+                    @ '1p'
+                    f_cb_test()
+                        _ ws.gen
+                            @ filePath_1p
+                            f_cb_test( artifactText )
+                                log 'artifactText', artifactText
+                                r_cb()
+
+    function writeFile
+        param vfile
+        param filePath
+        param type
+        param callback
+
+        _ vfile.write
+            @ filePath
+            _ getContent
+                @ type
+            f_cb_test( result )
+                log 'write', filePath, 'result', result
+                _ callback
+                    @ null
+                    
+    function getContent
+        param type
+        
+        if type === '1t'
+            return
+                [
+                    @ 'li'
+                    @ '    $params text, href'
+                    @ '    a ${__dollar}{text}'
+                    @ '        href ${__dollar}{href}'
+                    ._ join
+                        @ '\n'
+        
+        elif type === '1p'
+            return
+                [
+                    @ 'html'
+                    @ '    body'
+                    @ '        ul'
+                    @ '            lia( alfa, #alfa'
+                    @ '            lia( beta, #beta'
+                    ._ join
+                        @ '\n'
+
+    function create_testWizziStandalone_vfile
+        param callback
+        var ws = wizziStandalone.default
+        var u = ws.wizziUtils
+        _ u.vfile
+            {
+                @ storeName 'testWizziStandalone'
+                $$ @ storeName 'wizziRepo'
+            f_cb_test( vfile )
+                log 'create_testWizziStandalone_vfile', 'done', vfile
+                r_cb( vfile )
+
+
+    function populateIndexedDB
+        param callback
+        _ create_testWizziStandalone_vfile
+            f_cb_test( vfile )
+                log 'populateIndexedDB.created vfile', vfile
+                var filePath = '/ixdb/wizzi/default/file.txt'
+                _ vfile.write
+                    @ filePath
+                    @ 'alpha\n\tbeta\tgamma'
+                    f_cb_test( result )
+                        log 'populateIndexedDB.writeFile', filePath, 'result', result
+                        _ vfile.read
+                            @ filePath
+                            f_cb_test( result )
+                                log 'populateIndexedDB.readFile.result', result
+                                r_cb( vfile )
+                
+    function listIndexedDB
+        param vfile
+        # get the entire BrowserFS filesystem
+        var folderPath = '/ixdb'
+        _ vfile.getFolders
+            @ folderPath
+            {
+                @ deep true
+            f_cb_test( result )
+                log 'listIndexedDB.getFolders.result', result
+                foreach item in result
+                    _ vfile.getFiles
+                        @ item.fullPath
+                        {
+                            @ deep true
+                            @ documentContent true
+                        f_cb_test( result_files )
+                            _ WizziBrowser.log
+                                @ '----------------------------------------'
+                            _ WizziBrowser.log
+                                _ JSON.stringify
+                                    @ item
+                                    @ null
+                                    @ 2
+                            foreach f in result_files
+                                var c = f.content
+                                delete f.content
+                                _ WizziBrowser.log
+                                    _ JSON.stringify
+                                        @ f
+                                        @ null
+                                        @ 2
+                                _ WizziBrowser.log
+                                    @ '\n' + c
+            
+
+
+
+
+

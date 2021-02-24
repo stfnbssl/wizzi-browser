@@ -68,7 +68,7 @@ md.createFactory = function(options, callback) {
         return callback(null, md.__wf);
     }
     md.initialize();
-    var mdItems = DEFAULT_PLUGINS().concat(options.mds || []);
+    var pluginItems = DEFAULT_PLUGINS().concat(options.plugins || []);
     md.wizzi.browsernoaclFactory({
         plugins: {
             items: pluginItems

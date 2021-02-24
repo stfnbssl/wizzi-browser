@@ -4,33 +4,82 @@
 	body
 		# app
         js https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js
+        script
+            src https://cdn.jsdelivr.net/npm/async@3.2.0/dist/async.min.js
+            integrity sha256-1fzeJbnZYlbSHYe5wD+47ogB5E2i9mC4oIbUsWgl7dw=
+            crossorigin anonymous
 		js ./scripts/${pkg.name}.js
 
         ready
             log 'wizziStandalone', wizziStandalone
             log 'wizziStandalone.default', wizziStandalone.default
-            var wf = wizziStandalone.default
-            _ wf.initialize
-            log 'wf', wf
-            _ wf.wizzi.genFromText
+            
+            var ws = wizziStandalone.default
+            _ ws.initialize
+            var wizzi = ws.wizzi
+
+            _ async.map
                 [
-                    @ 'module'
-                    @ '    kind react'
-                    @ '    react Hello'
-                    @ '        state'
-                    @ '            @ name "stefi"'
-                    @ '        $foreach item in items'
-                    @ '            m ${__dollar}{item}'
-                    ._ join
-                        @ '\n'
-                {
-                    [ items
-                        @ 'alfa'
-                        @ 'beta'
-                {
-                    @ artifactName 'js/module'
+                    @ test_1
+                    @ test_2
+                    @ test_3
+                =>
+                    param tfunc
+                    param callback
+                    _ tfunc
+                        @ callback
                 =>
                     param err
-                    param result
-                    log 'err', err
-                    log 'result', result
+                    param results
+                    log 'Test executed', results
+
+            function test_1
+                param callback
+                _ wizzi.genFromText
+                    [
+                        @ 'module'
+                        @ '    kind react'
+                        @ '    react Hello'
+                        @ '        state'
+                        @ '            @ name "stefi"'
+                        @ '        $foreach item in items'
+                        @ '            m ${__dollar}{item}'
+                        ._ join
+                            @ '\n'
+                    {
+                        [ items
+                            @ 'alfa'
+                            @ 'beta'
+                    {
+                        @ artifactName 'js/module'
+                    =>
+                        param err
+                        param result
+                        log 'err', err
+                        log 'result', result
+                        r_cb( 1 )
+
+            function test_2
+                param callback
+                _ createFS
+                    f_cb( vfile )
+                        _ testWriteGen
+                            @ vfile
+                            f_cb( )
+                                r_cb( 2 )
+            
+            function test_3
+                param callback
+                _ create_testWizziStandalone_vfile
+                    f_cb_test( vfile )
+                        _ listIndexedDB
+                            @ vfile
+                            f_cb( )
+                                _ populateIndexedDB
+                                    f_cb( vfile )
+                                        _ listIndexedDB
+                                            @ vfile
+                                            f_cb( )
+                                                r_cb( 3 )
+        
+            $include test-browserfs

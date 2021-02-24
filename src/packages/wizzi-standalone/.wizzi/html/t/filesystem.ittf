@@ -1,0 +1,15 @@
+$group
+    
+    const openFile
+        async=> 
+            return 
+                new Promise
+                    => 
+                        param resolve
+                        const input = document.createElement('input')
+                        set input.type = 'file'
+                        _ input.addEventListener
+                            @ 'change'
+                            => 
+                                _ resolve(input.files[0])
+                        _ input.click
